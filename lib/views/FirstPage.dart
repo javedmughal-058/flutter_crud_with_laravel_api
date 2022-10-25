@@ -16,7 +16,7 @@ class FirstPage extends StatelessWidget {
           leading: IconButton(
               onPressed: (){},
               icon: const Icon(Icons.arrow_back_ios, color: Colors.indigo, size: 16,)),
-          title: const Text("Flutter with Laravel Api", style: TextStyle(color: Colors.black, fontSize: 16),),
+          title: const Text("Flutter with Laravel APIs", style: TextStyle(color: Colors.black, fontSize: 16),),
 
         ),
         body: Column(
