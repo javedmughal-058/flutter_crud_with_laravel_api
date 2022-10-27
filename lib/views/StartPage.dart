@@ -2,10 +2,8 @@ import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:get/get.dart';
-
 import 'ProfilePage.dart';
 
 class StartPage extends StatefulWidget {
@@ -18,6 +16,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
 
+  @override
   void initState() {
     _bottomBarController.stream.listen((opened) {
       debugPrint('Bottom bar ${opened ? 'opened' : 'closed'}');
@@ -39,269 +38,244 @@ class _StartPageState extends State<StartPage> {
     Color _color2 = const Color(0xffFFA556);
     return SafeArea(
       child: Scaffold(
-
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: (){
-                        Get.to(ProfilePage());
-                      },
-                      icon: Icon(Icons.menu, color:_color2, size: 22,)),
-                  Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
-                  const Spacer(),
-                  IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.search, color: _color2, size: 22,)),
-                  Stack(
-                    children: [
-                       Icon(Icons.notifications, color: _color2,),
-                       Positioned(
-                        right: 0,
-                        child:  Container(
-                          padding: EdgeInsets.all(1),
-                          decoration:  BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          constraints: BoxConstraints(
-                            minWidth: 12,
-                            minHeight: 12,
-                          ),
-                          child:  Text(
-                            '5',
-                            style:  TextStyle(
-                              color: Colors.white,
-                              fontSize: 8,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(width: 10,),
-                ],
-              ),
-              Stack(
-                children: [
-                  // Container(
-                  //   padding: EdgeInsets.all(5),
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(20),
-                  //   ),
-                  //   child: CarouselSlider(
-                  //     options: CarouselOptions(
-                  //       height: 200.0,
-                  //       autoPlayCurve: Curves.linear,
-                  //       scrollDirection: Axis.horizontal,
-                  //       pageSnapping: false,
-                  //       autoPlay: true,
-                  //       viewportFraction: 1.0,
-                  //       disableCenter: true,
-                  //       onPageChanged: (index, reason) {
-                  //         setState(() {
-                  //           _carouselIndex = index;
-                  //         });
-                  //       },
-                  //     ),
-                  //     items: imgList.map((e) => Container(
-                  //       height: 200.0,
-                  //       child: Image.asset(e, fit: BoxFit.cover,),
-                  //     ),
-                  //     ).toList(),
-                  //   ),
-                  // ),
-                  Container(
-                    //height: 200,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                    // color: Colors.amber[600],
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        onPageChanged: (index, reason) {
-                          setState(
-                                () {
-                                  _carouselIndex = index;
-                            },
-                          );
-                        },
-                      ),
-                      items: imgList.map(
-                            (imagepath) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: const EdgeInsets.symmetric(horizontal: 0),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: SizedBox.fromSize(
-                                        size: Size.fromRadius(100),
-                                        child: Image.asset(imagepath))),
-                              );
-                            },
-                          );
-                        },
-                      ).toList(),
-                    ),
-                  ),
-                  Positioned(
-                    bottom:10,
-                    left: Get.width*0.35,
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: imgList.asMap().entries.map((entry) {
-                        return GestureDetector(
-                          onTap: () => _controller.animateToPage(entry.key),
-                          child: Container(
-                            width: 12.0,
-                            height: 12.0,
-                            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : _color2).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  Positioned(
-                      top: 80.0,
-                      left: Get.width*0.3,
-                      child: Column(
-                        children: [
-                          const Text('APPAREL',style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
-                          Text('Quality From Fit To Finish',style: TextStyle(color: Colors.white, fontSize: 14,)),
-                        ],
-                      ))
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.cloud_outlined,
-                        entitled: '10',
-                        availed: '4.5',
-                        leaveName: 'Casual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.drive_eta_outlined,
-                        entitled: '30',
-                        availed: '8',
-                        leaveName: 'Annual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.sick_outlined,
-                        entitled: '8',
-                        availed: '2',
-                        leaveName: 'Sick'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5,),
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10,),
-                  Text('Text', style: Theme.of(context).textTheme.bodyText1,),
-                  const Spacer(),
-                  Text('View All',style: Theme.of(context).textTheme.bodyText1,),
-                  const SizedBox(width: 10,),
-                ],
-              ),
-
-              Container(
-                margin: const EdgeInsets.all(20.0),
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  //border: Border.all(color: Colors.black45,width: 1),
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade400,
-                        blurRadius: 5.0,
-                        offset: Offset(1,2)
-                    ),
-                  ],
-                  // gradient: LinearGradient(
-                  //     colors: [
-                  //       // Colors.white,
-                  //       _color.withOpacity(0.1),
-                  //       Colors.white
-                  //     ],
-                  //     begin: Alignment.topCenter,
-                  //     end: AlignmentDirectional.bottomCenter
-                  // )
-                ),
-                child: Stack(
+        body: Column(
+          children: [
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                    onPressed: (){
+                      Get.to(ProfilePage());
+                    },
+                    icon: Icon(Icons.menu, color:_color2, size: 22,)),
+                Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                const Spacer(),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.search, color: _color2, size: 22,)),
+                Stack(
                   children: [
-                    GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          childAspectRatio: 1,
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 8.0,
+                     Icon(Icons.notifications, color: _color2,),
+                     Positioned(
+                      right: 0,
+                      child:  Container(
+                        padding: EdgeInsets.all(1),
+                        decoration:  BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
-                        itemCount: menuList.length,
-                        itemBuilder: (context,index){
-                          final menu = menuList[index];
-                          return GestureDetector(
-                            onTap: (){
-                              Navigator.of(context).pushNamed(menu.route);
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              //crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(menu.icon,color: menu.color,size: 22,),
-                                const SizedBox(height: 5,),
-                                Text(menu.title,
-                                    style: const TextStyle(fontSize: 10.0)),
-                              ],
-                            ),
-                          );
-                        }),
-                    Positioned(
-                      bottom:0,
-                      left: Get.width*0.35,
-
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: imgList.asMap().entries.map((entry) {
-                          return GestureDetector(
-                            onTap: () => _controller.animateToPage(entry.key),
-                            child: Container(
-                              width: 12.0,
-                              height: 12.0,
-                              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.black : _color2).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
-                            ),
-                          );
-                        }).toList(),
+                        constraints: BoxConstraints(
+                          minWidth: 12,
+                          minHeight: 12,
+                        ),
+                        child:  Text(
+                          '5',
+                          style:  TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
-              ),
-            ],
-          ),
+                const SizedBox(width: 10,),
+              ],
+            ),
+            Stack(
+              children: [
+                // Container(
+                //   padding: EdgeInsets.all(5),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(20),
+                //   ),
+                //   child: CarouselSlider(
+                //     options: CarouselOptions(
+                //       height: 200.0,
+                //       autoPlayCurve: Curves.linear,
+                //       scrollDirection: Axis.horizontal,
+                //       pageSnapping: false,
+                //       autoPlay: true,
+                //       viewportFraction: 1.0,
+                //       disableCenter: true,
+                //       onPageChanged: (index, reason) {
+                //         setState(() {
+                //           _carouselIndex = index;
+                //         });
+                //       },
+                //     ),
+                //     items: imgList.map((e) => Container(
+                //       height: 200.0,
+                //       child: Image.asset(e, fit: BoxFit.cover,),
+                //     ),
+                //     ).toList(),
+                //   ),
+                // ),
+                Container(
+                  //height: 200,
+                  decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                  // color: Colors.amber[600],
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      onPageChanged: (index, reason) {
+                        setState(
+                              () {
+                                _carouselIndex = index;
+                          },
+                        );
+                      },
+                    ),
+                    items: imgList.map(
+                          (imagepath) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.symmetric(horizontal: 0),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: SizedBox.fromSize(
+                                      size: Size.fromRadius(100),
+                                      child: Image.asset(imagepath))),
+                            );
+                          },
+                        );
+                      },
+                    ).toList(),
+                  ),
+                ),
+                Positioned(
+                  bottom:10,
+                  left: Get.width*0.35,
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imgList.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () => _controller.animateToPage(entry.key),
+                        child: Container(
+                          width: 12.0,
+                          height: 12.0,
+                          margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : _color2).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Positioned(
+                    top: 80.0,
+                    left: Get.width*0.3,
+                    child: Column(
+                      children: [
+                        const Text('APPAREL',style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+                        Text('Quality From Fit To Finish',style: TextStyle(color: Colors.white, fontSize: 14,)),
+                      ],
+                    ))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Expanded(
+                  child: _CustomBalanceCard(
+                      icon: Icons.cloud_outlined,
+                      entitled: '10',
+                      availed: '4.5',
+                      leaveName: 'Casual'),
+                ),
+                Expanded(
+                  child: _CustomBalanceCard(
+                      icon: Icons.drive_eta_outlined,
+                      entitled: '30',
+                      availed: '8',
+                      leaveName: 'Annual'),
+                ),
+                Expanded(
+                  child: _CustomBalanceCard(
+                      icon: Icons.sick_outlined,
+                      entitled: '8',
+                      availed: '2',
+                      leaveName: 'Sick'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5,),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 10,),
+                Text('Text', style: Theme.of(context).textTheme.bodyText1,),
+                const Spacer(),
+                Text('View All',style: Theme.of(context).textTheme.bodyText1,),
+                const SizedBox(width: 10,),
+              ],
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: menuList.length,
+                  itemBuilder: (context, index){
+                    final menu = menuList[index];
+                    return  GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed(menu.route);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child:   Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(menu.icon,color: menu.color,size: 22,),
+                            const SizedBox(height: 5,),
+                            Text(menu.title,
+                                style: const TextStyle(fontSize: 10.0)),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: menuList.length,
+                  itemBuilder: (context, index){
+                    final menu = menuList[index];
+                    return  GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed(menu.route);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child:   Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(menu.icon,color: menu.color,size: 22,),
+                            const SizedBox(height: 5,),
+                            Text(menu.title,
+                                style: const TextStyle(fontSize: 10.0)),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+
+          ],
         ),
         bottomNavigationBar: BottomBarWithSheet(
           controller: _bottomBarController,
