@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
-import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
 import 'package:get/get.dart';
-
-import 'views/HomPage.dart';
+import 'views/StartPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const StartPage(),
     );
   }
 }
