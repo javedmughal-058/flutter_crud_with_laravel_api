@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  bottom_sheet_bar:
+    dependency: "direct main"
+    description:
+      name: bottom_sheet_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -144,6 +151,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  measure_size:
+    dependency: transitive
+    description:
+      name: measure_size
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   meta:
     dependency: transitive
     description:
