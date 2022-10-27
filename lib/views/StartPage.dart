@@ -1,7 +1,12 @@
+import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:get/get.dart';
+
+import 'ProfilePage.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -11,6 +16,14 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
+
+  void initState() {
+    _bottomBarController.stream.listen((opened) {
+      debugPrint('Bottom bar ${opened ? 'opened' : 'closed'}');
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final CarouselController _controller = CarouselController();
@@ -26,35 +39,53 @@ class _StartPageState extends State<StartPage> {
     Color _color2 = const Color(0xffFFA556);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,elevation: 0.0,
-          leading: IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.menu, color:_color2, size: 22,)),
-              centerTitle: true,
-              title: const Text("USG", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
-          actions: [
-            IconButton(
-                onPressed: (){},
-                icon: Icon(Icons.search, color: _color2, size: 22,)),
-            Stack(
-              children:[
-                IconButton(
-                    onPressed: (){},
-                    icon: Icon(Icons.notifications, color: _color2, size: 22,)),
-                Positioned(child:
-                  Container(
-                    
-                  ))
-              ],
 
-            ),
-
-          ],
-        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: (){
+                        Get.to(ProfilePage());
+                      },
+                      icon: Icon(Icons.menu, color:_color2, size: 22,)),
+                  Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: (){},
+                      icon: Icon(Icons.search, color: _color2, size: 22,)),
+                  Stack(
+                    children: [
+                       Icon(Icons.notifications, color: _color2,),
+                       Positioned(
+                        right: 0,
+                        child:  Container(
+                          padding: EdgeInsets.all(1),
+                          decoration:  BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          constraints: BoxConstraints(
+                            minWidth: 12,
+                            minHeight: 12,
+                          ),
+                          child:  Text(
+                            '5',
+                            style:  TextStyle(
+                              color: Colors.white,
+                              fontSize: 8,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(width: 10,),
+                ],
+              ),
               Stack(
                 children: [
                   // Container(
@@ -237,7 +268,7 @@ class _StartPageState extends State<StartPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               //crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(menu.icon,color: _color,size: 22,),
+                                Icon(menu.icon,color: menu.color,size: 22,),
                                 const SizedBox(height: 5,),
                                 Text(menu.title,
                                     style: const TextStyle(fontSize: 10.0)),
@@ -272,6 +303,62 @@ class _StartPageState extends State<StartPage> {
             ],
           ),
         ),
+        bottomNavigationBar: BottomBarWithSheet(
+          controller: _bottomBarController,
+          bottomBarTheme: BottomBarTheme(
+            selectedItemIconSize: 24,
+            mainButtonPosition: MainButtonPosition.middle,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+            ),
+            itemIconColor: Colors.grey,
+            itemTextStyle: TextStyle(
+              color: _color2,
+              fontSize: 10.0,
+            ),
+            selectedItemTextStyle: const TextStyle(
+              color: Colors.blue,
+              fontSize: 10.0,
+            ),
+          ),
+          onSelectItem: (index) => debugPrint('$index'),
+          sheetChild:  GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 1,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 8.0,
+              ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
+              itemCount: menuList.length,
+              itemBuilder: (context,index){
+                final menu = menuList[index];
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pushNamed(menu.route);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(menu.icon,color: menu.color,size: 22,),
+                      const SizedBox(height: 5,),
+                      Text(menu.title,
+                          style: const TextStyle(fontSize: 10.0)),
+                    ],
+                  ),
+                );
+              }),
+          items: const [
+            BottomBarWithSheetItem(icon: Icons.home),
+            BottomBarWithSheetItem(icon: Icons.description),
+            BottomBarWithSheetItem(icon: Icons.settings),
+            BottomBarWithSheetItem(icon: Icons.people),
+          ],
+        ),
       ),
     );
   }
@@ -288,7 +375,7 @@ class _CustomBalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _color = const Color(0xff7367f0);
+    Color _color = const Color(0xffFFA556);
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -335,7 +422,7 @@ class _CustomBalanceCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(icon,color: _color,),
+              Icon(icon,color: const Color(0xff74A1DF)),
               Text(leaveName),
             ],
           ),
@@ -345,7 +432,7 @@ class _CustomBalanceCard extends StatelessWidget {
             children: [
               Text('Entitled'),
               Text(entitled,
-                style: TextStyle(color: _color,fontWeight: FontWeight.w500),),
+                style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),),
             ],
           ),
           Divider(color: _color),
@@ -354,7 +441,7 @@ class _CustomBalanceCard extends StatelessWidget {
             children: [
               Text('Availed'),
               Text(availed,
-                style: TextStyle(color: _color,fontWeight: FontWeight.w500),),
+                style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),),
             ],
           )
         ],
