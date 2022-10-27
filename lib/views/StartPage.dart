@@ -22,19 +22,33 @@ class _StartPageState extends State<StartPage> {
       'assets/images/slider4.jpg',
       'assets/images/slider5.jpg'
     ];
-    Color _color = const Color.fromRGBO(21, 145, 252, 1.0);
+    Color _color = const Color(0xff7367f0);
+    Color _color2 = const Color(0xffFFA556);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,elevation: 0.0,
           leading: IconButton(
               onPressed: (){},
-              icon: Icon(Icons.menu, color:_color, size: 16,)),
-              title: Text("USG", style: TextStyle(color: _color, fontSize: 16),),
+              icon: Icon(Icons.menu, color:_color2, size: 22,)),
+              centerTitle: true,
+              title: const Text("USG", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
           actions: [
             IconButton(
                 onPressed: (){},
-                icon: Icon(Icons.notifications, color: _color, size: 20,)),
+                icon: Icon(Icons.search, color: _color2, size: 22,)),
+            Stack(
+              children:[
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.notifications, color: _color2, size: 22,)),
+                Positioned(child:
+                  Container(
+                    
+                  ))
+              ],
+
+            ),
 
           ],
         ),
@@ -121,7 +135,7 @@ class _StartPageState extends State<StartPage> {
                             margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.white).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
+                                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : _color2).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
                           ),
                         );
                       }).toList(),
@@ -175,8 +189,9 @@ class _StartPageState extends State<StartPage> {
                   const SizedBox(width: 10,),
                 ],
               ),
+
               Container(
-                margin: const EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(20.0),
                 padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -199,58 +214,60 @@ class _StartPageState extends State<StartPage> {
                   //     end: AlignmentDirectional.bottomCenter
                   // )
                 ),
-                child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 6,
-                      childAspectRatio: 1.0,
-                      mainAxisSpacing: 8.0,
-                      crossAxisSpacing: 8.0,
-                    ),
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                   padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 2.0),
-                    itemCount: menuList.length,
-                    itemBuilder: (context,index){
-                      final menu = menuList[index];
-                      return GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).pushNamed(menu.route);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: _color.withOpacity(0.1),width: 1),
-                              borderRadius: BorderRadius.circular(8.0),
-
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //       color: Colors.grey.shade400,
-                              //       blurRadius: 5.0,
-                              //       offset: Offset(1,2)
-                              //   ),
-                              // ],
-                              // gradient: LinearGradient(
-                              //     colors: [
-                              //       menu.color.withOpacity(0.3),
-                              //       menu.color,
-                              //     ],
-                              //     begin: Alignment.topCenter,
-                              //     end: AlignmentDirectional.bottomCenter
-                              // )
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(menu.icon,color: _color,size: 14,),
-                              const SizedBox(height: 5,),
-                              Text(menu.title,
-                                  style: const TextStyle(fontSize: 8.0)),
-                            ],
-                          ),
+                child: Stack(
+                  children: [
+                    GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          childAspectRatio: 1,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 8.0,
                         ),
-                      );
-                    }),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
+                        itemCount: menuList.length,
+                        itemBuilder: (context,index){
+                          final menu = menuList[index];
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).pushNamed(menu.route);
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              //crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(menu.icon,color: _color,size: 22,),
+                                const SizedBox(height: 5,),
+                                Text(menu.title,
+                                    style: const TextStyle(fontSize: 10.0)),
+                              ],
+                            ),
+                          );
+                        }),
+                    Positioned(
+                      bottom:0,
+                      left: Get.width*0.35,
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: imgList.asMap().entries.map((entry) {
+                          return GestureDetector(
+                            onTap: () => _controller.animateToPage(entry.key),
+                            child: Container(
+                              width: 12.0,
+                              height: 12.0,
+                              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.black : _color2).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -271,13 +288,46 @@ class _CustomBalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _color = const Color.fromRGBO(21, 145, 252, 1.0);
+    Color _color = const Color(0xff7367f0);
     return Container(
-      margin: const EdgeInsets.all(5),
+      margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: _color.withOpacity(0.03),
-        border: Border.all(color: _color.withOpacity(0.5),),
-        borderRadius: BorderRadius.circular(10),
+        //1
+
+      // border: Border.all(
+      //     color: _color.withOpacity(0.5),
+      //     width: 1.0,
+      //     style: BorderStyle.solid),
+      // borderRadius: BorderRadius.circular(8),
+      // color: _color.withOpacity(0.02),
+
+        //2
+
+        // color: Colors.grey.shade200,
+        // borderRadius: BorderRadius.circular(12),
+        // border: Border.all(
+        //   color: Colors.black,),
+
+
+        //3
+
+        // color: _color.withOpacity(0.03),
+        // border: Border.all(color: _color.withOpacity(0.5),),
+        // borderRadius: BorderRadius.circular(10),
+
+        //4
+
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(
+                  0, 2), // changes position of shadow
+            ),
+          ]
       ),
       padding: const EdgeInsets.all(8.0),
       child: Column(
