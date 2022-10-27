@@ -21,5 +21,5 @@ final menuList = [
   // const MenuModel(title: 'Objectives', icon: Icons.description, route: '/objective',color: Color(0xffC1C2F6)),
   // const MenuModel(title: 'Policies', icon: Icons.policy, route: '/policies',color: const Color(0xff74A1DF)),
   const MenuModel(title: 'Settings', icon: Icons.settings, route: '/settings',color: const Color(0xff7367f0)),
-  const MenuModel(title: 'About US', icon: Icons.info, route: '/about_us',color: const Color(0xffFFA556)),
+  const MenuModel(title: 'About US', icon: Icons.info, route: '/about_us',color: const Color(0xff28c76f)),
 ];
