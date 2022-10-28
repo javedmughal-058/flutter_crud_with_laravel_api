@@ -225,15 +225,31 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                 ],
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                margin: EdgeInsets.fromLTRB(0, 0, 18, 18),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withOpacity(0.2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Theme.of(context).primaryColor.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: const Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
+                    color: Colors.white,
                     borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(12),
-                        bottomRight: Radius.circular(12)),
-                    border: Border.all(color: Theme.of(context).primaryColor)),
+                        topRight: Radius.circular(8),
+                        bottomRight: Radius.circular(8)),
+                    //border: Border.all(color: Theme.of(context).primaryColor)
+                ),
+
+                //2
+                // decoration: BoxDecoration(
+                //     color: Theme.of(context).primaryColor.withOpacity(0.2),
+                //     borderRadius: const BorderRadius.only(
+                //         topRight: Radius.circular(8),
+                //         bottomRight: Radius.circular(8)),
+                //     border: Border.all(color: Theme.of(context).primaryColor)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
                     Expanded(
                       child: _CustomBalanceCard(
@@ -350,7 +366,6 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                               context: context, builder: (BuildContext context){
                             return Container(
                               decoration: BoxDecoration(
-
                                 borderRadius: BorderRadius.circular(20)
                               ),
                               margin: const EdgeInsets.all(50),
@@ -486,7 +501,7 @@ class _CustomBalanceCard extends StatelessWidget {
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           //1
 
