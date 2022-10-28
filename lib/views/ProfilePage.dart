@@ -6,250 +6,156 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                flex:5,
-                child:Container(
-                  width: double.infinity,
+    Color _color3 = const Color(0xff009b9a);
+
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(4,0, 4, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: (){
+                          Get.back();
+                        },
+                        icon: Icon(Icons.arrow_back_ios, color:_color3, size: 22,)),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed('/usgbot');
+
+                      },
+                      child: const CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('assets/images/bot1.png'),
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                  ],
+                ),
+                Text('Welcome', style: TextStyle(color: _color3, fontSize: 32)),
+                Row(
+
+                  children: [
+                    Text('USG Smart Office', style: Theme.of(context).textTheme.bodyMedium,),
+                    const Spacer(),
+                    Text('Version: 4.25', style: TextStyle(color: _color3, fontSize: 14)),
+                    const SizedBox(width: 10,),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                  height: MediaQuery.of(context).size.height*0.15,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xffFFA556),Color(0xffFFA556).withOpacity(0.7)],
-                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    color: _color3,
                   ),
-                  child: Column(
-                      children: [
-                        SizedBox(height: 110.0,),
-                        CircleAvatar(
-                          radius: 65.0,
-                          backgroundImage: AssetImage('assets/images/w4.jpg'),
-                          backgroundColor: Colors.white,
-                        ),
-                        SizedBox(height: 10.0,),
-                        Text('Erza Scarlet',
-                            style: TextStyle(
-                              color:Colors.white,
-                              fontSize: 20.0,
-                            )),
-                        SizedBox(height: 10.0,),
-                        Text('S Class Mage',
-                          style: TextStyle(
-                            color:Colors.white,
-                            fontSize: 15.0,
-                          ),)
-                      ]
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(width: 10,),
+                      const CircleAvatar(
+                        radius: 35,
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('assets/images/slider1.jpg'),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Hafiz Mustanser Ahmed', style: Theme.of(context).textTheme.bodyMedium,),
+                          Text('CEO New Ventures', style: Theme.of(context).textTheme.bodyMedium,),
+                          Text('+923001234567', style: Theme.of(context).textTheme.bodyMedium,),
+
+                        ],
+                      ),
+                      IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios, color: Colors.white,))
+                    ],
                   ),
                 ),
-              ),
-
-              Expanded(
-                flex:5,
-                child: Container(
-                  color: Colors.grey[200],
-                  child: Center(
-                      child:Card(
-                          margin: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-                          child: Container(
-                              width: 310.0,
-                              height:290.0,
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Information",
-                                      style: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.w800,
-                                      ),),
-                                    Divider(color: Colors.grey[300],),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.home,
-                                          color: Colors.blueAccent[400],
-                                          size: 35,
-                                        ),
-                                        SizedBox(width: 20.0,),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Guild",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),),
-                                            Text("FairyTail, Magnolia",
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.grey[400],
-                                              ),)
-                                          ],
-                                        )
-
-                                      ],
-                                    ),
-                                    SizedBox(height: 20.0,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.auto_awesome,
-                                          color: Colors.yellowAccent[400],
-                                          size: 35,
-                                        ),
-                                        SizedBox(width: 20.0,),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Magic",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),),
-                                            Text("Spatial & Sword Magic, Telekinesis",
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.grey[400],
-                                              ),)
-                                          ],
-                                        )
-
-                                      ],
-                                    ),
-                                    SizedBox(height: 20.0,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.favorite,
-                                          color: Colors.pinkAccent[400],
-                                          size: 35,
-                                        ),
-                                        SizedBox(width: 20.0,),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Loves",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),),
-                                            Text("Eating cakes",
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.grey[400],
-                                              ),)
-                                          ],
-                                        )
-
-                                      ],
-                                    ),
-                                    SizedBox(height: 20.0,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.people,
-                                          color: Colors.lightGreen[400],
-                                          size: 35,
-                                        ),
-                                        SizedBox(width: 20.0,),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Team",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),),
-                                            Text("Team Natsu",
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.grey[400],
-                                              ),)
-                                          ],
-                                        )
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                          )
-                      )
-                  ),
+                ListTile(
+                  leading: Icon(Icons.home_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  title: Text('Home',style: Theme.of(context).textTheme.subtitle2),
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/home");
+                  },
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                 ),
-              ),
+                ListTile(
+                  leading: Icon(Icons.approval_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  title: Text('Decision Support',style: Theme.of(context).textTheme.subtitle2),
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
-            ],
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/dss_notifs");
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.check_circle_outline,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  title: Text('Approvals',style: Theme.of(context).textTheme.subtitle2),
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/dss_notifs");
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  title: Text('Settings',style: Theme.of(context).textTheme.subtitle2),
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/settings");
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.info_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  title: Text('About US',style: Theme.of(context).textTheme.subtitle2),
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/about_us");
+
+                  },
+                ),
+                const Divider(),
+                // ListTile(
+                //   leading:  const CircleAvatar(
+                //     backgroundColor: Colors.white,
+                //     backgroundImage: AssetImage('assets/images/bot1.png'),
+                //   ),
+                //   title: Text('USG Bot',style: Theme.of(context).textTheme.subtitle2),
+                //   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                //   onTap: (){
+                //     Navigator.of(context).pushNamed("/usg_bot");
+                //   },
+                // ),
+                ListTile(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1, color: Theme.of(context).primaryColor),
+                    borderRadius: BorderRadius.circular(12), //<-- SEE HERE
+                  ),
+                  tileColor: Theme.of(context).primaryColor.withOpacity(0.3),
+                  //leading: const Icon(Icons.logout,color: Colors.black26,),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.logout,color: Colors.black26,),
+                      const SizedBox(width: 10,),
+                      Text('Logout',style: Theme.of(context).textTheme.subtitle2, textAlign: TextAlign.center),
+                    ],
+                  ),
+                  dense: true,
+                  visualDensity: const VisualDensity(vertical: 0),
+
+                ),
+              ],
+            ),
           ),
-          Positioned(
-              top:MediaQuery.of(context).size.height*0.45,
-              left: 20.0,
-              right: 20.0,
-              child: Card(
-                  child: Padding(
-                    padding:EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            child:Column(
-                              children: [
-                                Text('Battles',
-                                  style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 14.0
-                                  ),),
-                                SizedBox(height: 5.0,),
-                                Text("",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                  ),)
-                              ],
-                            )
-                        ),
-
-                        Container(
-                          child: Column(
-                              children: [
-                                Text('Birthday',
-                                  style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 14.0
-                                  ),),
-                                SizedBox(height: 5.0,),
-                                Text('April 7th',
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                  ),)
-                              ]),
-                        ),
-
-                        Container(
-                            child:Column(
-                              children: [
-                                Text('Age',
-                                  style: TextStyle(
-                                      color: Colors.grey[400],
-                                      fontSize: 14.0
-                                  ),),
-                                SizedBox(height: 5.0,),
-                                Text('19 yrs',
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                  ),)
-                              ],
-                            )
-                        ),
-                      ],
-                    ),
-                  )
-              )
-          )
-        ],
-
+        )
       ),
     );
   }
