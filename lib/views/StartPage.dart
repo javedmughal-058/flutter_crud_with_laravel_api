@@ -38,6 +38,8 @@ class _StartPageState extends State<StartPage> {
     Color _color2 = const Color(0xffFFA556);
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
+    int itemCount = menuList.length;
+    int divison = 2;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -48,10 +50,10 @@ class _StartPageState extends State<StartPage> {
                 children: [
                   IconButton(
                       onPressed: (){
-                        Get.to(ProfilePage());
+                        Get.toNamed('/profile_page');
                       },
                       icon: Icon(Icons.menu, color:_color3, size: 22,)),
-                  Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                  const Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
                   const Spacer(),
                   IconButton(
                       onPressed: (){},
@@ -214,172 +216,58 @@ class _StartPageState extends State<StartPage> {
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(width: 10,),
-                  Text('Text', style: Theme.of(context).textTheme.bodyText1,),
+                  Text('USG Menu', style: Theme.of(context).textTheme.bodyText1,),
                   const Spacer(),
                   Text('View All',style: Theme.of(context).textTheme.bodyText1,),
                   const SizedBox(width: 10,),
                 ],
               ),
-              GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        childAspectRatio: 2,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 8.0,
-                      ),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
-                      itemCount: menuList.length,
-                      itemBuilder: (context,index){
-                        final menu = menuList[index];
-                        return GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).pushNamed(menu.route);
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(menu.icon,color: menu.color,size: 22,),
-                              const SizedBox(height: 5,),
-                              Text(menu.title,
-                                  style: const TextStyle(fontSize: 10.0)),
-                            ],
-                          ),
-                        );
-                      }),
-
-              Stack(
-                children: [
-                  SizedBox(
-                    //width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height*0.2,
-                    child: ListView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        //shrinkWrap: true,
-                        itemCount: 2,
-                        itemBuilder: (context, index){
-                          final menu = menuList[index];
-                          return Container(
-                            // decoration: BoxDecoration(
-                            //   borderRadius: BorderRadius.circular(8),
-                            //   border: Border.all(color: _color3),
-                            //   color: _color3.withOpacity(0.2),
-                            // ),
-                            //height: MediaQuery.of(context).size.height*0.5,
-                            width: MediaQuery.of(context).size.width*0.98,
-                            margin: const EdgeInsets.all(4.0),
-                            padding: const EdgeInsets.all(12.0),
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.list_alt,color: Color(0xff7367f0),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.approval,color: Color(0xff28c76f),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.time_to_leave,color: Color(0xFDA60000),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-
-
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.list_alt,color: Color(0xff7367f0),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.approval,color: Color(0xff28c76f),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      //crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.time_to_leave,color: Color(0xFDA60000),size: 22,),
-                                        SizedBox(height: 5,),
-                                        Text('Appointment',
-                                            style: const TextStyle(fontSize: 10.0)),
-                                      ],
-                                    ),
-
-
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-
-                  Positioned(
-                    bottom:0,
-                    left: Get.width*0.35,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: imgList.asMap().entries.map((entry) {
-                        return GestureDetector(
-                          onTap: () => _controller.animateToPage(entry.key),
-                          child: Container(
-                            width: 12.0,
-                            height: 12.0,
-                            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : _color3).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 10,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .15,
+                child: ListView.separated(
+                  separatorBuilder: (_, __) => const SizedBox(width: 5),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: menuList.length ~/ 2,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        productItem((itemCount ~/ 2) * 0 + index, context),
+                        productItem((itemCount ~/ 2) * 1 + index, context),
+                      ],
+                    );
+                  },
+                ),
               ),
-
-
+              // GridView.builder(
+              //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //           crossAxisCount: 4,
+              //           childAspectRatio: 2,
+              //           mainAxisSpacing: 12,
+              //           crossAxisSpacing: 8.0,
+              //         ),
+              //         physics: const NeverScrollableScrollPhysics(),
+              //         shrinkWrap: true,
+              //         padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
+              //         itemCount: menuList.length,
+              //         itemBuilder: (context,index){
+              //           final menu = menuList[index];
+              //           return GestureDetector(
+              //             onTap: (){
+              //               Navigator.of(context).pushNamed(menu.route);
+              //             },
+              //             child: Column(
+              //               mainAxisAlignment: MainAxisAlignment.center,
+              //               //crossAxisAlignment: CrossAxisAlignment.center,
+              //               children: [
+              //                 Icon(menu.icon,color: menu.color,size: 22,),
+              //                 const SizedBox(height: 5,),
+              //                 Text(menu.title,
+              //                     style: const TextStyle(fontSize: 10.0)),
+              //               ],
+              //             ),
+              //           );
+              //         }),
 
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -413,37 +301,6 @@ class _StartPageState extends State<StartPage> {
                   ],
                 ),
               ),
-
-
-              // Expanded(
-              //   child: ListView.builder(
-              //       shrinkWrap: true,
-              //       physics: const AlwaysScrollableScrollPhysics(),
-              //       scrollDirection: Axis.horizontal,
-              //       itemCount: menuList.length,
-              //       itemBuilder: (context, index){
-              //         final menu = menuList[index];
-              //         return  GestureDetector(
-              //           onTap: (){
-              //             Navigator.of(context).pushNamed(menu.route);
-              //           },
-              //           child: Padding(
-              //             padding: const EdgeInsets.all(12.0),
-              //             child:   Column(
-              //               mainAxisAlignment: MainAxisAlignment.center,
-              //               //crossAxisAlignment: CrossAxisAlignment.center,
-              //               children: [
-              //                 Icon(menu.icon,color: menu.color,size: 22,),
-              //                 const SizedBox(height: 5,),
-              //                 Text(menu.title,
-              //                     style: const TextStyle(fontSize: 10.0)),
-              //               ],
-              //             ),
-              //           ),
-              //         );
-              //       }),
-              // ),
-
 
 
             ],
@@ -598,3 +455,30 @@ class _CustomBalanceCard extends StatelessWidget {
     );
   }
 }
+
+Widget productItem(int index, context) => Container(
+  padding: const EdgeInsets.fromLTRB(12, 0, 6, 6),
+  decoration: BoxDecoration(
+    //color: Colors.grey[50],
+    borderRadius: BorderRadius.circular(8),
+  ),
+  //elevation: 1,
+  // shape: RoundedRectangleBorder(
+  //   borderRadius: BorderRadius.circular(5.0),
+  // ),
+  child: GestureDetector(
+    onTap: (){
+      Navigator.of(context).pushNamed(menuList[index].route);
+    },
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      //crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(menuList[index].icon,color: menuList[index].color,size: 22,),
+        const SizedBox(height: 5,),
+        Text(menuList[index].title,
+            style: const TextStyle(fontSize: 10.0)),
+      ],
+    ),
+  ),
+);
