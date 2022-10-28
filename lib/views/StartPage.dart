@@ -185,31 +185,39 @@ class _StartPageState extends State<StartPage> {
                       ))
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.cloud_outlined,
-                        entitled: '10',
-                        availed: '4.5',
-                        leaveName: 'Casual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.drive_eta_outlined,
-                        entitled: '30',
-                        availed: '8',
-                        leaveName: 'Annual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.sick_outlined,
-                        entitled: '8',
-                        availed: '2',
-                        leaveName: 'Sick'),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.2),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
+                  border: Border.all(color: Theme.of(context).primaryColor)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Expanded(
+                      child: _CustomBalanceCard(
+                          icon: Icons.cloud_outlined,
+                          entitled: '10',
+                          availed: '4.5',
+                          leaveName: 'Casual'),
+                    ),
+                    Expanded(
+                      child: _CustomBalanceCard(
+                          icon: Icons.drive_eta_outlined,
+                          entitled: '30',
+                          availed: '8',
+                          leaveName: 'Annual'),
+                    ),
+                    Expanded(
+                      child: _CustomBalanceCard(
+                          icon: Icons.sick_outlined,
+                          entitled: '8',
+                          availed: '2',
+                          leaveName: 'Sick'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 5,),
               Row(
@@ -405,22 +413,22 @@ class _CustomBalanceCard extends StatelessWidget {
         //3
 
         // color: _color.withOpacity(0.03),
-        border: Border.all(color: _color3),
+        // border: Border.all(color: _color3),
         // borderRadius: BorderRadius.circular(10),
 
         //4
 
           borderRadius: BorderRadius.circular(8),
-          color: _color.withOpacity(0.1),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(1),
-          //     spreadRadius: 1,
-          //     blurRadius: 2,
-          //     offset: const Offset(
-          //         0, 2), // changes position of shadow
-          //   ),
-          // ]
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(
+                  0, 2), // changes position of shadow
+            ),
+          ]
       ),
       padding: const EdgeInsets.all(8.0),
       child: Column(
