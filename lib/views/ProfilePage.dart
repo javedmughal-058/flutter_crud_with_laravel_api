@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -29,11 +30,7 @@ class ProfilePage extends StatelessWidget {
                         Get.toNamed('/usgbot');
 
                       },
-                      child: const CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage('assets/images/bot1.png'),
-                      ),
+                      child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json', width: 80,  height: 60),
                     ),
                     const SizedBox(width: 10,),
                   ],
