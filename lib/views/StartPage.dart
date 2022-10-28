@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:get/get.dart';
-import 'ProfilePage.dart';
+import 'package:lottie/lottie.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -13,16 +13,21 @@ class StartPage extends StatefulWidget {
   State<StartPage> createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
+
+  late AnimationController _animationController;
 
   @override
   void initState() {
     _bottomBarController.stream.listen((opened) {
       debugPrint('Bottom bar ${opened ? 'opened' : 'closed'}');
     });
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final CarouselController _controller = CarouselController();
@@ -49,23 +54,40 @@ class _StartPageState extends State<StartPage> {
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: (){
+                      onPressed: () {
                         Get.toNamed('/profile_page');
                       },
-                      icon: Icon(Icons.menu, color:_color3, size: 22,)),
-                  const Text("Welcome", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                      icon: Icon(
+                        Icons.menu,
+                        color: _color3,
+                        size: 22,
+                      )),
+                  const Text(
+                    "Welcome",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
                   const Spacer(),
                   IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.search, color: _color3, size: 22,)),
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: _color3,
+                        size: 22,
+                      )),
                   Stack(
                     children: [
-                       Icon(Icons.notifications, color: _color3,),
-                       Positioned(
+                      Icon(
+                        Icons.notifications,
+                        color: _color3,
+                      ),
+                      Positioned(
                         right: 0,
-                        child:  Container(
+                        child: Container(
                           padding: EdgeInsets.all(1),
-                          decoration:  BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(6),
                           ),
@@ -73,9 +95,9 @@ class _StartPageState extends State<StartPage> {
                             minWidth: 12,
                             minHeight: 12,
                           ),
-                          child:  Text(
+                          child: Text(
                             '5',
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 8,
                             ),
@@ -85,7 +107,9 @@ class _StartPageState extends State<StartPage> {
                       )
                     ],
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                 ],
               ),
               Stack(
@@ -119,8 +143,8 @@ class _StartPageState extends State<StartPage> {
                   // ),
                   Container(
                     //height: 200,
-                    decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.0)),
                     // color: Colors.amber[600],
                     child: CarouselSlider(
                       options: CarouselOptions(
@@ -128,19 +152,20 @@ class _StartPageState extends State<StartPage> {
                         enlargeCenterPage: true,
                         onPageChanged: (index, reason) {
                           setState(
-                                () {
-                                  _carouselIndex = index;
+                            () {
+                              _carouselIndex = index;
                             },
                           );
                         },
                       ),
                       items: imgList.map(
-                            (imagepath) {
+                        (imagepath) {
                           return Builder(
                             builder: (BuildContext context) {
                               return Container(
                                 width: MediaQuery.of(context).size.width,
-                                margin: const EdgeInsets.symmetric(horizontal: 0),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 0),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: SizedBox.fromSize(
@@ -154,9 +179,8 @@ class _StartPageState extends State<StartPage> {
                     ),
                   ),
                   Positioned(
-                    bottom:10,
-                    left: Get.width*0.35,
-
+                    bottom: 10,
+                    left: Get.width * 0.35,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: imgList.asMap().entries.map((entry) {
@@ -165,10 +189,17 @@ class _StartPageState extends State<StartPage> {
                           child: Container(
                             width: 12.0,
                             height: 12.0,
-                            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 4.0),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : _color3).withOpacity(_carouselIndex == entry.key ? 0.9 : 0.4)),
+                                color: (Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : _color3)
+                                    .withOpacity(_carouselIndex == entry.key
+                                        ? 0.9
+                                        : 0.4)),
                           ),
                         );
                       }).toList(),
@@ -176,11 +207,19 @@ class _StartPageState extends State<StartPage> {
                   ),
                   Positioned(
                       top: 80.0,
-                      left: Get.width*0.3,
+                      left: Get.width * 0.3,
                       child: Column(
                         children: [
-                          const Text('APPAREL',style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
-                          Text('Quality From Fit To Finish',style: TextStyle(color: Colors.white, fontSize: 14,)),
+                          const Text('APPAREL',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold)),
+                          Text('Quality From Fit To Finish',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              )),
                         ],
                       ))
                 ],
@@ -188,10 +227,11 @@ class _StartPageState extends State<StartPage> {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 10, 10),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.2),
-                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
-                  border: Border.all(color: Theme.of(context).primaryColor)
-                ),
+                    color: Theme.of(context).primaryColor.withOpacity(0.2),
+                    borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        bottomRight: Radius.circular(12)),
+                    border: Border.all(color: Theme.of(context).primaryColor)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -219,18 +259,32 @@ class _StartPageState extends State<StartPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 5,),
+              const SizedBox(
+                height: 5,
+              ),
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 10,),
-                  Text('USG Menu', style: Theme.of(context).textTheme.bodyText1,),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'USG Menu',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                   const Spacer(),
-                  Text('View All',style: Theme.of(context).textTheme.bodyText1,),
-                  const SizedBox(width: 10,),
+                  Text(
+                    'View All',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
                 ],
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .15,
                 child: ListView.separated(
@@ -284,33 +338,64 @@ class _StartPageState extends State<StartPage> {
                   children: [
                     ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width, 40.0)),
+                          minimumSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 40.0)),
                           backgroundColor: MaterialStateProperty.all(_color),
                         ),
-                        onPressed: (){}, child: Text('Submit')),
+                        onPressed: () {
+                          _animationController.forward();
+                          print("clicked");
+                          showDialog(
+                              barrierDismissible: true,
+                              context: context, builder: (BuildContext context){
+                            return Container(
+                              decoration: BoxDecoration(
+
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              margin: const EdgeInsets.all(50),
+                              //height: 100,
+                              child:  Lottie.network(
+                                'https://assets6.lottiefiles.com/packages/lf20_xqeez8ld.json',
+                                //controller: _animationController,
+                                repeat:  false,
+                                reverse: false,
+                                //animate: false,
+                                height: 20,
+                              )
+                            );
+                          });
+                          _animationController.stop();
+                        },
+                        child: Text('Submit')),
+
                     ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width, 40.0)),
+                          minimumSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 40.0)),
                           backgroundColor: MaterialStateProperty.all(_color2),
                         ),
-                        onPressed: (){}, child: Text('Submit')),
+                        onPressed: () {},
+                        child: Text('Submit')),
                     ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width, 40.0)),
+                          minimumSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 40.0)),
                           backgroundColor: MaterialStateProperty.all(_color3),
                         ),
-                        onPressed: (){}, child: Text('Submit')),
+                        onPressed: () {},
+                        child: Text('Submit')),
                     ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width, 40.0)),
+                          minimumSize: MaterialStateProperty.all(
+                              Size(MediaQuery.of(context).size.width, 40.0)),
                           backgroundColor: MaterialStateProperty.all(_color4),
                         ),
-                        onPressed: (){}, child: Text('Submit')),
+                        onPressed: () {},
+                        child: Text('Submit')),
                   ],
                 ),
               ),
-
-
             ],
           ),
         ),
@@ -334,7 +419,7 @@ class _StartPageState extends State<StartPage> {
             ),
           ),
           onSelectItem: (index) => debugPrint('$index'),
-          sheetChild:  GridView.builder(
+          sheetChild: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
                 childAspectRatio: 1,
@@ -343,22 +428,28 @@ class _StartPageState extends State<StartPage> {
               ),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 4.0,top: 8.0,right: 8.0,bottom: 8.0),
+              padding: const EdgeInsets.only(
+                  left: 4.0, top: 8.0, right: 8.0, bottom: 8.0),
               itemCount: menuList.length,
-              itemBuilder: (context,index){
+              itemBuilder: (context, index) {
                 final menu = menuList[index];
                 return GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).pushNamed(menu.route);
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     //crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(menu.icon,color: menu.color,size: 22,),
-                      const SizedBox(height: 5,),
-                      Text(menu.title,
-                          style: const TextStyle(fontSize: 10.0)),
+                      Icon(
+                        menu.icon,
+                        color: menu.color,
+                        size: 22,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(menu.title, style: const TextStyle(fontSize: 10.0)),
                     ],
                   ),
                 );
@@ -380,9 +471,13 @@ class _CustomBalanceCard extends StatelessWidget {
   final String entitled;
   final String availed;
   final String leaveName;
-  const _CustomBalanceCard({Key? key,
-    required this.icon,required this.entitled,required this.availed,
-    required this.leaveName}) : super(key: key);
+  const _CustomBalanceCard(
+      {Key? key,
+      required this.icon,
+      required this.entitled,
+      required this.availed,
+      required this.leaveName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -393,30 +488,29 @@ class _CustomBalanceCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        //1
+          //1
 
-      // border: Border.all(
-      //     color: _color.withOpacity(0.5),
-      //     width: 1.0,
-      //     style: BorderStyle.solid),
-      // borderRadius: BorderRadius.circular(8),
-      // color: _color.withOpacity(0.02),
+          // border: Border.all(
+          //     color: _color.withOpacity(0.5),
+          //     width: 1.0,
+          //     style: BorderStyle.solid),
+          // borderRadius: BorderRadius.circular(8),
+          // color: _color.withOpacity(0.02),
 
-        //2
+          //2
 
-        // color: Colors.grey.shade200,
-        // borderRadius: BorderRadius.circular(12),
-        // border: Border.all(
-        //   color: Colors.black,),
+          // color: Colors.grey.shade200,
+          // borderRadius: BorderRadius.circular(12),
+          // border: Border.all(
+          //   color: Colors.black,),
 
+          //3
 
-        //3
+          // color: _color.withOpacity(0.03),
+          // border: Border.all(color: _color3),
+          // borderRadius: BorderRadius.circular(10),
 
-        // color: _color.withOpacity(0.03),
-        // border: Border.all(color: _color3),
-        // borderRadius: BorderRadius.circular(10),
-
-        //4
+          //4
 
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
@@ -425,18 +519,16 @@ class _CustomBalanceCard extends StatelessWidget {
               color: Colors.grey.withOpacity(1),
               spreadRadius: 1,
               blurRadius: 2,
-              offset: const Offset(
-                  0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
-          ]
-      ),
+          ]),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(icon,color: const Color(0xff74A1DF)),
+              Icon(icon, color: const Color(0xff74A1DF)),
               Text(leaveName),
             ],
           ),
@@ -445,8 +537,11 @@ class _CustomBalanceCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text('Entitled'),
-              Text(entitled,
-                style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),),
+              Text(
+                entitled,
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
             ],
           ),
           Divider(color: _color),
@@ -454,8 +549,11 @@ class _CustomBalanceCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text('Availed'),
-              Text(availed,
-                style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),),
+              Text(
+                availed,
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
             ],
           )
         ],
@@ -465,28 +563,33 @@ class _CustomBalanceCard extends StatelessWidget {
 }
 
 Widget productItem(int index, context) => Container(
-  padding: const EdgeInsets.fromLTRB(12, 0, 6, 6),
-  decoration: BoxDecoration(
-    //color: Colors.grey[50],
-    borderRadius: BorderRadius.circular(8),
-  ),
-  //elevation: 1,
-  // shape: RoundedRectangleBorder(
-  //   borderRadius: BorderRadius.circular(5.0),
-  // ),
-  child: GestureDetector(
-    onTap: (){
-      Navigator.of(context).pushNamed(menuList[index].route);
-    },
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      //crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(menuList[index].icon,color: menuList[index].color,size: 22,),
-        const SizedBox(height: 5,),
-        Text(menuList[index].title,
-            style: const TextStyle(fontSize: 10.0)),
-      ],
-    ),
-  ),
-);
+      padding: const EdgeInsets.fromLTRB(12, 0, 6, 6),
+      decoration: BoxDecoration(
+        //color: Colors.grey[50],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      //elevation: 1,
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(5.0),
+      // ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(menuList[index].route);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              menuList[index].icon,
+              color: menuList[index].color,
+              size: 22,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(menuList[index].title, style: const TextStyle(fontSize: 10.0)),
+          ],
+        ),
+      ),
+    );
