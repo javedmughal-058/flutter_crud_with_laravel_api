@@ -2,6 +2,8 @@ import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
+import 'package:flutter_crud_with_laravel_api/views/HomPage.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/AppointmentHome.dart';
 import 'package:get/get.dart';
 
 class StartPage extends StatefulWidget {
@@ -38,73 +40,176 @@ class _StartPageState extends State<StartPage>{
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
     int itemCount = menuList.length;
+    final size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 40.0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          leading:   GestureDetector(
+            onTap: (){
+              Get.toNamed('/profile_page');
+            },
+            child: Stack(
+              alignment: AlignmentDirectional.centerStart,
+              children: [
+                const CircleAvatar(
+                  radius: 15,
+                  backgroundColor: Colors.white,
+                  backgroundImage: AssetImage('assets/images/slider1.jpg'),
+                ),
+                Positioned(
+                  //right: 0,
+                  //bottom: 0,
+                  left: 16,
+                  top: 22,
+                  child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: _color2, width: 1)
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 8,
+                        minHeight: 8,
+                      ),
+                      child: Icon(Icons.menu, color: Colors.white , size: 13,)
+                  ),
+                )
+              ],
+            ),
+          ),
+          title:Text('USG Smart Office', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  color:Theme.of(context).primaryColor,
+                  size: 22,
+                )),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                Icon(
+                  Icons.notifications,
+                  color: Theme.of(context).primaryColor,
+                ),
+                Positioned(
+                  right: 0,
+                  top: 8,
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
+                    child: Text(
+                      '5',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(width: 10,),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Get.toNamed('/profile_page');
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        color: _color3,
-                        size: 22,
-                      )),
-                  const Text(
-                    "Welcome",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.search,
-                        color: _color3,
-                        size: 22,
-                      )),
-                  Stack(
-                    children: [
-                      Icon(
-                        Icons.notifications,
-                        color: _color3,
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: Container(
-                          padding: EdgeInsets.all(1),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          constraints: BoxConstraints(
-                            minWidth: 12,
-                            minHeight: 12,
-                          ),
-                          child: Text(
-                            '5',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 8,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
+              // Row(
+              //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const SizedBox(width: 3,),
+              //     GestureDetector(
+              //       onTap: (){
+              //         Get.toNamed('/profile_page');
+              //       },
+              //       child: Stack(
+              //         children: [
+              //           const CircleAvatar(
+              //             radius: 17,
+              //             backgroundColor: Colors.white,
+              //             backgroundImage: AssetImage('assets/images/slider1.jpg'),
+              //           ),
+              //           Positioned(
+              //             right: 0,
+              //             bottom: 0,
+              //             child: Container(
+              //               padding: const EdgeInsets.all(1),
+              //               decoration: BoxDecoration(
+              //                 color:Theme.of(context).primaryColor,
+              //                 borderRadius: BorderRadius.circular(6),
+              //               ),
+              //               constraints: const BoxConstraints(
+              //                 minWidth: 12,
+              //                 minHeight: 12,
+              //               ),
+              //               child: const Icon(Icons.menu, color: Colors.white, size: 13,)
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //
+              //     SizedBox(width: Get.width*0.215,),
+              //     Text('USG Smart Office', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
+              //     const Spacer(),
+              //     IconButton(
+              //         onPressed: () {},
+              //         icon: Icon(
+              //           Icons.search,
+              //           color: Theme.of(context).primaryColor,
+              //           size: 22,
+              //         )),
+              //     Stack(
+              //       children: [
+              //         Icon(
+              //           Icons.notifications,
+              //           color: Theme.of(context).primaryColor,
+              //         ),
+              //         Positioned(
+              //           right: 0,
+              //           child: Container(
+              //             padding: EdgeInsets.all(1),
+              //             decoration: BoxDecoration(
+              //               color: Colors.red,
+              //               borderRadius: BorderRadius.circular(6),
+              //             ),
+              //             constraints: BoxConstraints(
+              //               minWidth: 12,
+              //               minHeight: 12,
+              //             ),
+              //             child: Text(
+              //               '5',
+              //               style: TextStyle(
+              //                 color: Colors.white,
+              //                 fontSize: 8,
+              //               ),
+              //               textAlign: TextAlign.center,
+              //             ),
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     const SizedBox(
+              //       width: 10,
+              //     ),
+              //   ],
+              // ),
               Stack(
                 children: [
                   // Container(
@@ -189,10 +294,7 @@ class _StartPageState extends State<StartPage>{
                                 color: (Theme.of(context).brightness ==
                                             Brightness.dark
                                         ? Colors.white
-                                        : _color3)
-                                    .withOpacity(_carouselIndex == entry.key
-                                        ? 0.9
-                                        : 0.4)),
+                                        : Theme.of(context).primaryColor).withOpacity(_carouselIndex == entry.key ? 1 : 0.4)),
                           ),
                         );
                       }).toList(),
@@ -202,8 +304,8 @@ class _StartPageState extends State<StartPage>{
                       top: 80.0,
                       left: Get.width * 0.3,
                       child: Column(
-                        children: [
-                          const Text('APPAREL',
+                        children: const [
+                          Text('APPAREL',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 40,
@@ -217,59 +319,33 @@ class _StartPageState extends State<StartPage>{
                       ))
                 ],
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 18, 18),
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 1,
-                        blurRadius: 2,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(8),
-                        bottomRight: Radius.circular(8)),
-                    //border: Border.all(color: Theme.of(context).primaryColor)
-                ),
-
-                //2
-                // decoration: BoxDecoration(
-                //     color: Theme.of(context).primaryColor.withOpacity(0.2),
-                //     borderRadius: const BorderRadius.only(
-                //         topRight: Radius.circular(8),
-                //         bottomRight: Radius.circular(8)),
-                //     border: Border.all(color: Theme.of(context).primaryColor)),
-                child: Row(
-                  children: const [
-                    Expanded(
-                      child: _CustomBalanceCard(
-                          icon: Icons.cloud_outlined,
-                          entitled: '10',
-                          availed: '4.5',
-                          leaveName: 'Casual'),
-                    ),
-                    Expanded(
-                      child: _CustomBalanceCard(
-                          icon: Icons.drive_eta_outlined,
-                          entitled: '30',
-                          availed: '8',
-                          leaveName: 'Annual'),
-                    ),
-                    Expanded(
-                      child: _CustomBalanceCard(
-                          icon: Icons.sick_outlined,
-                          entitled: '8',
-                          availed: '2',
-                          leaveName: 'Sick'),
-                    ),
-                  ],
-                ),
+              Row(
+                children: const [
+                  Expanded(
+                    child: _CustomBalanceCard(
+                        icon: Icons.cloud_outlined,
+                        entitled: '10',
+                        availed: '4.5',
+                        leaveName: 'Casual'),
+                  ),
+                  Expanded(
+                    child: _CustomBalanceCard(
+                        icon: Icons.drive_eta_outlined,
+                        entitled: '30',
+                        availed: '8',
+                        leaveName: 'Annual'),
+                  ),
+                  Expanded(
+                    child: _CustomBalanceCard(
+                        icon: Icons.sick_outlined,
+                        entitled: '8',
+                        availed: '2',
+                        leaveName: 'Sick'),
+                  ),
+                ],
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -282,9 +358,14 @@ class _StartPageState extends State<StartPage>{
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   const Spacer(),
-                  Text(
-                    'View All',
-                    style: Theme.of(context).textTheme.bodyText1,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed('/appointment_home');
+                    },
+                    child: Text(
+                      'View All',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
                   ),
                   const SizedBox(
                     width: 10,
@@ -292,7 +373,7 @@ class _StartPageState extends State<StartPage>{
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .15,
@@ -340,110 +421,148 @@ class _StartPageState extends State<StartPage>{
               //           );
               //         }),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width, 40.0)),
-                          backgroundColor: MaterialStateProperty.all(_color),
-                        ),
-                        onPressed: () {},
-                        child: Text('Submit')),
 
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width, 40.0)),
-                          backgroundColor: MaterialStateProperty.all(_color2),
-                        ),
-                        onPressed: () {},
-                        child: Text('Submit')),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width, 40.0)),
-                          backgroundColor: MaterialStateProperty.all(_color3),
-                        ),
-                        onPressed: () {},
-                        child: Text('Submit')),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              Size(MediaQuery.of(context).size.width, 40.0)),
-                          backgroundColor: MaterialStateProperty.all(_color4),
-                        ),
-                        onPressed: () {},
-                        child: Text('Submit')),
-                  ],
-                ),
-              ),
+              // Row(
+              //   children:[
+              //      const SizedBox(width: 10,),
+              //      Text('ESS', style: Theme.of(context).textTheme.bodyText1,),
+              //   ],
+              // ),
+
+
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       ElevatedButton(
+              //           style: ButtonStyle(
+              //             minimumSize: MaterialStateProperty.all(
+              //                 Size(MediaQuery.of(context).size.width, 40.0)),
+              //             backgroundColor: MaterialStateProperty.all(_color),
+              //           ),
+              //           onPressed: () {},
+              //           child: Text('Submit')),
+              //
+              //       ElevatedButton(
+              //           style: ButtonStyle(
+              //             minimumSize: MaterialStateProperty.all(
+              //                 Size(MediaQuery.of(context).size.width, 40.0)),
+              //             backgroundColor: MaterialStateProperty.all(_color2),
+              //           ),
+              //           onPressed: () {},
+              //           child: Text('Submit')),
+              //       ElevatedButton(
+              //           style: ButtonStyle(
+              //             minimumSize: MaterialStateProperty.all(
+              //                 Size(MediaQuery.of(context).size.width, 40.0)),
+              //             backgroundColor: MaterialStateProperty.all(_color3),
+              //           ),
+              //           onPressed: () {},
+              //           child: Text('Submit')),
+              //       ElevatedButton(
+              //           style: ButtonStyle(
+              //             minimumSize: MaterialStateProperty.all(
+              //                 Size(MediaQuery.of(context).size.width, 40.0)),
+              //             backgroundColor: MaterialStateProperty.all(_color4),
+              //           ),
+              //           onPressed: () {},
+              //           child: Text('Submit')),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
         bottomNavigationBar: BottomBarWithSheet(
           controller: _bottomBarController,
           bottomBarTheme: BottomBarTheme(
-            selectedItemIconSize: 24,
+            selectedItemIconSize: 28,
             mainButtonPosition: MainButtonPosition.middle,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             ),
-            itemIconColor: Colors.grey,
+            itemIconColor: Colors.grey.withOpacity(0.5),
             itemTextStyle: TextStyle(
-              color: _color2,
-              fontSize: 10.0,
+              color: Theme.of(context).primaryColor,
+              fontSize: 14.0,
             ),
+            selectedItemIconColor: Colors.white,
             selectedItemTextStyle: const TextStyle(
-              color: Colors.blue,
-              fontSize: 10.0,
+              color: Colors.white,
+              fontSize: 12.0,
             ),
           ),
+          mainActionButtonTheme: MainActionButtonTheme( size: 50, color: _color2, icon: Icon(Icons.keyboard_arrow_up, color: Colors.white, size: 32,)),
           onSelectItem: (index) => debugPrint('$index'),
-          sheetChild: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 1,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 8.0,
+          sheetChild:   GridView.count(
+            crossAxisCount: 5,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            padding: const EdgeInsets.only(left: 15.0,top: 20.0,bottom: 20.0,right: 10),
+            children: [
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '1',
+                  notifyName: 'Leave',
+                  notifyIcon: Icons.group_off,
+                  iconColor: _color2,
+                  onTap: (){}
               ),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                  left: 4.0, top: 8.0, right: 8.0, bottom: 8.0),
-              itemCount: menuList.length,
-              itemBuilder: (context, index) {
-                final menu = menuList[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(menu.route);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        menu.icon,
-                        color: menu.color,
-                        size: 22,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(menu.title, style: const TextStyle(fontSize: 10.0)),
-                    ],
-                  ),
-                );
-              }),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'PR',
+                  notifyIcon: Icons.request_quote_outlined,
+                  iconColor:_color2,
+                  onTap: (){}
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '6',
+                  notifyName: 'PO',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  iconColor: _color2,
+                  onTap: (){}
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '2',
+                  notifyName: 'POC',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  iconColor: _color2,
+                  onTap: (){}
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'Projects',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  iconColor: _color2,
+                  onTap: (){}
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'CTM',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  iconColor: _color2,
+                  onTap: (){}
+              ),
+
+
+            ],
+          ),
           items: const [
-            BottomBarWithSheetItem(icon: Icons.home),
-            BottomBarWithSheetItem(icon: Icons.description),
-            BottomBarWithSheetItem(icon: Icons.settings),
-            BottomBarWithSheetItem(icon: Icons.people),
+            BottomBarWithSheetItem(label: 'Home', icon: Icons.home),
+            BottomBarWithSheetItem(label: 'Currency', icon: Icons.description),
+            BottomBarWithSheetItem(label: 'Setting', icon: Icons.settings),
+            BottomBarWithSheetItem(label: 'Team', icon: Icons.people),
           ],
         ),
       ),
@@ -498,22 +617,24 @@ class _CustomBalanceCard extends StatelessWidget {
           //4
 
           borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: _color2.withOpacity(0.5) ),
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(1),
-              spreadRadius: 1,
-              blurRadius: 2,
-              offset: const Offset(0, 2), // changes position of shadow
-            ),
-          ]),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(1),
+          //     spreadRadius: 1,
+          //     blurRadius: 2,
+          //     offset: const Offset(0, 2), // changes position of shadow
+          //   ),
+          // ]
+      ),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(icon, color: const Color(0xff74A1DF)),
+              Icon(icon, color: Theme.of(context).primaryColor),
               Text(leaveName),
             ],
           ),
@@ -521,11 +642,11 @@ class _CustomBalanceCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Entitled'),
+              const Text('Entitled'),
               Text(
                 entitled,
                 style:
-                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                    const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -533,11 +654,11 @@ class _CustomBalanceCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Availed'),
+              const Text('Availed'),
               Text(
                 availed,
                 style:
-                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                    const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
               ),
             ],
           )
@@ -578,3 +699,69 @@ Widget productItem(int index, context) => Container(
         ),
       ),
     );
+
+class _NotifyIconBadgerTile extends StatelessWidget {
+  final Size size;
+  final String notifyCount;
+  final String notifyName;
+  final IconData notifyIcon;
+  final Color iconColor;
+  final Function() onTap;
+  const _NotifyIconBadgerTile({Key? key,required this.size,
+    required this.notifyCount,
+    required this.notifyName,
+    required this.notifyIcon,
+    required this.iconColor,
+    required this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color _color2 = const Color(0xffFFA556);
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            width: 50,
+            //height: 70,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white,width: 1),
+                borderRadius: BorderRadius.circular(10.0)
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(notifyIcon,size: 24,color: iconColor),
+                Text(notifyName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      // decoration: TextDecoration.underline,
+                      fontSize: 10.0),),
+              ],
+            ),
+          ),
+          Positioned(
+            top: -8,
+            right: -1,
+            //left: -5,
+            child: notifyCount == '0'?
+            const SizedBox():
+            Container(
+              // width: 18,
+              // height: 18,
+              padding: const EdgeInsets.all(3.5),
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle
+              ),
+              child: Text(notifyCount,style: TextStyle(color: Colors.white,fontSize: 13),),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
