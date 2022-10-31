@@ -1,10 +1,8 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -13,19 +11,15 @@ class StartPage extends StatefulWidget {
   State<StartPage> createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
+class _StartPageState extends State<StartPage>{
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
 
-  late AnimationController _animationController;
 
   @override
   void initState() {
     _bottomBarController.stream.listen((opened) {
       debugPrint('Bottom bar ${opened ? 'opened' : 'closed'}');
     });
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    super.initState();
   }
 
   @override
@@ -44,7 +38,6 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
     int itemCount = menuList.length;
-    int divison = 2;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -226,17 +219,17 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 18, 18),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Theme.of(context).primaryColor.withOpacity(0.2),
+                        color: Colors.grey,
                         spreadRadius: 1,
                         blurRadius: 2,
-                        offset: const Offset(0, 2), // changes position of shadow
+                        offset: Offset(0, 2), // changes position of shadow
                       ),
                     ],
                     color: Colors.white,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                         topRight: Radius.circular(8),
                         bottomRight: Radius.circular(8)),
                     //border: Border.all(color: Theme.of(context).primaryColor)
@@ -358,30 +351,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                               Size(MediaQuery.of(context).size.width, 40.0)),
                           backgroundColor: MaterialStateProperty.all(_color),
                         ),
-                        onPressed: () {
-                          _animationController.forward();
-                          print("clicked");
-                          showDialog(
-                              barrierDismissible: true,
-                              context: context, builder: (BuildContext context){
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)
-                              ),
-                              margin: const EdgeInsets.all(50),
-                              //height: 100,
-                              child:  Lottie.network(
-                                'https://assets6.lottiefiles.com/packages/lf20_xqeez8ld.json',
-                                //controller: _animationController,
-                                repeat:  false,
-                                reverse: false,
-                                //animate: false,
-                                height: 20,
-                              )
-                            );
-                          });
-                          _animationController.stop();
-                        },
+                        onPressed: () {},
                         child: Text('Submit')),
 
                     ElevatedButton(
