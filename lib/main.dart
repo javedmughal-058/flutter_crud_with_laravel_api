@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
       home: const StartPage(),
       getPages: [
         GetPage(
-            name: "/profile_page", page: () => ProfilePage(), transition: Transition.leftToRight),
+            name: "/profile_page", page: () => const ProfilePage(), transition: Transition.leftToRight, transitionDuration: const Duration(milliseconds: 800)),
         GetPage(
-            name: "/main", page: () => MyApp(), transition: Transition.rightToLeft),
+            name: "/main", page: () => const MyApp(), transition: Transition.rightToLeft, transitionDuration: const Duration(milliseconds: 800)),
       ],
       routes: {
         "/appointment_home" : (context) => AppointmentHome(),
