@@ -7,15 +7,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _color3 = const Color(0xff009b9a);
+    Color _color3 = const Color(0xffFFA556);
 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(4,0, 4, 10),
+            padding: const EdgeInsets.fromLTRB(4,0, 4, 4),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -23,34 +23,26 @@ class ProfilePage extends StatelessWidget {
                         onPressed: (){
                           Get.back();
                         },
-                        icon: Icon(Icons.arrow_back_ios, color:_color3, size: 22,)),
+                        icon: Icon(Icons.arrow_back_ios, color:Theme.of(context).primaryColor, size: 22,)),
+                    Text('USG Smart Office', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
                     const Spacer(),
                     GestureDetector(
                       onTap: (){
                         Get.toNamed('/usgbot');
 
                       },
-                      child: Lottie.asset('assets/animation/bot.json', height: 80, width: 60),
+                      child: Lottie.asset('assets/animation/bot.json', height: 50, width: 60),
                     ),
                     const SizedBox(width: 10,),
                   ],
                 ),
-                Text('Welcome', style: TextStyle(color: _color3, fontSize: 32)),
-                Row(
 
-                  children: [
-                    Text('USG Smart Office', style: Theme.of(context).textTheme.bodyMedium,),
-                    const Spacer(),
-                    Text('Version: 4.25', style: TextStyle(color: _color3, fontSize: 14)),
-                    const SizedBox(width: 10,),
-                  ],
-                ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                  margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
                   height: MediaQuery.of(context).size.height*0.15,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: _color3,
+                    color: Theme.of(context).primaryColor,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,9 +56,9 @@ class ProfilePage extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Hafiz Mustanser Ahmed', style: Theme.of(context).textTheme.bodyMedium,),
-                          Text('CEO New Ventures', style: Theme.of(context).textTheme.bodyMedium,),
-                          Text('+923001234567', style: Theme.of(context).textTheme.bodyMedium,),
+                          Text('Hafiz Mustanser Ahmed', style: TextStyle(color: _color3),),
+                          Text('CEO New Ventures', style: TextStyle(color: _color3),),
+                          Text('+923001234567', style: TextStyle(color: _color3),),
 
                         ],
                       ),
@@ -75,7 +67,10 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.home_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.home_outlined,color: _color3.withOpacity(0.5)),
                   title: Text('Home',style: Theme.of(context).textTheme.subtitle2),
                   onTap: (){
                     Navigator.of(context).pushNamed("/home");
@@ -83,7 +78,10 @@ class ProfilePage extends StatelessWidget {
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                 ),
                 ListTile(
-                  leading: Icon(Icons.approval_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.approval_outlined,color: _color3.withOpacity(0.5)),
                   title: Text('Decision Support',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -92,7 +90,10 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.check_circle_outline,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.check_circle_outline,color: _color3.withOpacity(0.5)),
                   title: Text('Approvals',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -101,7 +102,22 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.settings_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.policy_outlined,color: _color3.withOpacity(0.5)),
+                  title: Text('Policy',style: Theme.of(context).textTheme.subtitle2),
+                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  onTap: (){
+                    Navigator.of(context).pushNamed("/policies");
+
+                  },
+                ),
+                ListTile(
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.settings_outlined,color: _color3.withOpacity(0.5)),
                   title: Text('Settings',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -110,7 +126,10 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outlined,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                  dense: true,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Icon(Icons.info_outlined,color: _color3.withOpacity(0.5)),
                   title: Text('About US',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                   onTap: (){
@@ -118,7 +137,10 @@ class ProfilePage extends StatelessWidget {
 
                   },
                 ),
-                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 2, 15, 0),
+                  child: Divider(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                ),
                 // ListTile(
                 //   leading:  const CircleAvatar(
                 //     backgroundColor: Colors.white,
@@ -135,12 +157,12 @@ class ProfilePage extends StatelessWidget {
                     side: BorderSide(width: 1, color: Theme.of(context).primaryColor),
                     borderRadius: BorderRadius.circular(12), //<-- SEE HERE
                   ),
-                  tileColor: Theme.of(context).primaryColor.withOpacity(0.3),
+                  tileColor: Colors.white,
                   //leading: const Icon(Icons.logout,color: Colors.black26,),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.logout,color: Colors.black26,),
+                      Icon(Icons.logout,color: _color3,),
                       const SizedBox(width: 10,),
                       Text('Logout',style: Theme.of(context).textTheme.subtitle2, textAlign: TextAlign.center),
                     ],
@@ -149,6 +171,8 @@ class ProfilePage extends StatelessWidget {
                   visualDensity: const VisualDensity(vertical: 0),
 
                 ),
+                const SizedBox(height: 10,),
+                Text('Version: 4.25', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14)),
               ],
             ),
           ),
