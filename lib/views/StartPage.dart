@@ -52,34 +52,37 @@ class _StartPageState extends State<StartPage>{
             onTap: (){
               Get.toNamed('/profile_page');
             },
-            child: Stack(
-              alignment: AlignmentDirectional.centerStart,
-              children: [
-                const CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('assets/images/slider1.jpg'),
-                ),
-                Positioned(
-                  //right: 0,
-                  //bottom: 0,
-                  left: 16,
-                  top: 22,
-                  child: Container(
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: _color2, width: 1)
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 8,
-                        minHeight: 8,
-                      ),
-                      child: Icon(Icons.menu, color: Colors.white , size: 13,)
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: [
+                  const CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage('assets/images/slider1.jpg'),
                   ),
-                )
-              ],
+                  Positioned(
+                    //right: 0,
+                    //bottom: 0,
+                    left: 16,
+                    top: 22,
+                    child: Container(
+                        padding: const EdgeInsets.all(1),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: _color2, width: 1)
+                        ),
+                        // constraints: const BoxConstraints(
+                        //   minWidth: 8,
+                        //   minHeight: 8,
+                        // ),
+                        child: const Icon(Icons.menu, color: Colors.white , size: 13,)
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           title:Text('USG Smart Office', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
