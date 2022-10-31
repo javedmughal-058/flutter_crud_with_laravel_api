@@ -30,7 +30,7 @@ class ProfilePage extends StatelessWidget {
                         Get.toNamed('/usgbot');
 
                       },
-                      child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_ofa3xwo7.json', width: 80,  height: 60),
+                      child: Lottie.asset('assets/animation/bot.json', height: 80, width: 60),
                     ),
                     const SizedBox(width: 10,),
                   ],
