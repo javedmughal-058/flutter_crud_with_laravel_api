@@ -33,10 +33,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Color(0xff009b9a),
+        primaryColor: Color(0xff115e7a),
         appBarTheme: AppBarTheme(
           elevation: 0.0,
-          backgroundColor: Color(0xff009b9a),
+          backgroundColor: Color(0xff115e7a),
         ),
       ),
       home: const StartPage(),
