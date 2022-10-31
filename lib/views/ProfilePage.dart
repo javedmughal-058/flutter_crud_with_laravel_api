@@ -7,7 +7,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _color3 = const Color(0xffFFA556);
+    Color _color3 = const Color(0xfff2652e);
 
     return SafeArea(
       child: Scaffold(
