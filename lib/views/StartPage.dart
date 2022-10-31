@@ -36,7 +36,7 @@ class _StartPageState extends State<StartPage>{
       'assets/images/slider5.jpg'
     ];
     Color _color = const Color(0xff115e7a);
-    Color _color2 = const Color(0xffFFA556);
+    Color _color2 = const Color(0xfff2652e);
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
     int itemCount = menuList.length;
@@ -105,16 +105,16 @@ class _StartPageState extends State<StartPage>{
                   right: 0,
                   top: 8,
                   child: Container(
-                    padding: EdgeInsets.all(1),
+                    padding: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 12,
                       minHeight: 12,
                     ),
-                    child: Text(
+                    child: const Text(
                       '5',
                       style: TextStyle(
                         color: Colors.white,
@@ -308,12 +308,12 @@ class _StartPageState extends State<StartPage>{
                       left: Get.width * 0.3,
                       child: Column(
                         children: const [
-                          Text('APPAREL',
+                          Text('US GROUP',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 40,
                                   fontWeight: FontWeight.bold)),
-                          Text('Quality From Fit To Finish',
+                          Text('Make Business Sustainable',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -589,7 +589,7 @@ class _CustomBalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color _color = const Color(0xff115e7a);
-    Color _color2 = const Color(0xffFFA556);
+    Color _color2 = const Color(0xfff2652e);
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
     return Container(
@@ -620,7 +620,7 @@ class _CustomBalanceCard extends StatelessWidget {
           //4
 
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: _color2.withOpacity(0.5) ),
+          border: Border.all(color: _color2 ),
           color: Colors.white,
           // boxShadow: [
           //   BoxShadow(
@@ -691,7 +691,7 @@ Widget productItem(int index, context) => Container(
           children: [
             Icon(
               menuList[index].icon,
-              color: menuList[index].color,
+              color: const Color(0xfff2652e),
               size: 22,
             ),
             const SizedBox(
