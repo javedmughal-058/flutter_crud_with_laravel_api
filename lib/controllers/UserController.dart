@@ -7,6 +7,7 @@ class UserController extends GetxController{
   late TextEditingController name;
   late TextEditingController email;
 
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -14,4 +15,5 @@ class UserController extends GetxController{
     name = TextEditingController();
     email = TextEditingController();
   }
+
 }
