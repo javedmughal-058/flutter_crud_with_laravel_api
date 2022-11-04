@@ -36,9 +36,11 @@ class _StartPageState extends State<StartPage>{
       'assets/images/slider5.jpg'
     ];
     Color _color = const Color(0xff115e7a);
-    Color _color2 = const Color(0xfff2652e);
+    Color _color2 = const Color(0xfff2652f);
     Color _color3 = const Color(0xff009b9a);
     Color _color4 = const Color(0xff2b5485);
+    Color _colorwhite = const Color(0xffffffff);
+    Color _colorTheme = Theme.of(context).primaryColor;
     int itemCount = menuList.length;
     final size = MediaQuery.of(context).size;
 
@@ -65,20 +67,20 @@ class _StartPageState extends State<StartPage>{
                   Positioned(
                     //right: 0,
                     //bottom: 0,
-                    left: 16,
-                    top: 22,
+                    left: 15,
+                    top: 18,
                     child: Container(
                         padding: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: _color2, width: 1)
+                          border: Border.all(color:Theme.of(context).primaryColor, width: 2)
                         ),
                         // constraints: const BoxConstraints(
                         //   minWidth: 8,
                         //   minHeight: 8,
                         // ),
-                        child: const Icon(Icons.menu, color: Colors.white , size: 13,)
+                        child:  Icon(Icons.menu, color: Theme.of(context).primaryColor , size: 12,)
                     ),
                   )
                 ],
@@ -379,9 +381,9 @@ class _StartPageState extends State<StartPage>{
                 height: 15,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .15,
+                height: MediaQuery.of(context).size.height * .18,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const SizedBox(width: 5),
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
                   scrollDirection: Axis.horizontal,
                   itemCount: menuList.length ~/ 2,
                   itemBuilder: (context, index) {
@@ -389,6 +391,7 @@ class _StartPageState extends State<StartPage>{
                       children: [
                         productItem((itemCount ~/ 2) * 0 + index, context),
                         productItem((itemCount ~/ 2) * 1 + index, context),
+                        //productItem((itemCount ~/ 2) * 2 + index, context),
                       ],
                     );
                   },
@@ -483,24 +486,24 @@ class _StartPageState extends State<StartPage>{
             selectedItemIconSize: 28,
             mainButtonPosition: MainButtonPosition.middle,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Colors.white,
               borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             ),
             itemIconColor: Colors.grey.withOpacity(0.5),
             itemTextStyle: TextStyle(
-              color: Theme.of(context).primaryColor,
+              color: Colors.grey.withOpacity(0.5),
               fontSize: 14.0,
             ),
-            selectedItemIconColor: Colors.white,
-            selectedItemTextStyle: const TextStyle(
-              color: Colors.white,
+            selectedItemIconColor:_colorTheme,
+            selectedItemTextStyle:  TextStyle(
+              color: _colorTheme,
               fontSize: 12.0,
             ),
           ),
-          mainActionButtonTheme: MainActionButtonTheme( size: 50, color: _color2, icon: Icon(Icons.keyboard_arrow_up, color: Colors.white, size: 32,)),
+          mainActionButtonTheme: MainActionButtonTheme( size: 50, color: Theme.of(context).primaryColor, icon: Icon(Icons.keyboard_arrow_up, color: Colors.white, size: 32,)),
           onSelectItem: (index) => debugPrint('$index'),
           sheetChild:   GridView.count(
-            crossAxisCount: 5,
+            crossAxisCount: 4,
             mainAxisSpacing: 15,
             crossAxisSpacing: 15,
             shrinkWrap: true,
@@ -520,7 +523,7 @@ class _StartPageState extends State<StartPage>{
                   notifyCount: '0',
                   notifyName: 'PR',
                   notifyIcon: Icons.request_quote_outlined,
-                  iconColor:_color2,
+                  iconColor: _color2,
                   onTap: (){}
               ),
               _NotifyIconBadgerTile(
@@ -528,7 +531,7 @@ class _StartPageState extends State<StartPage>{
                   notifyCount: '6',
                   notifyName: 'PO',
                   notifyIcon: Icons.shopping_cart_outlined,
-                  iconColor: _color2,
+                  iconColor:  _color2,
                   onTap: (){}
               ),
               _NotifyIconBadgerTile(
@@ -672,7 +675,7 @@ class _CustomBalanceCard extends StatelessWidget {
 }
 
 Widget productItem(int index, context) => Container(
-      padding: const EdgeInsets.fromLTRB(12, 0, 6, 6),
+      padding: const EdgeInsets.fromLTRB(8, 0, 6, 6),
       decoration: BoxDecoration(
         //color: Colors.grey[50],
         borderRadius: BorderRadius.circular(8),
@@ -691,13 +694,13 @@ Widget productItem(int index, context) => Container(
           children: [
             Icon(
               menuList[index].icon,
-              color: const Color(0xfff2652e),
-              size: 22,
+              color: menuList[index].color,
+              size: 24,
             ),
             const SizedBox(
-              height: 5,
+              height: 10,
             ),
-            Text(menuList[index].title, style: const TextStyle(fontSize: 10.0)),
+            Text(menuList[index].title, style: const TextStyle(fontSize: 12.0)),
           ],
         ),
       ),
@@ -719,35 +722,45 @@ class _NotifyIconBadgerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color _color2 = const Color(0xffFFA556);
+    Color _color2 = const Color(0xfff2652f);
+    Color _colorTheme = Theme.of(context).primaryColor;
     return GestureDetector(
       onTap: onTap,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Container(
-            width: 50,
-            //height: 70,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.white,width: 1),
-                borderRadius: BorderRadius.circular(10.0)
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(notifyIcon,size: 24,color: iconColor),
-                Text(notifyName,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      // decoration: TextDecoration.underline,
-                      fontSize: 10.0),),
-              ],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(1, 2), // changes position of shadow
+                      ),
+                    ],
+                    //border: Border.all(color: _color2,width: 1),
+                  color:Colors.white,
+                    borderRadius: BorderRadius.circular(12.0)
+                ),
+                child: Icon(notifyIcon,size: 24,color: _colorTheme),
+              ),
+              Text(notifyName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: _colorTheme,
+                    // decoration: TextDecoration.underline,
+                    fontSize: 10.0),),
+            ],
           ),
           Positioned(
-            top: -8,
-            right: -1,
+            top: -6,
+            right: 12,
             //left: -5,
             child: notifyCount == '0'?
             const SizedBox():
