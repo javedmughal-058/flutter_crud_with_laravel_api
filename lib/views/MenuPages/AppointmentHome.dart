@@ -1,7 +1,10 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
+import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/OptionalScreen.dart';
+import 'package:get/get.dart';
 
 
 class AppointmentHome extends StatefulWidget {
@@ -12,11 +15,24 @@ class AppointmentHome extends StatefulWidget {
 }
 
 class _AppointmentHomeState extends State<AppointmentHome> {
-  PageController page = PageController();
-  bool isFinished = false;
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
+      appBar: AppBar(title: const Text('USG Smart Office'),),
+      body:  const SecondPage(),
+    );
+  }
+}
+
+class NavigationPage extends StatelessWidget {
+  const NavigationPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    PageController page = PageController();
+    bool isFinished = false;
+    return Scaffold(
       appBar: AppBar(title: const Text('USG Smart Office', style: TextStyle(fontSize: 18),),),
       body: Stack(
         alignment: AlignmentDirectional.bottomCenter,
@@ -286,7 +302,7 @@ class _AppointmentHomeState extends State<AppointmentHome> {
                         ),
                       ),
                     ),
-                 
+
 
                   ],
                 ),
@@ -298,3 +314,545 @@ class _AppointmentHomeState extends State<AppointmentHome> {
     );
   }
 }
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+   final UserController _userController = Get.find();
+
+    final size = MediaQuery.of(context).size;
+   Color _colorTheme = Theme.of(context).primaryColor;
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16,8,0,0),
+            child: Text('ESS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
+          ),
+          // GridView.count(
+          //   crossAxisCount: 4,
+          //   mainAxisSpacing: 8,
+          //   crossAxisSpacing: 15,
+          //   shrinkWrap: true,
+          //   //scrollDirection: Axis.vertical,
+          //   padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
+          //   children: [
+          //     _NotifyIconBadgerTile(
+          //         size: size,
+          //         notifyCount: '1',
+          //         notifyName: 'Apply Leave',
+          //         notifyIcon: Icons.group_off,
+          //         //iconColor: _color2,
+          //         onTap: (){},
+          //         onLong:(){
+          //           showDialog(
+          //               context: context, builder: (BuildContext context){
+          //             return AlertDialog(
+          //               actions: [
+          //                 GestureDetector(
+          //                   onTap: (){
+          //                     _userController.favourite();
+          //                   },
+          //                   child: Row(
+          //                     children:  [
+          //                       Obx(()=>Icon(_userController.setFav.value?Icons.favorite :Icons.favorite_border ),),
+          //                       const Text('Add to Favourite'),
+          //                     ],
+          //                   ),
+          //                 )
+          //               ],
+          //             );
+          //           });
+          //         } ,
+          //     ),
+          //     _NotifyIconBadgerTile(
+          //         size: size,
+          //         notifyCount: '0',
+          //         notifyName: 'Garments',
+          //         notifyIcon: Icons.request_quote_outlined,
+          //         //iconColor: _color2,
+          //         onTap: (){},
+          //         onLong:(){} ,
+          //     ),
+          //     _NotifyIconBadgerTile(
+          //         size: size,
+          //         notifyCount: '6',
+          //         notifyName: 'Lunch Request',
+          //         notifyIcon: Icons.shopping_cart_outlined,
+          //         //iconColor:  _color2,
+          //         onTap: (){},
+          //         onLong:(){} ,
+          //     ),
+          //
+          //   ],
+          // ),
+
+          GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+              ),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 8.0),
+              itemCount: essMenu.length,
+              itemBuilder: (context,index){
+                final _menu = essMenu[index];
+                return GestureDetector(
+                  onTap: (){},
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        //padding: const EdgeInsets.all(3),
+                        width: size.width*0.5,
+                        height: 65,
+                        //height: 65,
+
+                        //1
+                        // decoration: BoxDecoration(
+                        //     boxShadow: [
+                        //       BoxShadow(
+                        //         color: Colors.grey.withOpacity(0.5),
+                        //         spreadRadius: 1,
+                        //         blurRadius: 3,
+                        //         offset: const Offset(1, 2), // changes position of shadow
+                        //       ),
+                        //     ],
+                        //     //border: Border.all(color: _color2,width: 1),
+                        //     color:Colors.white,
+                        //     borderRadius: BorderRadius.circular(12.0)
+                        // ),
+
+                        decoration: BoxDecoration(
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //     color: _colorTheme.withOpacity(0.5),
+                            //     spreadRadius: 1,
+                            //     blurRadius: 2,
+                            //     offset: const Offset(0, 2), // changes position of shadow
+                            //   ),
+                            // ],
+                            border: Border.all(color: Colors.white,width: 1),
+                            color:_colorTheme,
+                            borderRadius: BorderRadius.circular(8.0)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(width: 2,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+
+                                Icon(_menu.icon,size: 28,color: Colors.white),
+                                Text(_menu.title,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      // decoration: TextDecoration.underline,
+                                      fontSize: 12.0),),
+                              ],
+                            ),
+                            Align(
+                                alignment: Alignment.center,
+                                child: GestureDetector(
+                                  onTap: (){
+                                    if(_userController.favorites.contains(_menu.count)){
+                                      _userController.removeFavorite(_menu);
+                                    }else{
+                                      _userController.addFavorite(_menu);
+                                    }
+
+                                  },
+                                  child: Obx(()=>_userController.favorites.contains(_menu.count)?
+                                      Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
+                                      const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
+                                )
+                            ),
+                            const SizedBox(width: 2,),
+                          ],
+                        ),
+                      ),
+                      // Positioned(
+                      //   top: -6,
+                      //   right: 4,
+                      //   //left: -5,
+                      //   child: menu.count== '0'?
+                      //   const SizedBox():
+                      //   Container(
+                      //     // width: 18,
+                      //     // height: 18,
+                      //     padding: const EdgeInsets.all(3.5),
+                      //     alignment: Alignment.center,
+                      //     decoration: const BoxDecoration(
+                      //         color: Colors.red,
+                      //         shape: BoxShape.circle
+                      //     ),
+                      //     child: Text(menu.count.toString(),style: TextStyle(color: Colors.white,fontSize: 13),),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                );
+              }),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16,0,0,0),
+            child: Text('DSS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
+          ),
+          GridView.count(
+            crossAxisCount: 4,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 15,
+            shrinkWrap: true,
+            //scrollDirection: Axis.vertical,
+            padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
+            children: [
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '1',
+                  notifyName: 'Leave',
+                  notifyIcon: Icons.group_off,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'PR',
+                  notifyIcon: Icons.request_quote_outlined,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '6',
+                  notifyName: 'PO',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  //iconColor:  _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '2',
+                  notifyName: 'POC',
+                  notifyIcon: Icons.description,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'Projects',
+                  notifyIcon: Icons.info,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'CTM',
+                  notifyIcon: Icons.approval,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16,0,0,0),
+            child: Text('Appointment', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
+          ),
+          GridView.count(
+            crossAxisCount: 4,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 15,
+            shrinkWrap: true,
+            //scrollDirection: Axis.vertical,
+            padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
+            children: [
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '1',
+                  notifyName: 'Create Appointment',
+                  notifyIcon: Icons.group_off,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'My Appointment',
+                  notifyIcon: Icons.request_quote_outlined,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+                ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '6',
+                  notifyName: 'other Host Appointment',
+                  notifyIcon: Icons.shopping_cart_outlined,
+                  //iconColor:  _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '2',
+                  notifyName: 'Appointment History',
+                  notifyIcon: Icons.description,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'Actionable Appointment',
+                  notifyIcon: Icons.info,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+              _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: '0',
+                  notifyName: 'Assign Actions',
+                  notifyIcon: Icons.approval,
+                  //iconColor: _color2,
+                  onTap: (){},
+                  onLong:(){} ,
+              ),
+
+
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+class _NotifyIconBadgerTile extends StatelessWidget {
+  final Size size;
+  final String notifyCount;
+  final String notifyName;
+  final IconData notifyIcon;
+  //final Color iconColor;
+  final Function() onTap;
+  final Function() onLong;
+  const _NotifyIconBadgerTile({Key? key,required this.size,
+    required this.notifyCount,
+    required this.notifyName,
+    required this.notifyIcon,
+    //required this.iconColor,
+    required this.onTap, required this.onLong}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color _color2 = const Color(0xfff2652f);
+    Color _colorTheme = Theme.of(context).primaryColor;
+    return GestureDetector(
+      onTap: onTap,
+      onLongPress: onLong,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            //padding: const EdgeInsets.all(10),
+             width: 65,
+             //height: 65,
+
+            //1
+            // decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: Colors.grey.withOpacity(0.5),
+            //         spreadRadius: 1,
+            //         blurRadius: 3,
+            //         offset: const Offset(1, 2), // changes position of shadow
+            //       ),
+            //     ],
+            //     //border: Border.all(color: _color2,width: 1),
+            //     color:Colors.white,
+            //     borderRadius: BorderRadius.circular(12.0)
+            // ),
+
+            decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: _colorTheme.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, 2), // changes position of shadow
+                  ),
+                ],
+                border: Border.all(color: _colorTheme,width: 1),
+                 color:Colors.white,
+                borderRadius: BorderRadius.circular(12.0)
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(notifyIcon,size: 28,color: _colorTheme),
+                Text(notifyName,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: _colorTheme,
+                      // decoration: TextDecoration.underline,
+                      fontSize: 10.0),),
+              ],
+            ),
+          ),
+          Positioned(
+            top: -6,
+            right: 4,
+            //left: -5,
+            child: notifyCount == '0'?
+            const SizedBox():
+            Container(
+              // width: 18,
+              // height: 18,
+              padding: const EdgeInsets.all(3.5),
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle
+              ),
+              child: Text(notifyCount,style: TextStyle(color: Colors.white,fontSize: 13),),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NewDesign extends StatelessWidget {
+  const NewDesign({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    Color _colorTheme = Theme.of(context).primaryColor;
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                height: size.height*0.9,
+                width: size.width*0.15,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: menuList.length,
+                    itemBuilder: (context, index) {
+                      final menu = menuList[index];
+                  return GestureDetector(
+                    onTap: (){},
+                    child: Container(
+                      //width: 65,
+                      //height: 30,
+                      margin: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: _colorTheme.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 2,
+                                offset: const Offset(0, 2), // changes position of shadow
+                              ),
+                            ],
+                            //border: Border.all(color: _colorTheme,width: 1),
+                            color:Colors.white,
+                            borderRadius: BorderRadius.circular(5.0)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(menu.icon,size: 24,color: _colorTheme),
+                            Text(menu.title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: _colorTheme,
+                                  // decoration: TextDecoration.underline,
+                                  fontSize: 10.0),),
+                          ],
+                        )),
+                  );
+                  }),
+              ),
+              SizedBox(
+                width: size.width*0.85,
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 15,
+                  shrinkWrap: true,
+                  //scrollDirection: Axis.vertical,
+                  padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
+                  children: [
+                    _NotifyIconBadgerTile(
+                        size: size,
+                        notifyCount: '1',
+                        notifyName: 'Apply Leave',
+                        notifyIcon: Icons.group_off,
+                        //iconColor: _color2,
+                        onTap: (){},
+                        onLong:(){} ,
+                    ),
+                    _NotifyIconBadgerTile(
+                        size: size,
+                        notifyCount: '0',
+                        notifyName: 'Garments',
+                        notifyIcon: Icons.request_quote_outlined,
+                        //iconColor: _color2,
+                        onTap: (){},
+                        onLong:(){} ,
+                    ),
+                    _NotifyIconBadgerTile(
+                        size: size,
+                        notifyCount: '6',
+                        notifyName: 'Lunch Request',
+                        notifyIcon: Icons.shopping_cart_outlined,
+                        //iconColor:  _color2,
+                        onTap: (){},
+                        onLong:(){} ,
+                    ),
+
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+          Text('data'),
+
+        ],
+      ),
+    );
+  }
+}
+
+
+
