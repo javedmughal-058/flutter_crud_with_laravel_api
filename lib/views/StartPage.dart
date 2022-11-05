@@ -1,6 +1,7 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/HomPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AppointmentHome.dart';
@@ -43,6 +44,7 @@ class _StartPageState extends State<StartPage>{
     Color _colorTheme = Theme.of(context).primaryColor;
     int itemCount = menuList.length;
     final size = MediaQuery.of(context).size;
+    final UserController _userController = Get.find();
 
     return SafeArea(
       child: Scaffold(
@@ -486,84 +488,132 @@ class _StartPageState extends State<StartPage>{
             selectedItemIconSize: 28,
             mainButtonPosition: MainButtonPosition.middle,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+              color: _colorTheme,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
             itemIconColor: Colors.grey.withOpacity(0.5),
             itemTextStyle: TextStyle(
               color: Colors.grey.withOpacity(0.5),
               fontSize: 14.0,
             ),
-            selectedItemIconColor:_colorTheme,
+            selectedItemIconColor:Colors.white,
             selectedItemTextStyle:  TextStyle(
-              color: _colorTheme,
+              color:Colors.white,
               fontSize: 12.0,
             ),
           ),
-          mainActionButtonTheme: MainActionButtonTheme( size: 50, color: Theme.of(context).primaryColor, icon: Icon(Icons.keyboard_arrow_up, color: Colors.white, size: 32,)),
+          mainActionButtonTheme: MainActionButtonTheme( size: 50, color: Colors.white, icon: Icon(Icons.keyboard_arrow_up, color: _colorTheme, size: 32,)),
           onSelectItem: (index) => debugPrint('$index'),
-          sheetChild:   GridView.count(
-            crossAxisCount: 4,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 15,
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            padding: const EdgeInsets.only(left: 15.0,top: 20.0,bottom: 20.0,right: 10),
-            children: [
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '1',
-                  notifyName: 'Leave',
-                  notifyIcon: Icons.group_off,
-                  iconColor: _color2,
-                  onTap: (){}
+          sheetChild:   Obx(()=>GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.0,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
               ),
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '0',
-                  notifyName: 'PR',
-                  notifyIcon: Icons.request_quote_outlined,
-                  iconColor: _color2,
-                  onTap: (){}
-              ),
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '6',
-                  notifyName: 'PO',
-                  notifyIcon: Icons.shopping_cart_outlined,
-                  iconColor:  _color2,
-                  onTap: (){}
-              ),
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '2',
-                  notifyName: 'POC',
-                  notifyIcon: Icons.shopping_cart_outlined,
-                  iconColor: _color2,
-                  onTap: (){}
-              ),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 8.0),
+              itemCount: _userController.favoritesmenu.length,
+              itemBuilder: (context,index){
+                final _fav =  _userController.favoritesmenu[index];
+                return GestureDetector(
+                  onTap: (){},
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        //padding: const EdgeInsets.all(3),
+                        width: 85,
+                        height: 65,
+                        //height: 65,
 
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '0',
-                  notifyName: 'Projects',
-                  notifyIcon: Icons.shopping_cart_outlined,
-                  iconColor: _color2,
-                  onTap: (){}
-              ),
+                        //1
+                        // decoration: BoxDecoration(
+                        //     boxShadow: [
+                        //       BoxShadow(
+                        //         color: Colors.grey.withOpacity(0.5),
+                        //         spreadRadius: 1,
+                        //         blurRadius: 3,
+                        //         offset: const Offset(1, 2), // changes position of shadow
+                        //       ),
+                        //     ],
+                        //     //border: Border.all(color: _color2,width: 1),
+                        //     color:Colors.white,
+                        //     borderRadius: BorderRadius.circular(12.0)
+                        // ),
 
-              _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: '0',
-                  notifyName: 'CTM',
-                  notifyIcon: Icons.shopping_cart_outlined,
-                  iconColor: _color2,
-                  onTap: (){}
-              ),
+                        decoration: BoxDecoration(
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //     color: _colorTheme.withOpacity(0.5),
+                            //     spreadRadius: 1,
+                            //     blurRadius: 2,
+                            //     offset: const Offset(0, 2), // changes position of shadow
+                            //   ),
+                            // ],
+                            border: Border.all(color: Colors.white,width: 1),
+                            color:Colors.white,
+                            borderRadius: BorderRadius.circular(8.0)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(_fav.icon,size: 28,color: _colorTheme),
+                                Text(_fav.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: _colorTheme,
+                                      // decoration: TextDecoration.underline,
+                                      fontSize: 10.0),),
+                              ],
+                            ),
+                            Align(
+                                alignment: Alignment.center,
+                                child: GestureDetector(
+                                  onTap: (){
+                                    if(_userController.favorites.contains(_fav.count)){
+                                      _userController.removeFavorite(_fav);
+                                    }else{
+                                      _userController.addFavorite(_fav);
+                                    }
 
+                                  },
+                                  child: Obx(()=>_userController.favorites.contains(_fav.count)?
+                                  Icon(Icons.favorite_outlined,color: _colorTheme ,size: 16,):
+                                  const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
+                                )
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Positioned(
+                      //   top: -6,
+                      //   right: 4,
+                      //   //left: -5,
+                      //   child: menu.count== '0'?
+                      //   const SizedBox():
+                      //   Container(
+                      //     // width: 18,
+                      //     // height: 18,
+                      //     padding: const EdgeInsets.all(3.5),
+                      //     alignment: Alignment.center,
+                      //     decoration: const BoxDecoration(
+                      //         color: Colors.red,
+                      //         shape: BoxShape.circle
+                      //     ),
+                      //     child: Text(menu.count.toString(),style: TextStyle(color: Colors.white,fontSize: 13),),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                );
 
-            ],
-          ),
+              })),
           items: const [
             BottomBarWithSheetItem(label: 'Home', icon: Icons.home),
             BottomBarWithSheetItem(label: 'Currency', icon: Icons.description),
