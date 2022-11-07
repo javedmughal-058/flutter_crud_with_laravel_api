@@ -30,10 +30,17 @@ final essMenu = [
   MenuModel(count:0, title: 'Apply Leave', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
   MenuModel(count:1,title: 'Garment', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
   MenuModel(count:2,title: 'Lunch Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:3,title: 'Task Planner', icon: Icons.task, route: '/ess',color: const Color(0xFDA60000), fav: false),
+
 ];
 
 final dssMenu = [
-  MenuModel(count:0, title: 'Apply Leave', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
-  MenuModel(count:1,title: 'Garment', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
-  MenuModel(count:2,title: 'Lunch Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:4, title: 'PO', icon: Icons.shopping_cart_outlined, route: '/po',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:5,title: 'PR', icon: Icons.request_quote_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:6,title: 'POC', icon: Icons.point_of_sale_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:7,title: 'Peojects', icon: Icons.description_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:8,title: 'Stock Movement', icon: Icons.category_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:9,title: 'Gate Pass', icon: Icons.map_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:10,title: 'CTM', icon: Icons.airplanemode_on_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
+
 ];
