@@ -19,7 +19,7 @@ class _EssHomeState extends State<EssHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('USG Smart Office'),),
+      appBar: AppBar(title: const Text('ESS'),),
       body:  const SecondPage(),
     );
   }
@@ -358,7 +358,7 @@ class SecondPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16,8,0,0),
-            child: Text('ESS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
+            child: Text('Employee Self Service', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
           ),
           // GridView.count(
           //   crossAxisCount: 4,
@@ -418,44 +418,7 @@ class SecondPage extends StatelessWidget {
           //   ],
           // ),
 
-          GridView.builder(
-
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 2.0,
-                crossAxisSpacing: 8.0,
-              ),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 0.0),
-              itemCount: essMenu.length,
-              itemBuilder: (context,index){
-                final _menu = essMenu[index];
-                return _NotifyIconBadgerTile(
-                  size: size,
-                  notifyCount: _menu.count.toString(),
-                  notifyName: _menu.title,
-                  notifyIcon: _menu.icon,
-                  //iconColor: _color2,
-                  favIcon:  Align(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: (){
-                          if(_userController.favorites.contains(_menu.count)){
-                            _userController.removeFavorite(_menu);
-                          }else{
-                            _userController.addFavorite(_menu);
-                          }
-                        },
-                        child: Obx(()=>_userController.favorites.contains(_menu.count)?
-                          const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
-                          const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
-                      )
-                  ),
-                  onTap: (){}
-                );
-              }),
+          const CustomGridView(),
 
           // GridView.builder(
           //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -568,48 +531,7 @@ class SecondPage extends StatelessWidget {
           //         ),
           //       );
           //     }),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16,0,0,0),
-            child: Text('DSS', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
-          ),
-          GridView.builder(
 
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 2.0,
-                crossAxisSpacing: 8.0,
-              ),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 0.0),
-              itemCount: essMenu.length,
-              itemBuilder: (context,index){
-                final _menu = essMenu[index];
-                return _NotifyIconBadgerTile(
-                    size: size,
-                    notifyCount: _menu.count.toString(),
-                    notifyName: _menu.title,
-                    notifyIcon: _menu.icon,
-                    //iconColor: _color2,
-                    favIcon:  Align(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: (){
-                            if(_userController.favorites.contains(_menu.count)){
-                              _userController.removeFavorite(_menu);
-                            }else{
-                              _userController.addFavorite(_menu);
-                            }
-                          },
-                          child: Obx(()=>_userController.favorites.contains(_menu.count)?
-                          const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
-                          const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
-                        )
-                    ),
-                    onTap: (){}
-                );
-              }),
           // GridView.count(
           //   crossAxisCount: 4,
           //   mainAxisSpacing: 8,
@@ -755,120 +677,7 @@ class SecondPage extends StatelessWidget {
     );
   }
 }
-class _NotifyIconBadgerTile extends StatelessWidget {
-  final Size size;
-  final String notifyCount;
-  final String notifyName;
-  final IconData notifyIcon;
-  final Widget favIcon;
-  final Function() onTap;
-   const _NotifyIconBadgerTile({Key? key,required this.size,
-    required this.notifyCount,
-    required this.notifyName,
-    required this.notifyIcon,
-    //required this.iconColor,
-    required this.onTap, required this.favIcon}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    Color _color2 = const Color(0xfff2652f);
-    Color _colorTheme = Theme.of(context).primaryColor;
-    final UserController _userController = Get.find();
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            //padding: const EdgeInsets.all(10),
-            width: size.width*0.5,
-            height: 65,
-             //height: 65,
-
-            //1
-            // decoration: BoxDecoration(
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: Colors.grey.withOpacity(0.5),
-            //         spreadRadius: 1,
-            //         blurRadius: 3,
-            //         offset: const Offset(1, 2), // changes position of shadow
-            //       ),
-            //     ],
-            //     //border: Border.all(color: _color2,width: 1),
-            //     color:Colors.white,
-            //     borderRadius: BorderRadius.circular(12.0)
-            // ),
-            decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: _colorTheme.withOpacity(0.5),
-              //     spreadRadius: 1,
-              //     blurRadius: 2,
-              //     offset: const Offset(0, 2), // changes position of shadow
-              //   ),
-              // ],
-                border: Border.all(color: Colors.white,width: 1),
-                 color: _colorTheme,
-                borderRadius: BorderRadius.circular(8.0)
-            ),
-            // decoration: BoxDecoration(
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: _colorTheme.withOpacity(0.5),
-            //         spreadRadius: 1,
-            //         blurRadius: 2,
-            //         offset: const Offset(0, 2), // changes position of shadow
-            //       ),
-            //     ],
-            //     border: Border.all(color: _colorTheme,width: 1),
-            //      color:Colors.white,
-            //     borderRadius: BorderRadius.circular(12.0)
-            // ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(width: 2,),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(notifyIcon,size: 28, color: Colors.white,),
-                    Text(notifyName,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 10.0),),
-                  ],
-                ),
-                favIcon,
-                const SizedBox(width: 2,),
-
-              ],
-            ),
-          ),
-          Positioned(
-            top: -6,
-            right: 0,
-            //left: -5,
-            child: notifyCount == '0'?
-            const SizedBox():
-            Container(
-              padding: const EdgeInsets.all(3.5),
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle
-              ),
-              child: Text(notifyCount,style: const TextStyle(color: Colors.white,fontSize: 13),),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _CustomBalanceCard extends StatelessWidget {
   final IconData icon;
@@ -917,16 +726,16 @@ class _CustomBalanceCard extends StatelessWidget {
         //4
 
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _color2 ),
+        // border: Border.all(color: _color2 ),
         color: Colors.white,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.grey.withOpacity(1),
-        //     spreadRadius: 1,
-        //     blurRadius: 2,
-        //     offset: const Offset(0, 2), // changes position of shadow
-        //   ),
-        // ]
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(1),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: const Offset(0, 2), // changes position of shadow
+          ),
+        ]
       ),
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -968,6 +777,165 @@ class _CustomBalanceCard extends StatelessWidget {
   }
 }
 
+class CustomGridView extends StatelessWidget {
+  const CustomGridView({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final UserController _userController = Get.find();
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1.0,
+          mainAxisSpacing: 2.0,
+          crossAxisSpacing: 8.0,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 0.0),
+        itemCount: essMenu.length,
+        itemBuilder: (context,index){
+          final _menu = essMenu[index];
+          return _NotifyIconBadgerTile(
+              size: size,
+              notifyCount: _menu.count.toString(),
+              notifyName: _menu.title,
+              notifyIcon: _menu.icon,
+              //iconColor: _color2,
+              favIcon:  Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: (){
+                      if(_userController.favorites.contains(_menu.count)){
+                        _userController.removeFavorite(_menu);
+                      }else{
+                        _userController.addFavorite(_menu);
+                      }
+                    },
+                    child: Obx(()=>_userController.favorites.contains(_menu.count)?
+                    const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
+                    const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
+                  )
+              ),
+              onTap: (){}
+          );
+        });
+  }
+}
+class _NotifyIconBadgerTile extends StatelessWidget {
+  final Size size;
+  final String notifyCount;
+  final String notifyName;
+  final IconData notifyIcon;
+  final Widget favIcon;
+  final Function() onTap;
+  const _NotifyIconBadgerTile({Key? key,required this.size,
+    required this.notifyCount,
+    required this.notifyName,
+    required this.notifyIcon,
+    //required this.iconColor,
+    required this.onTap, required this.favIcon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color _color2 = const Color(0xfff2652f);
+    Color _colorTheme = Theme.of(context).primaryColor;
+
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            //padding: const EdgeInsets.all(10),
+            width: size.width*0.5,
+            height: 65,
+            //height: 65,
+
+            //1
+            // decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: Colors.grey.withOpacity(0.5),
+            //         spreadRadius: 1,
+            //         blurRadius: 3,
+            //         offset: const Offset(1, 2), // changes position of shadow
+            //       ),
+            //     ],
+            //     //border: Border.all(color: _color2,width: 1),
+            //     color:Colors.white,
+            //     borderRadius: BorderRadius.circular(12.0)
+            // ),
+            decoration: BoxDecoration(
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: _colorTheme.withOpacity(0.5),
+              //     spreadRadius: 1,
+              //     blurRadius: 2,
+              //     offset: const Offset(0, 2), // changes position of shadow
+              //   ),
+              // ],
+                border: Border.all(color: Colors.white,width: 1),
+                color: _colorTheme,
+                borderRadius: BorderRadius.circular(8.0)
+            ),
+            // decoration: BoxDecoration(
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: _colorTheme.withOpacity(0.5),
+            //         spreadRadius: 1,
+            //         blurRadius: 2,
+            //         offset: const Offset(0, 2), // changes position of shadow
+            //       ),
+            //     ],
+            //     border: Border.all(color: _colorTheme,width: 1),
+            //      color:Colors.white,
+            //     borderRadius: BorderRadius.circular(12.0)
+            // ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 2,),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(notifyIcon,size: 28, color: Colors.white,),
+                    Text(notifyName,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          // decoration: TextDecoration.underline,
+                          fontSize: 13.0),),
+                  ],
+                ),
+                favIcon,
+                const SizedBox(width: 2,),
+
+              ],
+            ),
+          ),
+          Positioned(
+            top: -6,
+            right: 0,
+            //left: -5,
+            child: notifyCount == '0'?
+            const SizedBox():
+            Container(
+              padding: const EdgeInsets.all(3.5),
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle
+              ),
+              child: Text(notifyCount,style: const TextStyle(color: Colors.white,fontSize: 13),),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
