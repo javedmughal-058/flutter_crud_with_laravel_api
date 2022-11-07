@@ -6,7 +6,7 @@ class EmployeeSelfService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Ess'),
+      child: Text('Appointment'),
     );
   }
 }
