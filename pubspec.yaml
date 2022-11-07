@@ -44,7 +44,7 @@ dependencies:
 
   bottom_sheet_bar: ^2.2.0
   carousel_slider: ^4.0.0
-
+  shared_preferences: ^2.0.6
   bubble: ^1.2.1
   lottie: ^1.2.1
   simple_animations: ^4.0.1
