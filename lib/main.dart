@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AboutUs.dart';
-import 'package:flutter_crud_with_laravel_api/views/MenuPages/AppointmentHome.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Decision.dart';
-import 'package:flutter_crud_with_laravel_api/views/MenuPages/ESS.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/Appointment.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Garments.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Lunch.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Objective.dart';
@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
             name: "/main", page: () => const MyApp(), transition: Transition.rightToLeft, transitionDuration: const Duration(milliseconds: 600)),
       ],
       routes: {
-        "/appointment_home" : (context) => const AppointmentHome(),
+        "/appointment_home" : (context) => const EmployeeSelfService(),
         "/dss_notifs" : (context) => const DecisionSupport(),
-        "/ess" : (context) => const EmployeeSelfService(),
+        "/ess" : (context) => const EssHome(),
         "/leave_apply" : (context) => const LeaveApply(),
         "/garment_request" : (context) => const GarmentRequest(),
         "/lunch_request" : (context) => const LunchRequest(),
