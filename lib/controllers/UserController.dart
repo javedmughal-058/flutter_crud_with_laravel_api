@@ -2,16 +2,27 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
+import 'package:flutter_crud_with_laravel_api/views/BottomPages/Currency.dart';
+import 'package:flutter_crud_with_laravel_api/views/BottomPages/Setting.dart';
+import 'package:flutter_crud_with_laravel_api/views/BottomPages/Team.dart';
+import 'package:flutter_crud_with_laravel_api/views/StartPage.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController{
-
+  var currentIndex = 0.obs;
+  final screens = [
+    const StartPage(),
+    const Currency(),
+    const Setting(),
+    const Team(),
+  ];
 
   late TextEditingController name;
   late TextEditingController email;
   var setFav =false.obs;
   var favorites = [].obs;
+
   var favoritesmenu = <MenuModel>[].obs;
   @override
   void onInit() {
@@ -19,6 +30,7 @@ class UserController extends GetxController{
     super.onInit();
     name = TextEditingController();
     email = TextEditingController();
+
   }
 // Future<bool> favourite(int index)async {
 //   print("$index ${menu[index].fav}");
