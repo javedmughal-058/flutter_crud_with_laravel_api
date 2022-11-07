@@ -32,16 +32,21 @@ class UserController extends GetxController{
   Future<void> addFavorite(MenuModel element)  async {
     favorites.add(element.count);
     var fav = json.encode(favorites);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('favoriteSurahs', fav);
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString('favMenu', fav);
     favoritesmenu.add(element);
   }
 
   Future<void> removeFavorite(MenuModel element) async {
     favorites.remove(element.count);
     var fav = json.encode(favorites);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('favoriteSurahs', fav);
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString('favMenu', fav);
     favoritesmenu.remove(element);
+  }
+  Future<void> getFavorite()  async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var favorite = prefs.getString('favMenu');
+    favorites.value = json.decode(favorite!);
   }
 }
