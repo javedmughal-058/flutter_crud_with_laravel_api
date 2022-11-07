@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/HomPage.dart';
-import 'package:flutter_crud_with_laravel_api/views/MenuPages/AppointmentHome.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
 import 'package:get/get.dart';
 
 class StartPage extends StatefulWidget {
@@ -326,34 +326,7 @@ class _StartPageState extends State<StartPage>{
                       ))
                 ],
               ),
-              Row(
-                children: const [
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.cloud_outlined,
-                        entitled: '10',
-                        availed: '4.5',
-                        leaveName: 'Casual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.drive_eta_outlined,
-                        entitled: '30',
-                        availed: '8',
-                        leaveName: 'Annual'),
-                  ),
-                  Expanded(
-                    child: _CustomBalanceCard(
-                        icon: Icons.sick_outlined,
-                        entitled: '8',
-                        availed: '2',
-                        leaveName: 'Sick'),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -626,103 +599,7 @@ class _StartPageState extends State<StartPage>{
   }
 }
 
-class _CustomBalanceCard extends StatelessWidget {
-  final IconData icon;
-  final String entitled;
-  final String availed;
-  final String leaveName;
-  const _CustomBalanceCard(
-      {Key? key,
-      required this.icon,
-      required this.entitled,
-      required this.availed,
-      required this.leaveName})
-      : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    Color _color = const Color(0xff115e7a);
-    Color _color2 = const Color(0xfff2652e);
-    Color _color3 = const Color(0xff009b9a);
-    Color _color4 = const Color(0xff2b5485);
-    return Container(
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          //1
-
-          // border: Border.all(
-          //     color: _color.withOpacity(0.5),
-          //     width: 1.0,
-          //     style: BorderStyle.solid),
-          // borderRadius: BorderRadius.circular(8),
-          // color: _color.withOpacity(0.02),
-
-          //2
-
-          // color: Colors.grey.shade200,
-          // borderRadius: BorderRadius.circular(12),
-          // border: Border.all(
-          //   color: Colors.black,),
-
-          //3
-
-          // color: _color.withOpacity(0.03),
-          // border: Border.all(color: _color3),
-          // borderRadius: BorderRadius.circular(10),
-
-          //4
-
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: _color2 ),
-          color: Colors.white,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(1),
-          //     spreadRadius: 1,
-          //     blurRadius: 2,
-          //     offset: const Offset(0, 2), // changes position of shadow
-          //   ),
-          // ]
-      ),
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Icon(icon, color: Theme.of(context).primaryColor),
-              Text(leaveName),
-            ],
-          ),
-          Divider(color: _color),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text('Entitled'),
-              Text(
-                entitled,
-                style:
-                    const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          Divider(color: _color),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text('Availed'),
-              Text(
-                availed,
-                style:
-                    const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
 
 Widget productItem(int index, context) => Container(
       padding: const EdgeInsets.fromLTRB(8, 0, 6, 6),
