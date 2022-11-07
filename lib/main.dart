@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
+import 'package:flutter_crud_with_laravel_api/views/DSS/PO.dart';
+import 'package:flutter_crud_with_laravel_api/views/DSS/POC.dart';
+import 'package:flutter_crud_with_laravel_api/views/DSS/PR.dart';
+import 'package:flutter_crud_with_laravel_api/views/BottomPages/Home.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AboutUs.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/DecisionSupport.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
-import 'package:flutter_crud_with_laravel_api/views/MenuPages/Decision.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/login.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Appointment.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Garments.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Lunch.dart';
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color(0xff24577a),
         ),
       ),
-      home: const StartPage(),
+      home: const main_page(),
       getPages: [
         GetPage(
             name: "/profile_page", page: () => const ProfilePage(), transition: Transition.leftToRight, transitionDuration: const Duration(milliseconds: 600)),
@@ -60,6 +65,9 @@ class MyApp extends StatelessWidget {
         "/settings" : (context) => const Settings(),
         "/about_us" : (context) => const AboutUS(),
         "/usgbot" : (context) => const USGBot(),
+        "/po" : (context) => const PO(),
+        "/pr" : (context) => const PR(),
+        "/poc" : (context) => const POC(),
       },
     );
   }
