@@ -11,10 +11,10 @@ class DecisionSupport extends StatefulWidget {
   const DecisionSupport({Key? key}) : super(key: key);
 
   @override
-  State<DecisionSupport> createState() => _DEcisionSupportState();
+  State<DecisionSupport> createState() => _DecisionSupportState();
 }
 
-class _DEcisionSupportState extends State<DecisionSupport> {
+class _DecisionSupportState extends State<DecisionSupport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -395,7 +395,7 @@ class SecondPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(5),
                                         color: Colors.red
                                     ),
-                                    child: const Text('Approve', style: TextStyle(color: Colors.white),)),
+                                    child: const Text('Cancel', style: TextStyle(color: Colors.white),)),
                               ),
 
                             ],
