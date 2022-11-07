@@ -9,7 +9,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color _colorwhite =const Color(0xffffffff);
-    Color _color3 =Theme.of(context).primaryColor;
+    Color _colorTheme =Theme.of(context).primaryColor;
     Color _color4 = const Color(0xfff2652e);
 
     return SafeArea(
@@ -77,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.home_outlined,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.home_outlined,color: _colorTheme),
                   title: Text('Home',style: Theme.of(context).textTheme.subtitle2),
                   onTap: (){
                     Navigator.of(context).pushNamed("/home");
@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.approval_outlined,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.approval_outlined,color: _colorTheme),
                   title: Text('Decision Support',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -100,7 +100,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.check_circle_outline,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.check_circle_outline,color: _colorTheme),
                   title: Text('Approvals',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -112,7 +112,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.policy_outlined,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.policy_outlined,color: _colorTheme),
                   title: Text('Policy',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                   onTap: (){
@@ -124,7 +124,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.settings_outlined,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.settings_outlined,color: _colorTheme),
                   title: Text('Settings',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
@@ -136,7 +136,7 @@ class ProfilePage extends StatelessWidget {
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.info_outlined,color: _color3.withOpacity(0.5)),
+                  leading: Icon(Icons.info_outlined,color:_colorTheme),
                   title: Text('About US',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                   onTap: (){
@@ -171,7 +171,7 @@ class ProfilePage extends StatelessWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.logout,color: _color3,),
+                        Icon(Icons.logout,color: _colorTheme,),
                         const SizedBox(width: 10,),
                         Text('Logout',style: Theme.of(context).textTheme.subtitle2, textAlign: TextAlign.center),
                       ],
