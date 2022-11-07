@@ -61,7 +61,7 @@ class ProfilePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('UsmanRiaz', style: TextStyle(color: _colorwhite),),
+                          Text('UsmanRiaz', style: TextStyle(color: _colorwhite, fontWeight: FontWeight.w700, fontSize: 16),),
                           SizedBox(
                               width: 240,
                               child: Text('Senior Assistant Manager mnager assistan', style: TextStyle(color: _colorwhite),)),
