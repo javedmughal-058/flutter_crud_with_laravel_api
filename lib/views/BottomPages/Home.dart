@@ -18,15 +18,8 @@ class main_page extends StatefulWidget {
 
 class main_pageState extends State<main_page> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
+  final UserController _userController = Get.find();
 
-  int _currentIndex = 0;
-  final screens = [
-    const StartPage(),
-    const Currency(),
-    const Setting(),
-    const Team(),
-
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +115,7 @@ class main_pageState extends State<main_page> {
         // extendBodyBehindAppBar: true,
         // extendBody: true,
         //backgroundColor: Colors.blue,
-        body: screens[_currentIndex],
+        body: _userController.screens[_userController.currentIndex.value],
         bottomNavigationBar: BottomBarWithSheet(
           controller: _bottomBarController,
           bottomBarTheme: BottomBarTheme(
@@ -152,7 +145,7 @@ class main_pageState extends State<main_page> {
                 size: 32,
               )),
           onSelectItem: (_currentIndex) => setState(() {
-              this._currentIndex = _currentIndex;
+              _userController.currentIndex.value = _currentIndex;
               }),
           sheetChild: const CustomGridView(),
           items: const [
