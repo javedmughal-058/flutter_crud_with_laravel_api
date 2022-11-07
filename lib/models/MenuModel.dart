@@ -31,3 +31,9 @@ final essMenu = [
   MenuModel(count:1,title: 'Garment', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
   MenuModel(count:2,title: 'Lunch Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
 ];
+
+final dssMenu = [
+  MenuModel(count:0, title: 'Apply Leave', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Garment', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:2,title: 'Lunch Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+];
