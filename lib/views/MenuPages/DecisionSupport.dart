@@ -493,7 +493,7 @@ class SecondPage extends StatelessWidget {
                   final _menu = dssMenu[index];
                   return _NotifyIconBadgerTile(
                       size: size,
-                      notifyCount: _menu.count.toString(),
+                      notifyCount: _menu.count,
                       notifyName: _menu.title,
                       notifyIcon: _menu.icon,
                       //iconColor: _color2,
@@ -999,7 +999,7 @@ class CustomGridView extends StatelessWidget {
           final _menu = dssMenu[index];
           return _NotifyIconBadgerTile(
               size: size,
-              notifyCount: _menu.count.toString(),
+              notifyCount: _menu.count,
               notifyName: _menu.title,
               notifyIcon: _menu.icon,
               //iconColor: _color2,
@@ -1033,7 +1033,7 @@ class CustomGridView extends StatelessWidget {
 
 class _NotifyIconBadgerTile extends StatelessWidget {
   final Size size;
-  final String notifyCount;
+  final int notifyCount;
   final String notifyName;
   final IconData notifyIcon;
   final Widget favIcon;
@@ -1139,19 +1139,19 @@ class _NotifyIconBadgerTile extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -6,
-            right: 0,
+            top: notifyCount>=10?-4:-6,
+            right: notifyCount>=10?3:0,
             //left: -5,
-            child: notifyCount == '0'
+            child: notifyCount == 0
                 ? const SizedBox()
                 : Container(
-                    padding: const EdgeInsets.all(3.5),
+                    padding: EdgeInsets.all(notifyCount>=10?2:3.5),
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
                         color: Colors.red, shape: BoxShape.circle),
                     child: Text(
-                      notifyCount,
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
+                      notifyCount.toString(),
+                      style:  TextStyle(color: Colors.white, fontSize: notifyCount>=10?11:13),
                     ),
                   ),
           ),

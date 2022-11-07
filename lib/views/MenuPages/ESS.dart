@@ -937,7 +937,7 @@ class _NotifyIconBadgerTile extends StatelessWidget {
                   color: Colors.red,
                   shape: BoxShape.circle
               ),
-              child: Text(notifyCount,style: const TextStyle(color: Colors.white,fontSize: 13),),
+              child: Text(notifyCount,style:  TextStyle(color: Colors.white,fontSize: notifyCount==10?10:13),),
             ),
           ),
         ],
