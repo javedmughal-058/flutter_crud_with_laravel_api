@@ -784,43 +784,47 @@ class CustomGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final UserController _userController = Get.find();
-    return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          mainAxisSpacing: 2.0,
-          crossAxisSpacing: 8.0,
-        ),
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 0.0),
-        itemCount: essMenu.length,
-        itemBuilder: (context,index){
-          final _menu = essMenu[index];
-          return _NotifyIconBadgerTile(
-              size: size,
-              notifyCount: _menu.count.toString(),
-              notifyName: _menu.title,
-              notifyIcon: _menu.icon,
-              //iconColor: _color2,
-              favIcon:  Align(
-                  alignment: Alignment.center,
-                  child: GestureDetector(
-                    onTap: (){
-                      if(_userController.favorites.contains(_menu.count)){
-                        _userController.removeFavorite(_menu);
-                      }else{
-                        _userController.addFavorite(_menu);
-                      }
-                    },
-                    child: Obx(()=>_userController.favorites.contains(_menu.count)?
-                    const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
-                    const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
-                  )
-              ),
-              onTap: (){}
-          );
-        });
+    return SizedBox(
+      height: size.width*0.25,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //   crossAxisCount: 3,
+          //   childAspectRatio: 1.0,
+          //   mainAxisSpacing: 2.0,
+          //   crossAxisSpacing: 8.0,
+          // ),
+          physics: const AlwaysScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
+          itemCount: essMenu.length,
+          itemBuilder: (context,index){
+            final _menu = essMenu[index];
+            return _NotifyIconBadgerTile(
+                size: size,
+                notifyCount: _menu.count.toString(),
+                notifyName: _menu.title,
+                notifyIcon: _menu.icon,
+                //iconColor: _color2,
+                favIcon:  Align(
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: (){
+                        if(_userController.favorites.contains(_menu.count)){
+                          _userController.removeFavorite(_menu);
+                        }else{
+                          _userController.addFavorite(_menu);
+                        }
+                      },
+                      child: Obx(()=>_userController.favorites.contains(_menu.count)?
+                      const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
+                      const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
+                    )
+                ),
+                onTap: (){}
+            );
+          }),
+    );
   }
 }
 class _NotifyIconBadgerTile extends StatelessWidget {
@@ -850,7 +854,8 @@ class _NotifyIconBadgerTile extends StatelessWidget {
         children: [
           Container(
             //padding: const EdgeInsets.all(10),
-            width: size.width*0.5,
+            margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+            width: size.width*0.26,
             height: 65,
             //height: 65,
 
@@ -899,15 +904,18 @@ class _NotifyIconBadgerTile extends StatelessWidget {
               children: [
                 const SizedBox(width: 2,),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(notifyIcon,size: 28, color: Colors.white,),
-                    Text(notifyName,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 13.0),),
+                    SizedBox(
+                      width: 60,
+                      child: Text(notifyName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            // decoration: TextDecoration.underline,
+                            fontSize: 12.0),),
+                    ),
                   ],
                 ),
                 favIcon,
