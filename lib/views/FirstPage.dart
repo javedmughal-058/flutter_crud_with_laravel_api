@@ -11,14 +11,14 @@ class FirstPage extends StatelessWidget {
     final UserController userController = Get.find();
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   // backgroundColor: Colors.transparent,elevation: 0.0,
-        //   // leading: IconButton(
-        //   //     onPressed: (){},
-        //   //     icon: const Icon(Icons.arrow_back_ios, color: Colors.indigo, size: 16,)),
-        //   title: const Text("Flutter with Laravel APIs", style: TextStyle(color: Colors.black, fontSize: 16),),
-        //
-        // ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,elevation: 0.0,
+          leading: IconButton(
+              onPressed: (){},
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.indigo, size: 16,)),
+          title: const Text("Flutter with Laravel APIs", style: TextStyle(color: Colors.black, fontSize: 16),),
+
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -47,40 +47,46 @@ class FirstPage extends StatelessWidget {
 
                 ),
               ),
-              ElevatedButton(onPressed: (){},
+              ElevatedButton(onPressed: (){
+                userController.addRecord(username: userController.name.text, email: userController.email.text);
+                userController.getRecord();
+              },
                   child: const Text('Save')),
-              ListView.builder(
+              Obx(()=>ListView.builder(
                   padding: const EdgeInsets.all(5),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 3,
+                  itemCount: userController.getData.length,
                   itemBuilder: (context, index){
-                return Container(
-                  margin: const EdgeInsets.all(4),
-                  padding: const EdgeInsets.only(left: 4),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        style: BorderStyle.solid,
-                        width: 1,
-                        color: Colors.grey,
-                      )),
-                  child: Row(
-                    children:[
-                      Column(
-                        children: const [
-                          Text('Name'),
-                          Text('Email'),
+                    return Container(
+                      margin: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.only(left: 4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            style: BorderStyle.solid,
+                            width: 1,
+                            color: Colors.grey,
+                          )),
+                      child: Row(
+                        children:[
+                          Column(
+                            children:  [
+                              Text(userController.getData[index].stdname== null ?" ":userController.getData[index].stdname.toString() ),
+                              Text(userController.getData[index].email== null ?" ":userController.getData[index].email.toString()),
+                            ],
+                          ),
+                          const Spacer(),
+                          IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: Colors.green,)),
+                          IconButton(onPressed: (){
+                            userController.deleteRecord(userController.getData[index].stdname.toString());
+                          }, icon: const Icon(Icons.delete, color: Colors.red,)),
+
+
                         ],
                       ),
-                      const Spacer(),
-                      IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: Colors.green,)),
-                      IconButton(onPressed: (){}, icon: const Icon(Icons.delete, color: Colors.red,)),
-
-                    ],
-                  ),
-                );
-              })
+                    );
+                  })),
             ],
           ),
         ),
