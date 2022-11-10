@@ -22,6 +22,7 @@ class UserController extends GetxController{
   ];
 
   var EssTabIndex = 0.obs;
+  var lunchTab = false.obs;
 
   String apiUrl = 'http://127.0.0.1:8000/api/';
   ApiService apiService =  ApiService();
@@ -39,6 +40,11 @@ class UserController extends GetxController{
     name = TextEditingController();
     email = TextEditingController();
 
+  }
+
+
+  Future<void> updateValue() async{
+    lunchTab.value = !lunchTab.value;
   }
 // Future<bool> favourite(int index)async {
 //   print("$index ${menu[index].fav}");
