@@ -6,7 +6,6 @@ import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/OptionalScreen.dart';
 import 'package:get/get.dart';
 
-
 class EssHome extends StatefulWidget {
   const EssHome({Key? key}) : super(key: key);
 
@@ -15,12 +14,13 @@ class EssHome extends StatefulWidget {
 }
 
 class _EssHomeState extends State<EssHome> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ESS'),),
-      body:  const SecondPage(),
+      appBar: AppBar(
+        title: const Text('ESS'),
+      ),
+      body: const SecondPage(),
     );
   }
 }
@@ -33,18 +33,23 @@ class NavigationPage extends StatelessWidget {
     PageController page = PageController();
     bool isFinished = false;
     return Scaffold(
-      appBar: AppBar(title: const Text('USG Smart Office', style: TextStyle(fontSize: 18),),),
+      appBar: AppBar(
+        title: const Text(
+          'USG Smart Office',
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
       body: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
               SideMenu(
                 controller: page,
                 style: SideMenuStyle(
-                  itemOuterPadding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                  itemOuterPadding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                   iconSize: 18,
                   itemHeight: 35.0,
                   // showTooltip: false,
@@ -97,7 +102,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 1,
-
                     onTap: () {
                       page.jumpToPage(1);
                     },
@@ -105,7 +109,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 2,
-
                     onTap: () {
                       page.jumpToPage(2);
                     },
@@ -119,13 +122,13 @@ class NavigationPage extends StatelessWidget {
                               horizontal: 6.0, vertical: 3),
                           child: Text(
                             'New',
-                            style: TextStyle(fontSize: 11, color: Colors.grey[800]),
+                            style: TextStyle(
+                                fontSize: 11, color: Colors.grey[800]),
                           ),
                         )),
                   ),
                   SideMenuItem(
                     priority: 3,
-
                     onTap: () {
                       page.jumpToPage(3);
                     },
@@ -133,7 +136,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 4,
-
                     onTap: () {
                       page.jumpToPage(4);
                     },
@@ -142,7 +144,6 @@ class NavigationPage extends StatelessWidget {
 
                   SideMenuItem(
                     priority: 5,
-
                     onTap: () {
                       page.jumpToPage(5);
                     },
@@ -150,7 +151,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 6,
-
                     onTap: () {
                       page.jumpToPage(6);
                     },
@@ -164,13 +164,13 @@ class NavigationPage extends StatelessWidget {
                               horizontal: 6.0, vertical: 3),
                           child: Text(
                             'New',
-                            style: TextStyle(fontSize: 11, color: Colors.grey[800]),
+                            style: TextStyle(
+                                fontSize: 11, color: Colors.grey[800]),
                           ),
                         )),
                   ),
                   SideMenuItem(
                     priority: 7,
-
                     onTap: () {
                       page.jumpToPage(7);
                     },
@@ -178,7 +178,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 8,
-
                     onTap: () {
                       page.jumpToPage(8);
                     },
@@ -186,7 +185,6 @@ class NavigationPage extends StatelessWidget {
                   ),
                   SideMenuItem(
                     priority: 9,
-
                     onTap: () {
                       page.jumpToPage(9);
                     },
@@ -302,8 +300,6 @@ class NavigationPage extends StatelessWidget {
                         ),
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -315,369 +311,377 @@ class NavigationPage extends StatelessWidget {
   }
 }
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
 
   @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateMixin{
+  late TabController tabController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabController =TabController(length: 8, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
-   final UserController _userController = Get.find();
+    final UserController _userController = Get.find();
 
     final size = MediaQuery.of(context).size;
-   Color _colorTheme = Theme.of(context).primaryColor;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: const [
-              Expanded(
-                child: _CustomBalanceCard(
-                    icon: Icons.cloud_outlined,
-                    entitled: '10',
-                    availed: '4.5',
-                    leaveName: 'Casual'),
-              ),
-              Expanded(
-                child: _CustomBalanceCard(
-                    icon: Icons.drive_eta_outlined,
-                    entitled: '30',
-                    availed: '8',
-                    leaveName: 'Annual'),
-              ),
-              Expanded(
-                child: _CustomBalanceCard(
-                    icon: Icons.sick_outlined,
-                    entitled: '8',
-                    availed: '2',
-                    leaveName: 'Sick'),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16,8,0,0),
-            child: Text('Employee Self Service', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
-          ),
-          // GridView.count(
-          //   crossAxisCount: 4,
-          //   mainAxisSpacing: 8,
-          //   crossAxisSpacing: 15,
-          //   shrinkWrap: true,
-          //   //scrollDirection: Axis.vertical,
-          //   padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
-          //   children: [
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '1',
-          //         notifyName: 'Apply Leave',
-          //         notifyIcon: Icons.group_off,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //         onLong:(){
-          //           showDialog(
-          //               context: context, builder: (BuildContext context){
-          //             return AlertDialog(
-          //               actions: [
-          //                 GestureDetector(
-          //                   onTap: (){
-          //                     _userController.favourite();
-          //                   },
-          //                   child: Row(
-          //                     children:  [
-          //                       Obx(()=>Icon(_userController.setFav.value?Icons.favorite :Icons.favorite_border ),),
-          //                       const Text('Add to Favourite'),
-          //                     ],
-          //                   ),
-          //                 )
-          //               ],
-          //             );
-          //           });
-          //         } ,
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'Garments',
-          //         notifyIcon: Icons.request_quote_outlined,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //         onLong:(){} ,
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '6',
-          //         notifyName: 'Lunch Request',
-          //         notifyIcon: Icons.shopping_cart_outlined,
-          //         //iconColor:  _color2,
-          //         onTap: (){},
-          //         onLong:(){} ,
-          //     ),
-          //
-          //   ],
-          // ),
+    Color _colorTheme = Theme.of(context).primaryColor;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: const [
+            Expanded(
+              child: _CustomBalanceCard(
+                  icon: Icons.cloud_outlined,
+                  entitled: '10',
+                  availed: '4.5',
+                  leaveName: 'Casual'),
+            ),
+            Expanded(
+              child: _CustomBalanceCard(
+                  icon: Icons.drive_eta_outlined,
+                  entitled: '30',
+                  availed: '8',
+                  leaveName: 'Annual'),
+            ),
+            Expanded(
+              child: _CustomBalanceCard(
+                  icon: Icons.sick_outlined,
+                  entitled: '8',
+                  availed: '2',
+                  leaveName: 'Sick'),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 0, 0),
+          child: Text('Employee Self Service',
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black)),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Container(
+                   // height: 55,
+                  decoration: BoxDecoration(
+                    // color: Colors.grey[300],
+                      border: Border.all(color: Colors.transparent),
+                      // borderRadius: BorderRadius.circular(25.0)
+                    ),
+                  child: TabBar(
+                    controller: tabController,
+                    isScrollable: true,
+                    padding: const EdgeInsets.all(4),
+                    indicatorColor: Theme.of(context).primaryColor,
+                    // indicator: BoxDecoration(
+                    //     color: Theme.of(context).primaryColor,
+                    //      borderRadius: BorderRadius.circular(5.0)
+                    //   ),
+                    labelColor: Theme.of(context).primaryColor,
+                    //labelStyle: const TextStyle(fontSize: 12.0,),
+                    unselectedLabelColor: Colors.grey,
+                    unselectedLabelStyle: const TextStyle(fontSize: 12.0),
+                    onTap: (index) {
+                      _userController.EssTabIndex.value=index;
+                    },
+                    tabs:  [
+                      const Tab(
+                          text: 'My Work Desk',
+                          // icon: Icon(
+                          //   Icons.email,
+                          //   size: 18, color: Theme.of(context).primaryColor
+                          // )
+                      ),
+                      const Tab(
+                        text: 'Task Planner',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
+                      const Tab(
+                        text: 'Service Request',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
+                      Tab(
+                        child: Row(
+                          children: [
+                            const Text('Mess'),
+                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
+                              )
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        child: Row(
+                          children: [
+                            const Text('Performance Management'),
+                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
+                            )
+                          ],
+                        ),
+                      ),
 
-          const CustomGridView(),
+                      Tab(
+                        child: Row(
+                          children: [
+                            const Text('ESS'),
+                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
+                            )
+                          ],
+                        ),
+                      ),
+                      const Tab(
+                        text: 'Garment Request',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
+                      Tab(
+                        child: Row(
+                          children: [
+                            const Text('Sustainability Report'),
+                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
+                            )
+                          ],
+                        ),
+                      ),
 
-          // GridView.builder(
-          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //       crossAxisCount: 3,
-          //       childAspectRatio: 1.0,
-          //       mainAxisSpacing: 8.0,
-          //       crossAxisSpacing: 8.0,
-          //     ),
-          //     physics: const NeverScrollableScrollPhysics(),
-          //     shrinkWrap: true,
-          //     padding: const EdgeInsets.only(left: 8.0,top: 8.0,right: 8.0,bottom: 8.0),
-          //     itemCount: essMenu.length,
-          //     itemBuilder: (context,index){
-          //       final _menu = essMenu[index];
-          //       return GestureDetector(
-          //         onTap: (){},
-          //         child: Stack(
-          //           clipBehavior: Clip.none,
-          //           children: [
-          //             Container(
-          //               //padding: const EdgeInsets.all(3),
-          //               width: size.width*0.5,
-          //               height: 65,
-          //               //height: 65,
-          //
-          //               //1
-          //               // decoration: BoxDecoration(
-          //               //     boxShadow: [
-          //               //       BoxShadow(
-          //               //         color: Colors.grey.withOpacity(0.5),
-          //               //         spreadRadius: 1,
-          //               //         blurRadius: 3,
-          //               //         offset: const Offset(1, 2), // changes position of shadow
-          //               //       ),
-          //               //     ],
-          //               //     //border: Border.all(color: _color2,width: 1),
-          //               //     color:Colors.white,
-          //               //     borderRadius: BorderRadius.circular(12.0)
-          //               // ),
-          //
-          //               decoration: BoxDecoration(
-          //                 // boxShadow: [
-          //                 //   BoxShadow(
-          //                 //     color: _colorTheme.withOpacity(0.5),
-          //                 //     spreadRadius: 1,
-          //                 //     blurRadius: 2,
-          //                 //     offset: const Offset(0, 2), // changes position of shadow
-          //                 //   ),
-          //                 // ],
-          //                   border: Border.all(color: Colors.white,width: 1),
-          //                   color:_colorTheme,
-          //                   borderRadius: BorderRadius.circular(8.0)
-          //               ),
-          //               child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //                 children: [
-          //                   const SizedBox(width: 2,),
-          //                   Column(
-          //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //                     crossAxisAlignment: CrossAxisAlignment.center,
-          //                     children: [
-          //
-          //                       Icon(_menu.icon,size: 28,color: Colors.white),
-          //                       Text(_menu.title,
-          //                         style: const TextStyle(
-          //                             color: Colors.white,
-          //                             // decoration: TextDecoration.underline,
-          //                             fontSize: 12.0),),
-          //                     ],
-          //                   ),
-          //                   Align(
-          //                       alignment: Alignment.center,
-          //                       child: GestureDetector(
-          //                         onTap: (){
-          //                           if(_userController.favorites.contains(_menu.count)){
-          //                             _userController.removeFavorite(_menu);
-          //                           }else{
-          //                             _userController.addFavorite(_menu);
-          //                           }
-          //
-          //                         },
-          //                         child: Obx(()=>_userController.favorites.contains(_menu.count)?
-          //                         Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
-          //                         const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
-          //                       )
-          //                   ),
-          //                   const SizedBox(width: 2,),
-          //                 ],
-          //               ),
-          //             ),
-          //             // Positioned(
-          //             //   top: -6,
-          //             //   right: 4,
-          //             //   //left: -5,
-          //             //   child: menu.count== '0'?
-          //             //   const SizedBox():
-          //             //   Container(
-          //             //     // width: 18,
-          //             //     // height: 18,
-          //             //     padding: const EdgeInsets.all(3.5),
-          //             //     alignment: Alignment.center,
-          //             //     decoration: const BoxDecoration(
-          //             //         color: Colors.red,
-          //             //         shape: BoxShape.circle
-          //             //     ),
-          //             //     child: Text(menu.count.toString(),style: TextStyle(color: Colors.white,fontSize: 13),),
-          //             //   ),
-          //             // ),
-          //           ],
-          //         ),
-          //       );
-          //     }),
+                    ],
+                  ),
+                ),
+                Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: [
+                        const Center(
+                          child: Text("1"),
+                        ),
+                        const Center(
+                          child: Text("2"),
+                        ),
+                        const Center(
+                          child: const Text("3"),
+                        ),
+                        DefaultTabController(
+                          length: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                  width: size.width,
+                                  // height: 30,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.grey[300],
+                                    border: Border.all(color: Colors.transparent),
+                                    // borderRadius: BorderRadius.circular(25.0)
+                                  ),
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    indicatorColor: Theme.of(context).primaryColor,
+                                    labelColor: Theme.of(context).primaryColor,
+                                    labelStyle: const TextStyle(fontSize: 12.0),
+                                    unselectedLabelColor: Colors.grey,
+                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                                    tabs: const  [
+                                      Tab(text: 'Lunch Request',),
+                                      Tab(text: 'Mess Menu',),
+                                      Tab(text: 'Online Mess Subscription form',),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0,),
+                                const Expanded(
+                                  child: TabBarView(
 
-          // GridView.count(
-          //   crossAxisCount: 4,
-          //   mainAxisSpacing: 8,
-          //   crossAxisSpacing: 15,
-          //   shrinkWrap: true,
-          //   //scrollDirection: Axis.vertical,
-          //   padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
-          //   children: [
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '1',
-          //         notifyName: 'Leave',
-          //         notifyIcon: Icons.group_off,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'PR',
-          //         notifyIcon: Icons.request_quote_outlined,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '6',
-          //         notifyName: 'PO',
-          //         notifyIcon: Icons.shopping_cart_outlined,
-          //         //iconColor:  _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '2',
-          //         notifyName: 'POC',
-          //         notifyIcon: Icons.description,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'Projects',
-          //         notifyIcon: Icons.info,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'CTM',
-          //         notifyIcon: Icons.approval,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //
-          //   ],
-          // ),
-          // const Padding(
-          //   padding: EdgeInsets.fromLTRB(16,0,0,0),
-          //   child: Text('Appointment', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black)),
-          // ),
-          // GridView.count(
-          //   crossAxisCount: 4,
-          //   mainAxisSpacing: 8,
-          //   crossAxisSpacing: 15,
-          //   shrinkWrap: true,
-          //   //scrollDirection: Axis.vertical,
-          //   padding: const EdgeInsets.only(left: 15.0,top: 10.0,bottom: 10.0,right: 10),
-          //   children: [
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '1',
-          //         notifyName: 'Create Appointment',
-          //         notifyIcon: Icons.group_off,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'My Appointment',
-          //         notifyIcon: Icons.request_quote_outlined,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //       ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '6',
-          //         notifyName: 'other Host Appointment',
-          //         notifyIcon: Icons.shopping_cart_outlined,
-          //         //iconColor:  _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '2',
-          //         notifyName: 'Appointment History',
-          //         notifyIcon: Icons.description,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'Actionable Appointment',
-          //         notifyIcon: Icons.info,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //     _NotifyIconBadgerTile(
-          //         size: size,
-          //         notifyCount: '0',
-          //         notifyName: 'Assign Actions',
-          //         notifyIcon: Icons.approval,
-          //         //iconColor: _color2,
-          //         onTap: (){},
-          //
-          //     ),
-          //
-          //
-          //   ],
-          // ),
-        ],
-      ),
+                                    children: [
+                                      Center(child: Text('Lunch Request',)),
+                                      Center(child: Text('Mess Menu')),
+                                      Center(child: Text('Online Mess Subscription form')),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        DefaultTabController(
+                          length: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                  width: size.width,
+                                  // height: 30,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.grey[300],
+                                    border: Border.all(color: Colors.transparent),
+                                    // borderRadius: BorderRadius.circular(25.0)
+                                  ),
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    indicatorColor: Theme.of(context).primaryColor,
+                                    labelColor: Theme.of(context).primaryColor,
+                                    labelStyle: const TextStyle(fontSize: 12.0),
+                                    unselectedLabelColor: Colors.grey,
+                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                                    tabs: const  [
+                                      Tab(text: 'My Objectives',),
+                                      Tab(text: 'My Appraisal',),
+                                      Tab(text: 'Team Objectives',),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0,),
+                                const Expanded(
+                                  child: TabBarView(
+
+                                    children: [
+                                      Center(child: Text('1',)),
+                                      Center(child: Text('2')),
+                                      Center(child: Text('3')),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        DefaultTabController(
+                          length: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                  width: size.width,
+                                  // height: 30,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.grey[300],
+                                    border: Border.all(color: Colors.transparent),
+                                    // borderRadius: BorderRadius.circular(25.0)
+                                  ),
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    indicatorColor: Theme.of(context).primaryColor,
+                                    labelColor: Theme.of(context).primaryColor,
+                                    labelStyle: const TextStyle(fontSize: 12.0),
+                                    unselectedLabelColor: Colors.grey,
+                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                                    tabs: const  [
+                                      Tab(text: 'Attendance Correction',),
+                                      Tab(text: 'Department Attendance',),
+                                      Tab(text: 'Leave Application',),
+                                      Tab(text: 'Absent Report',),
+                                      Tab(text: 'Leave Status',),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0,),
+                                const Expanded(
+                                  child: TabBarView(
+
+                                    children: [
+                                      Center(child: Text('1',)),
+                                      Center(child: Text('2')),
+                                      Center(child: Text('3')),
+                                      Center(child: Text('4')),
+                                      Center(child: Text('5')),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text("7"),
+                        ),
+                        DefaultTabController(
+                          length: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                  width: size.width,
+                                  // height: 30,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.grey[300],
+                                    border: Border.all(color: Colors.transparent),
+                                    // borderRadius: BorderRadius.circular(25.0)
+                                  ),
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    indicatorColor: Theme.of(context).primaryColor,
+                                    labelColor: Theme.of(context).primaryColor,
+                                    labelStyle: const TextStyle(fontSize: 12.0),
+                                    unselectedLabelColor: Colors.grey,
+                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                                    tabs: const  [
+                                      Tab(text: 'Sustainability 2021',),
+                                      Tab(text: 'Sustainability 2020',),
+
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0,),
+                                const Expanded(
+                                  child: TabBarView(
+
+                                    children: [
+                                      Center(child: Text('1',)),
+                                      Center(child: Text('2')),
+
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))
+              ],
+            ),
+          ),
+        ),
+        // const CustomGridView(),
+      ],
     );
   }
 }
-
 
 class _CustomBalanceCard extends StatelessWidget {
   final IconData icon;
@@ -686,10 +690,10 @@ class _CustomBalanceCard extends StatelessWidget {
   final String leaveName;
   const _CustomBalanceCard(
       {Key? key,
-        required this.icon,
-        required this.entitled,
-        required this.availed,
-        required this.leaveName})
+      required this.icon,
+      required this.entitled,
+      required this.availed,
+      required this.leaveName})
       : super(key: key);
 
   @override
@@ -701,42 +705,41 @@ class _CustomBalanceCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        //1
+          //1
 
-        // border: Border.all(
-        //     color: _color.withOpacity(0.5),
-        //     width: 1.0,
-        //     style: BorderStyle.solid),
-        // borderRadius: BorderRadius.circular(8),
-        // color: _color.withOpacity(0.02),
+          // border: Border.all(
+          //     color: _color.withOpacity(0.5),
+          //     width: 1.0,
+          //     style: BorderStyle.solid),
+          // borderRadius: BorderRadius.circular(8),
+          // color: _color.withOpacity(0.02),
 
-        //2
+          //2
 
-        // color: Colors.grey.shade200,
-        // borderRadius: BorderRadius.circular(12),
-        // border: Border.all(
-        //   color: Colors.black,),
+          // color: Colors.grey.shade200,
+          // borderRadius: BorderRadius.circular(12),
+          // border: Border.all(
+          //   color: Colors.black,),
 
-        //3
+          //3
 
-        // color: _color.withOpacity(0.03),
-        // border: Border.all(color: _color3),
-        // borderRadius: BorderRadius.circular(10),
+          // color: _color.withOpacity(0.03),
+          // border: Border.all(color: _color3),
+          // borderRadius: BorderRadius.circular(10),
 
-        //4
+          //4
 
-        borderRadius: BorderRadius.circular(8),
-        // border: Border.all(color: _color2 ),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(1),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: const Offset(0, 2), // changes position of shadow
-          ),
-        ]
-      ),
+          borderRadius: BorderRadius.circular(8),
+          // border: Border.all(color: _color2 ),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 2), // changes position of shadow
+            ),
+          ]),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
@@ -754,8 +757,8 @@ class _CustomBalanceCard extends StatelessWidget {
               const Text('Entitled'),
               Text(
                 entitled,
-                style:
-                const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -766,8 +769,8 @@ class _CustomBalanceCard extends StatelessWidget {
               const Text('Availed'),
               Text(
                 availed,
-                style:
-                const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.grey, fontWeight: FontWeight.w500),
               ),
             ],
           )
@@ -785,9 +788,9 @@ class CustomGridView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final UserController _userController = Get.find();
     return SizedBox(
-      height: size.width*0.25,
+      height: size.width * 0.25,
       child: ListView.builder(
-        scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.horizontal,
           // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           //   crossAxisCount: 3,
           //   childAspectRatio: 1.0,
@@ -796,9 +799,10 @@ class CustomGridView extends StatelessWidget {
           // ),
           physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
-          padding: const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
+          padding: const EdgeInsets.only(
+              left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
           itemCount: essMenu.length,
-          itemBuilder: (context,index){
+          itemBuilder: (context, index) {
             final _menu = essMenu[index];
             return _NotifyIconBadgerTile(
                 size: size,
@@ -806,27 +810,35 @@ class CustomGridView extends StatelessWidget {
                 notifyName: _menu.title,
                 notifyIcon: _menu.icon,
                 //iconColor: _color2,
-                favIcon:  Align(
+                favIcon: Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
-                      onTap: (){
-                        if(_userController.favorites.contains(_menu.count)){
+                      onTap: () {
+                        if (_userController.favorites.contains(_menu.count)) {
                           _userController.removeFavorite(_menu);
-                        }else{
+                        } else {
                           _userController.addFavorite(_menu);
                         }
                       },
-                      child: Obx(()=>_userController.favorites.contains(_menu.count)?
-                      const Icon(Icons.favorite_outlined,color: Colors.white ,size: 16,):
-                      const Icon(Icons.favorite_outline,color: Colors.grey, size: 16,)),
-                    )
-                ),
-                onTap: (){}
-            );
+                      child: Obx(
+                          () => _userController.favorites.contains(_menu.count)
+                              ? const Icon(
+                                  Icons.favorite_outlined,
+                                  color: Colors.white,
+                                  size: 16,
+                                )
+                              : const Icon(
+                                  Icons.favorite_outline,
+                                  color: Colors.grey,
+                                  size: 16,
+                                )),
+                    )),
+                onTap: () {});
           }),
     );
   }
 }
+
 class _NotifyIconBadgerTile extends StatelessWidget {
   final Size size;
   final String notifyCount;
@@ -834,18 +846,21 @@ class _NotifyIconBadgerTile extends StatelessWidget {
   final IconData notifyIcon;
   final Widget favIcon;
   final Function() onTap;
-  const _NotifyIconBadgerTile({Key? key,required this.size,
-    required this.notifyCount,
-    required this.notifyName,
-    required this.notifyIcon,
-    //required this.iconColor,
-    required this.onTap, required this.favIcon}) : super(key: key);
+  const _NotifyIconBadgerTile(
+      {Key? key,
+      required this.size,
+      required this.notifyCount,
+      required this.notifyName,
+      required this.notifyIcon,
+      //required this.iconColor,
+      required this.onTap,
+      required this.favIcon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Color _color2 = const Color(0xfff2652f);
     Color _colorTheme = Theme.of(context).primaryColor;
-
 
     return GestureDetector(
       onTap: onTap,
@@ -855,7 +870,7 @@ class _NotifyIconBadgerTile extends StatelessWidget {
           Container(
             //padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-            width: size.width*0.26,
+            width: size.width * 0.26,
             height: 65,
             //height: 65,
 
@@ -874,18 +889,17 @@ class _NotifyIconBadgerTile extends StatelessWidget {
             //     borderRadius: BorderRadius.circular(12.0)
             // ),
             decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: _colorTheme.withOpacity(0.5),
-              //     spreadRadius: 1,
-              //     blurRadius: 2,
-              //     offset: const Offset(0, 2), // changes position of shadow
-              //   ),
-              // ],
-                border: Border.all(color: Colors.white,width: 1),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: _colorTheme.withOpacity(0.5),
+                //     spreadRadius: 1,
+                //     blurRadius: 2,
+                //     offset: const Offset(0, 2), // changes position of shadow
+                //   ),
+                // ],
+                border: Border.all(color: Colors.white, width: 1),
                 color: _colorTheme,
-                borderRadius: BorderRadius.circular(8.0)
-            ),
+                borderRadius: BorderRadius.circular(8.0)),
             // decoration: BoxDecoration(
             //     boxShadow: [
             //       BoxShadow(
@@ -902,25 +916,34 @@ class _NotifyIconBadgerTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(width: 2,),
+                const SizedBox(
+                  width: 2,
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(notifyIcon,size: 28, color: Colors.white,),
+                    Icon(
+                      notifyIcon,
+                      size: 28,
+                      color: Colors.white,
+                    ),
                     SizedBox(
                       width: 60,
-                      child: Text(notifyName,
+                      child: Text(
+                        notifyName,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Colors.white,
                             // decoration: TextDecoration.underline,
-                            fontSize: 12.0),),
+                            fontSize: 12.0),
+                      ),
                     ),
                   ],
                 ),
                 favIcon,
-                const SizedBox(width: 2,),
-
+                const SizedBox(
+                  width: 2,
+                ),
               ],
             ),
           ),
@@ -928,22 +951,23 @@ class _NotifyIconBadgerTile extends StatelessWidget {
             top: -6,
             right: 0,
             //left: -5,
-            child: notifyCount == '0'?
-            const SizedBox():
-            Container(
-              padding: const EdgeInsets.all(3.5),
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle
-              ),
-              child: Text(notifyCount,style:  TextStyle(color: Colors.white,fontSize: notifyCount==10?10:13),),
-            ),
+            child: notifyCount == '0'
+                ? const SizedBox()
+                : Container(
+                    padding: const EdgeInsets.all(3.5),
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                        color: Colors.red, shape: BoxShape.circle),
+                    child: Text(
+                      notifyCount,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: notifyCount == 10 ? 10 : 13),
+                    ),
+                  ),
           ),
         ],
       ),
     );
   }
 }
-
-
