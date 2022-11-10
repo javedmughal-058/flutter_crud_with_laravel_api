@@ -320,6 +320,7 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateMixin{
   late TabController tabController;
+  final Tween <double> _scaleTween = Tween<double>(begin: 0, end: 10);
 
   @override
   void initState() {
@@ -362,17 +363,17 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
             ),
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 0, 0),
-          child: Text('Employee Self Service',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black)),
-        ),
+        // const SizedBox(
+        //   height: 10,
+        // ),
+        // const Padding(
+        //   padding: EdgeInsets.fromLTRB(16, 8, 0, 0),
+        //   child: Text('Employee Self Service',
+        //       style: TextStyle(
+        //           fontSize: 18,
+        //           fontWeight: FontWeight.w500,
+        //           color: Colors.black)),
+        // ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -484,51 +485,142 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                         const Center(
                           child: const Text("3"),
                         ),
-                        DefaultTabController(
-                          length: 3,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                  width: size.width,
-                                  // height: 30,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
-                                    border: Border.all(color: Colors.transparent),
-                                    // borderRadius: BorderRadius.circular(25.0)
-                                  ),
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: Theme.of(context).primaryColor,
-                                    labelColor: Theme.of(context).primaryColor,
-                                    labelStyle: const TextStyle(fontSize: 12.0),
-                                    unselectedLabelColor: Colors.grey,
-                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
-                                    tabs: const  [
-                                      Tab(text: 'Lunch Request',),
-                                      Tab(text: 'Mess Menu',),
-                                      Tab(text: 'Online Mess Subscription form',),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 5.0,),
-                                const Expanded(
-                                  child: TabBarView(
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.request_page_outlined,color: _colorTheme),
+                                title: Text('Lunch Request',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                   _userController.updateValue();
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Obx(()=>Icon(_userController.lunchTab.value ?Icons.keyboard_arrow_down :Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),),
+                              ),
 
-                                    children: [
-                                      Center(child: Text('Lunch Request',)),
-                                      Center(child: Text('Mess Menu')),
-                                      Center(child: Text('Online Mess Subscription form')),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              Obx(()=> _userController.lunchTab.value ?
+                                  TweenAnimationBuilder(
+                                    tween: _scaleTween,
+                                    duration: const Duration(seconds: 1),
+                                    builder: (context, scale, child) {
+                                      return Transform.scale(scale: 1, child: child);
+                                    },
+                                    child: SingleChildScrollView(
+                                      padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                                      child: Column(
+                                        children: [
+                                          ListTile(
+                                            dense: true,
+                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                            leading: Icon(Icons.score,color: _colorTheme),
+                                            title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                                            onTap: (){
+                                              // Navigator.of(context).pushNamed("/home");
+                                            },
+                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                          ),
+                                          ListTile(
+                                            dense: true,
+                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                            leading: Icon(Icons.group_off,color: _colorTheme),
+                                            title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                                            onTap: (){
+                                              // Navigator.of(context).pushNamed("/home");
+                                            },
+                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                          ),
+                                          ListTile(
+                                            dense: true,
+                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                            leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                                            title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                                            onTap: (){
+                                              // Navigator.of(context).pushNamed("/home");
+                                            },
+                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ):
+                                  const SizedBox()),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.menu_book_sharp,color: _colorTheme),
+                                title: Text('Mess Menu',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.book_online,color: _colorTheme),
+                                title: Text('Online Mess Subscription form',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                            ],
                           ),
                         ),
+                        // DefaultTabController(
+                        //   length: 3,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Container(
+                        //           // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                        //           width: size.width,
+                        //           // height: 30,
+                        //           decoration: BoxDecoration(
+                        //             // color: Colors.grey[300],
+                        //             border: Border.all(color: Colors.transparent),
+                        //             // borderRadius: BorderRadius.circular(25.0)
+                        //           ),
+                        //           child: TabBar(
+                        //             isScrollable: true,
+                        //             indicatorColor: Theme.of(context).primaryColor,
+                        //             labelColor: Theme.of(context).primaryColor,
+                        //             labelStyle: const TextStyle(fontSize: 12.0),
+                        //             unselectedLabelColor: Colors.grey,
+                        //             unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                        //             tabs: const  [
+                        //               Tab(text: 'Lunch Request',),
+                        //               Tab(text: 'Mess Menu',),
+                        //               Tab(text: 'Online Mess Subscription form',),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //         const SizedBox(height: 5.0,),
+                        //         const Expanded(
+                        //           child: TabBarView(
+                        //
+                        //             children: [
+                        //               Center(child: Text('Lunch Request',)),
+                        //               Center(child: Text('Mess Menu')),
+                        //               Center(child: Text('Online Mess Subscription form')),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         DefaultTabController(
                           length: 3,
                           child: Padding(
@@ -574,55 +666,118 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                             ),
                           ),
                         ),
-                        DefaultTabController(
-                          length: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                  width: size.width,
-                                  // height: 30,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
-                                    border: Border.all(color: Colors.transparent),
-                                    // borderRadius: BorderRadius.circular(25.0)
-                                  ),
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: Theme.of(context).primaryColor,
-                                    labelColor: Theme.of(context).primaryColor,
-                                    labelStyle: const TextStyle(fontSize: 12.0),
-                                    unselectedLabelColor: Colors.grey,
-                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
-                                    tabs: const  [
-                                      Tab(text: 'Attendance Correction',),
-                                      Tab(text: 'Department Attendance',),
-                                      Tab(text: 'Leave Application',),
-                                      Tab(text: 'Absent Report',),
-                                      Tab(text: 'Leave Status',),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 5.0,),
-                                const Expanded(
-                                  child: TabBarView(
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.contactless_rounded,color: _colorTheme),
+                                title: Text('Attendance Correction',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.menu_book_sharp,color: _colorTheme),
+                                title: Text('Department Attendance',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.time_to_leave,color: _colorTheme),
+                                title: Text('Leave Application',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.report_outlined,color: _colorTheme),
+                                title: Text('Absent Report',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.details_outlined,color: _colorTheme),
+                                title: Text('Leave Status',style: Theme.of(context).textTheme.subtitle2),
+                                onTap: (){
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              ),
 
-                                    children: [
-                                      Center(child: Text('1',)),
-                                      Center(child: Text('2')),
-                                      Center(child: Text('3')),
-                                      Center(child: Text('4')),
-                                      Center(child: Text('5')),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
                         ),
+                        // DefaultTabController(
+                        //   length: 5,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Container(
+                        //           // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                        //           width: size.width,
+                        //           // height: 30,
+                        //           decoration: BoxDecoration(
+                        //             // color: Colors.grey[300],
+                        //             border: Border.all(color: Colors.transparent),
+                        //             // borderRadius: BorderRadius.circular(25.0)
+                        //           ),
+                        //           child: TabBar(
+                        //             isScrollable: true,
+                        //             indicatorColor: Theme.of(context).primaryColor,
+                        //             labelColor: Theme.of(context).primaryColor,
+                        //             labelStyle: const TextStyle(fontSize: 12.0),
+                        //             unselectedLabelColor: Colors.grey,
+                        //             unselectedLabelStyle: const TextStyle(fontSize: 11.0),
+                        //             tabs: const  [
+                        //               Tab(text: 'Attendance Correction',),
+                        //               Tab(text: 'Department Attendance',),
+                        //               Tab(text: 'Leave Application',),
+                        //               Tab(text: 'Absent Report',),
+                        //               Tab(text: 'Leave Status',),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //         const SizedBox(height: 5.0,),
+                        //         const Expanded(
+                        //           child: TabBarView(
+                        //
+                        //             children: [
+                        //               Center(child: Text('1',)),
+                        //               Center(child: Text('2')),
+                        //               Center(child: Text('3')),
+                        //               Center(child: Text('4')),
+                        //               Center(child: Text('5')),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         const Center(
                           child: Text("7"),
                         ),
