@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_with_laravel_api/config/api_services.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
+import 'package:flutter_crud_with_laravel_api/models/showRecordModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Currency.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Setting.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Team.dart';
 import 'package:flutter_crud_with_laravel_api/views/StartPage.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController{
@@ -18,10 +21,15 @@ class UserController extends GetxController{
     const Team(),
   ];
 
+  var EssTabIndex = 0.obs;
+
+  String apiUrl = 'http://127.0.0.1:8000/api/';
+  ApiService apiService =  ApiService();
   late TextEditingController name;
   late TextEditingController email;
   var setFav =false.obs;
   var favorites = [].obs;
+  var getData = <Result>[].obs;
 
   var favoritesmenu = <MenuModel>[].obs;
   @override
@@ -41,6 +49,59 @@ class UserController extends GetxController{
 //
 // }
 
+  Future<void> addRecord({required String username,required String email})async{
+    var url = 'add_record';
+    var body = {
+      "name": username,
+      "email": email,
+    };
+    try{
+      await apiService.postData(apiUrl: url, body: body).then((response) async {
+        // var data = jsonDecode(response.body);
+
+      });
+    } catch (error){
+      print('Added Error: '+error.toString());
+    }
+  }
+  Future<void> getRecord()async{
+    var url = 'showRecord';
+    var body = {
+
+    };
+    try{
+      await apiService.postData(apiUrl: url, body: body).then((response) async {
+        var data = showRecordFromJson(response.body);
+        if(response.statusCode == 200){
+          getData.value = data.result ?? [];
+
+        }
+
+
+      });
+    } catch (error){
+      print('Added Error: '+error.toString());
+    }
+  }
+  Future<void> deleteRecord(String name)async{
+    var url = 'delete_record';
+    var body = {
+      "name":name
+    };
+    try{
+      await apiService.postData(apiUrl: url, body: body).then((response) async {
+        if(response.statusCode == 200){
+          print('Deleted');
+        }
+
+
+      });
+    } catch (error){
+      print('Deleted Error: '+error.toString());
+    }
+  }
+
+
   Future<void> addFavorite(MenuModel element)  async {
     favorites.add(element.count);
     var fav = json.encode(favorites);
@@ -48,7 +109,6 @@ class UserController extends GetxController{
     // prefs.setString('favMenu', fav);
     favoritesmenu.add(element);
   }
-
   Future<void> removeFavorite(MenuModel element) async {
     favorites.remove(element.count);
     var fav = json.encode(favorites);
