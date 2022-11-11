@@ -521,7 +521,8 @@ class SecondPage extends StatelessWidget {
                                         size: 20,
                                       )),
                           )),
-                      onTap: () {});
+                      onTap: () {
+                      });
                 }),
           ),
           const Padding(
