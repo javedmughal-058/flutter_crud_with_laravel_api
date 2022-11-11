@@ -9,6 +9,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final UserController userController = Get.find();
+    int indexValue=0;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -47,11 +48,29 @@ class FirstPage extends StatelessWidget {
 
                 ),
               ),
-              ElevatedButton(onPressed: (){
-                userController.addRecord(username: userController.name.text, email: userController.email.text);
-                userController.getRecord();
-              },
-                  child: const Text('Save')),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(onPressed: (){
+                    if(userController.isUpdate.value){
+                      userController.updateRecord(id: userController.getData[indexValue].id.toString(), username: userController.name.text, email: userController.email.text);
+                      print(userController.getData[indexValue].id.toString());
+                      print(userController.name.text);
+                      print(userController.email.text);
+                    }
+                    else{
+                      userController.addRecord(username: userController.name.text, email: userController.email.text);
+                    }
+                      }, child: Obx(()=>Text( userController.isUpdate.value ? 'update':'Save')),
+                  ),
+
+                  ElevatedButton(
+                      onPressed: (){
+                        userController.getRecord();
+                        },
+                      child: const Text('View')),
+                ],
+              ),
               Obx(()=>ListView.builder(
                   padding: const EdgeInsets.all(5),
                   physics: const NeverScrollableScrollPhysics(),
@@ -77,9 +96,16 @@ class FirstPage extends StatelessWidget {
                             ],
                           ),
                           const Spacer(),
-                          IconButton(onPressed: (){}, icon: const Icon(Icons.edit, color: Colors.green,)),
                           IconButton(onPressed: (){
-                            userController.deleteRecord(userController.getData[index].stdname.toString());
+                            userController.isUpdate.value = true;
+                            userController.editData(index);
+                            //print(index);
+                            indexValue = index;
+
+                          }, icon: const Icon(Icons.edit, color: Colors.green,)),
+                          IconButton(onPressed: (){
+                            userController.deleteRecord(userController.getData[index].id.toString());
+                            userController.getRecord();
                           }, icon: const Icon(Icons.delete, color: Colors.red,)),
 
 
