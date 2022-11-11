@@ -48,6 +48,8 @@ dependencies:
   bubble: ^1.2.1
   lottie: ^1.2.1
   simple_animations: ^4.0.1
+  percent_indicator: ^4.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
