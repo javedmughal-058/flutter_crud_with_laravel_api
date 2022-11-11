@@ -25,7 +25,8 @@ class UserController extends GetxController{
   var recordIndex =0.obs;
   var updateName ="".obs;
   var updatedEmail ="".obs;
-
+  var newFavList = [].obs;
+  var addedFav = false.obs;
   var EssTabIndex = 0.obs;
   var lunchTab = false.obs;
 
@@ -155,6 +156,16 @@ class UserController extends GetxController{
     // prefs.setString('favMenu', fav);
     favoritesmenu.remove(element);
   }
+  Future<void> addNewFavorite(IconData icon, String s)  async {
+    newFavList.add(icon);
+    var fav = json.encode(favorites);
+  }
+  Future<void> removeNewFavorite(IconData icon, String s)  async {
+    newFavList.remove(icon);
+
+
+  }
+
   Future<void> getFavorite()  async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorite = prefs.getString('favMenu');
