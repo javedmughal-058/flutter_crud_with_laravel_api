@@ -1,4 +1,5 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Currency.dart';
@@ -20,7 +21,6 @@ class main_pageState extends State<main_page> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
   final UserController _userController = Get.find();
 
-
   @override
   Widget build(BuildContext context) {
     Color _colorTheme = Theme.of(context).primaryColor;
@@ -31,8 +31,8 @@ class main_pageState extends State<main_page> {
           toolbarHeight: 40.0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
-          leading:   GestureDetector(
-            onTap: (){
+          leading: GestureDetector(
+            onTap: () {
               Get.toNamed('/profile_page');
             },
             child: Padding(
@@ -55,26 +55,32 @@ class main_pageState extends State<main_page> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color:Theme.of(context).primaryColor, width: 2)
-                        ),
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
                         // constraints: const BoxConstraints(
                         //   minWidth: 8,
                         //   minHeight: 8,
                         // ),
-                        child:  Icon(Icons.menu, color: Theme.of(context).primaryColor , size: 12,)
-                    ),
+                        child: Icon(
+                          Icons.menu,
+                          color: Theme.of(context).primaryColor,
+                          size: 12,
+                        )),
                   )
                 ],
               ),
             ),
           ),
-          title:Text('USG Smart Office', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
+          title: Text('USG Smart Office',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 16)),
           actions: [
             IconButton(
                 onPressed: () {},
                 icon: Icon(
                   Icons.search,
-                  color:Theme.of(context).primaryColor,
+                  color: Theme.of(context).primaryColor,
                   size: 22,
                 )),
             Stack(
@@ -109,7 +115,9 @@ class main_pageState extends State<main_page> {
                 )
               ],
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
           ],
         ),
         // extendBodyBehindAppBar: true,
@@ -145,13 +153,12 @@ class main_pageState extends State<main_page> {
                 size: 32,
               )),
           onSelectItem: (_currentIndex) => setState(() {
-              _userController.currentIndex.value = _currentIndex;
-              }),
+            _userController.currentIndex.value = _currentIndex;
+          }),
           sheetChild: const CustomGridView(),
           items: const [
             BottomBarWithSheetItem(label: 'Home', icon: Icons.home),
-            BottomBarWithSheetItem(
-                label: 'Currency', icon: Icons.description),
+            BottomBarWithSheetItem(label: 'Currency', icon: Icons.description),
             BottomBarWithSheetItem(label: 'Setting', icon: Icons.settings),
             BottomBarWithSheetItem(label: 'Team', icon: Icons.people),
           ],
@@ -341,6 +348,65 @@ class CustomGridView extends StatelessWidget {
                     )),
                 onTap: () {});
           }),
+    );
+  }
+}
+
+class SecondCustomGridView extends StatelessWidget {
+  const SecondCustomGridView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final UserController _userController = Get.find();
+    return Obx(
+      () => SizedBox(
+        height: 60,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+             physics: const AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+            // padding: const EdgeInsets.only(
+            //     left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
+            itemCount: _userController.newFavList.length,
+            itemBuilder: (context, index) {
+              final _menu = _userController.newFavList[index];
+              return GestureDetector(
+                onLongPress: (){
+                  _userController.addedFav.value = ! _userController.addedFav.value;
+                  print("Long clicked");
+                  if (_userController.addedFav.value) {
+                    _userController.addNewFavorite(Icons.request_page_outlined, 'Lunch Request', );
+                  }
+                  else {
+                    _userController.removeNewFavorite(Icons.request_page_outlined, 'Lunch Request', );
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 1),
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.request_page_outlined, color: Colors.white),
+                          // const SizedBox(width: 5,),
+                          Text('Lunch Request',
+                              style: TextStyle(color: Colors.white, fontSize: 14)),
+                          // const Spacer(),
+                        ],
+                      ),
+                      Obx(()=>_userController.addedFav.value ?const Icon(Icons.favorite,size: 14, color: Colors.red): const SizedBox()),
+                    ],
+                  ),
+                ),
+              );
+            }),
+      ),
     );
   }
 }
