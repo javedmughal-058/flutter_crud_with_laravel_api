@@ -7,6 +7,7 @@ class MenuModel{
   final Color color;
   bool fav;
   int count;
+
   MenuModel({required this.title,required this.icon,required this.route,required this.color, required this.fav, required this.count});
 
 }
@@ -27,16 +28,27 @@ final menuList = [
 ];
 
 final essMenu = [
-  MenuModel(count:0, title: 'Apply Leave', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
-  MenuModel(count:1,title: 'Garment', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
-  MenuModel(count:2,title: 'Lunch Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
-  MenuModel(count:3,title: 'Task Planner', icon: Icons.task, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:0, title: 'My Work Desk', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Task Planner', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: true),
+  MenuModel(count:2,title: 'Service Request', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:3,title: 'Vehicle Requisition', icon: Icons.task, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:0, title: 'Training Calender', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Mess', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:2,title: 'Performance Management', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:3,title: 'ESS', icon: Icons.task, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:0, title: 'Car Polling', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Sustainability', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:2,title: 'One HR Policies', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:3,title: 'Garment Request', icon: Icons.task, route: '/ess',color: const Color(0xFDA60000), fav: false),
+  MenuModel(count:0, title: 'Q Connect', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Sustainability Report', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
+
 
 ];
 
 final dssMenu = [
   MenuModel(count:4, title: 'PO', icon: Icons.shopping_cart_outlined, route: '/po',color: const Color(0xff7367f0), fav: false),
-  MenuModel(count:5,title: 'PR', icon: Icons.request_quote_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:5,title: 'PR', icon: Icons.request_quote_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false,),
   MenuModel(count:6,title: 'POC', icon: Icons.point_of_sale_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
   MenuModel(count:7,title: 'Peojects', icon: Icons.description_outlined, route: '/pr',color: const Color(0xff28c76f), fav: false),
   MenuModel(count:8,title: 'Stock Movement', icon: Icons.category_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
