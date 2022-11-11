@@ -1,10 +1,12 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/OptionalScreen.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class EssHome extends StatefulWidget {
   const EssHome({Key? key}) : super(key: key);
@@ -318,15 +320,16 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
-class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateMixin{
+class _SecondPageState extends State<SecondPage>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
-  final Tween <double> _scaleTween = Tween<double>(begin: 0, end: 10);
+  final Tween<double> _scaleTween = Tween<double>(begin: 0, end: 10);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController =TabController(length: 8, vsync: this);
+    tabController = TabController(length: 14, vsync: this);
   }
 
   @override
@@ -374,41 +377,168 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
         //           fontWeight: FontWeight.w500,
         //           color: Colors.black)),
         // ),
+
+        // Container(
+        //   padding: const EdgeInsets.all(8),
+        //   margin: const EdgeInsets.fromLTRB(12, 4, 12, 5),
+        //   decoration: BoxDecoration(
+        //     // border: Border.all(color: Theme.of(context).primaryColor),
+        //     color: Theme.of(context).primaryColor,
+        //     borderRadius: BorderRadius.circular(4),
+        //   ),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       Column(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           CircularPercentIndicator(
+        //             radius: 18.0,
+        //             lineWidth: 2.0,
+        //             percent: 0.80,
+        //             center: const Text("80%"),
+        //             progressColor: Colors.green,
+        //           ),
+        //           const SizedBox(height: 5,),
+        //           const Text('Casual', style: TextStyle(color: Colors.white),),
+        //         ],
+        //       ),
+        //       Column(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           CircularPercentIndicator(
+        //             radius: 18.0,
+        //             lineWidth: 2.0,
+        //             percent: 0.40,
+        //             center: const Text("40%"),
+        //             progressColor: Colors.amber,
+        //           ),
+        //           const SizedBox(height: 5,),
+        //           const Text('Annual', style: TextStyle(color: Colors.white),),
+        //         ],
+        //       ),
+        //       Column(
+        //         children: [
+        //           CircularPercentIndicator(
+        //             radius: 18.0,
+        //             lineWidth: 2.0,
+        //             percent: 0.25,
+        //             center: const Text("25%"),
+        //             progressColor: Colors.red,
+        //           ),
+        //           const SizedBox(height: 5,),
+        //           const Text('Sick', style: TextStyle(color: Colors.white),),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 4, 0, 0),
+          child: Text('Attendance Summary',
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black)),
+        ),
+        Container(
+          padding: const EdgeInsets.all(4),
+          margin: const EdgeInsets.fromLTRB(12, 2, 12, 0),
+          decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(4),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(1),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: const Offset(0, 2), // changes position of shadow
+                ),
+              ]),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: const [
+                  Text('Late in Minutes'),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    '84',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  Spacer(),
+                  Text('Early out Minutes'),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    '0',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Row(
+                children: const [
+                  Text('Late Out Minutes'),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    '407',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  Spacer(),
+                  Text('Early in Minutes'),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    '48',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Container(
-                   // height: 55,
+                  // height: 55,
                   decoration: BoxDecoration(
                     // color: Colors.grey[300],
-                      border: Border.all(color: Colors.transparent),
-                      // borderRadius: BorderRadius.circular(25.0)
-                    ),
+                    border: Border.all(color: Colors.transparent),
+                    // borderRadius: BorderRadius.circular(25.0)
+                  ),
                   child: TabBar(
                     controller: tabController,
                     isScrollable: true,
-                    padding: const EdgeInsets.all(4),
+                    // padding: const EdgeInsets.all(4),
                     indicatorColor: Theme.of(context).primaryColor,
-                    // indicator: BoxDecoration(
-                    //     color: Theme.of(context).primaryColor,
-                    //      borderRadius: BorderRadius.circular(5.0)
-                    //   ),
-                    labelColor: Theme.of(context).primaryColor,
-                    //labelStyle: const TextStyle(fontSize: 12.0,),
+                    indicator: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(5.0)),
+                    labelColor: Colors.white,
                     unselectedLabelColor: Colors.grey,
-                    unselectedLabelStyle: const TextStyle(fontSize: 12.0),
                     onTap: (index) {
-                      _userController.EssTabIndex.value=index;
+                      _userController.EssTabIndex.value = index;
                     },
-                    tabs:  [
+                    tabs: [
                       const Tab(
-                          text: 'My Work Desk',
-                          // icon: Icon(
-                          //   Icons.email,
-                          //   size: 18, color: Theme.of(context).primaryColor
-                          // )
+                        text: 'My Work Desk',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
                       ),
                       const Tab(
                         text: 'Task Planner',
@@ -424,33 +554,71 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                         //   size: 18, color: Theme.of(context).primaryColor
                         // )
                       ),
+                      const Tab(
+                        text: 'Vehicle Requisition',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
+                      const Tab(
+                        text: 'Training Calender',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
                       Tab(
                         child: Row(
-                          children: [
-                            const Text('Mess'),
-                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
-                              )
+                          children: const [
+                            Text('Mess'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white),
                           ],
                         ),
                       ),
                       Tab(
                         child: Row(
-                          children: [
-                            const Text('Performance Management'),
-                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
-                            )
+                          children: const [
+                            Text('Performance Management'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white)
                           ],
                         ),
                       ),
-
                       Tab(
                         child: Row(
-                          children: [
-                            const Text('ESS'),
-                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
-                            )
+                          children: const [
+                            Text('ESS'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white)
                           ],
                         ),
+                      ),
+                      Tab(
+                        child: Row(
+                          children: const [
+                            Text('Car Polling'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white)
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        child: Row(
+                          children: const [
+                            Text('Sustainability'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white)
+                          ],
+                        ),
+                      ),
+                      const Tab(
+                        text: 'One HR Policies',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
                       ),
                       const Tab(
                         text: 'Garment Request',
@@ -459,22 +627,28 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                         //   size: 18, color: Theme.of(context).primaryColor
                         // )
                       ),
+                      const Tab(
+                        text: 'Q Connect',
+                        // icon: Icon(
+                        //   Icons.email,
+                        //   size: 18, color: Theme.of(context).primaryColor
+                        // )
+                      ),
                       Tab(
                         child: Row(
-                          children: [
-                            const Text('Sustainability Report'),
-                            Icon(Icons.keyboard_arrow_down, size: 18, color: Theme.of(context).primaryColor
-                            )
+                          children: const [
+                            Text('Sustainability Report'),
+                            Icon(Icons.keyboard_arrow_down,
+                                size: 18, color: Colors.white)
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
                 Expanded(
                     child: TabBarView(
-                      controller: tabController,
+                  controller: tabController,
                       children: [
                         const Center(
                           child: Text("1"),
@@ -483,99 +657,335 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                           child: Text("2"),
                         ),
                         const Center(
-                          child: const Text("3"),
+                          child: Text("3"),
                         ),
-                        SingleChildScrollView(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              ListTile(
-                                dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.request_page_outlined,color: _colorTheme),
-                                title: Text('Lunch Request',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
-                                   _userController.updateValue();
-                                  // Navigator.of(context).pushNamed("/home");
-                                },
-                                trailing: Obx(()=>Icon(_userController.lunchTab.value ?Icons.keyboard_arrow_down :Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),),
-                              ),
-
-                              Obx(()=> _userController.lunchTab.value ?
-                                  TweenAnimationBuilder(
-                                    tween: _scaleTween,
-                                    duration: const Duration(seconds: 1),
-                                    builder: (context, scale, child) {
-                                      return Transform.scale(scale: 1, child: child);
+                        const Center(
+                          child: Text("Vehicle Requisition"),
+                        ),
+                        const Center(
+                          child: Text("Training Calender"),
+                        ),
+                          SizedBox(
+                            height: Get.height,
+                            child: ListView.builder(
+                                itemCount: messMenu.length,
+                                itemBuilder: (context, index) {
+                                  final _menu = messMenu[index];
+                                  return GestureDetector(
+                                    onLongPress: () {
+                                      _menu.fav = !_menu.fav;
+                                      _userController.addedFav.value = _menu.fav;
+                                      print("long pressed");
+                                      if (_userController.favorites
+                                          .contains(_menu.count)) {
+                                        _userController.removeFavorite(_menu);
+                                      } else {
+                                        _userController.addFavorite(_menu);
+                                      }
                                     },
-                                    child: SingleChildScrollView(
-                                      padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
-                                      child: Column(
+                                    child: ListTile(
+                                      dense: true,
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0, vertical: 5.0),
+                                      visualDensity: const VisualDensity(
+                                          horizontal: 0, vertical: -4),
+                                      leading: Icon(_menu.icon, color: _colorTheme),
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          ListTile(
-                                            dense: true,
-                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                            leading: Icon(Icons.score,color: _colorTheme),
-                                            title: Text('1',style: Theme.of(context).textTheme.subtitle2),
-                                            onTap: (){
-                                              // Navigator.of(context).pushNamed("/home");
-                                            },
-                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-                                          ),
-                                          ListTile(
-                                            dense: true,
-                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                            leading: Icon(Icons.group_off,color: _colorTheme),
-                                            title: Text('2',style: Theme.of(context).textTheme.subtitle2),
-                                            onTap: (){
-                                              // Navigator.of(context).pushNamed("/home");
-                                            },
-                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-                                          ),
-                                          ListTile(
-                                            dense: true,
-                                            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                            leading: Icon(Icons.policy_outlined,color: _colorTheme),
-                                            title: Text('3',style: Theme.of(context).textTheme.subtitle2),
-                                            onTap: (){
-                                              // Navigator.of(context).pushNamed("/home");
-                                            },
-                                            trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-                                          ),
+                                          Text(_menu.title,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2),
+                                          Obx(()=>_userController.favorites.contains(_menu.count) ? const Icon(Icons.favorite, size: 14, color: Colors.red) : const SizedBox(),),
                                         ],
                                       ),
+                                      onTap: () {
+                                        print("clicked");
+                                      },
+                                      trailing: Icon(Icons.arrow_forward_ios, size: 18, color: Theme.of(context).primaryColor.withOpacity(0.7),
+                                      ),
                                     ),
-                                  ):
-                                  const SizedBox()),
-                              ListTile(
-                                dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.menu_book_sharp,color: _colorTheme),
-                                title: Text('Mess Menu',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
-                                  // Navigator.of(context).pushNamed("/home");
-                                },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-                              ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.book_online,color: _colorTheme),
-                                title: Text('Online Mess Subscription form',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
-                                  // Navigator.of(context).pushNamed("/home");
-                                },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-                              ),
-                            ],
+                                  );
+                                }),
                           ),
-                        ),
+                        // SingleChildScrollView(
+                        //   padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
+                        //   child: Column(
+                        //     children: [
+                        //       // Padding(
+                        //       //   padding: const EdgeInsets.all(8.0),
+                        //       //   child: GestureDetector(
+                        //       //     onTap: (){},
+                        //       //     onLongPress: (){},
+                        //       //     child: Row(
+                        //       //       children: [
+                        //       //         Icon(Icons.request_page_outlined,color: _colorTheme),
+                        //       //         const SizedBox(width: 5,),
+                        //       //         Text('Lunch Request',style: Theme.of(context).textTheme.subtitle2),
+                        //       //         const Spacer(),
+                        //       //         Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //       ],
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       // Padding(
+                        //       //   padding: const EdgeInsets.all(8.0),
+                        //       //   child: GestureDetector(
+                        //       //     onTap: (){},
+                        //       //     onLongPress: (){},
+                        //       //     child: Row(
+                        //       //       children: [
+                        //       //         Icon(Icons.menu_book_sharp,color: _colorTheme),
+                        //       //         const SizedBox(width: 5,),
+                        //       //         Text('Mess Menu',style: Theme.of(context).textTheme.subtitle2),
+                        //       //         const Spacer(),
+                        //       //         Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //       ],
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       // Padding(
+                        //       //   padding: const EdgeInsets.all(8.0),
+                        //       //   child: GestureDetector(
+                        //       //     onTap: (){},
+                        //       //     onLongPress: (){},
+                        //       //     child: Row(
+                        //       //       children: [
+                        //       //         Icon(Icons.book_online,color: _colorTheme),
+                        //       //         const SizedBox(width: 5,),
+                        //       //         Text('Online Mess Subscription form',style: Theme.of(context).textTheme.subtitle2),
+                        //       //         const Spacer(),
+                        //       //         Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //       ],
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       SizedBox(
+                        //         height: 400,
+                        //         child: ListView.builder(
+                        //             itemCount: messMenu.length,
+                        //             itemBuilder: (context, index) {
+                        //               final _menu = messMenu[index];
+                        //           return GestureDetector(
+                        //             onLongPress: () {
+                        //               _menu.fav = !_menu.fav;
+                        //               print("long pressed");
+                        //               if (_userController.favorites.contains(_menu.count)) {
+                        //                 _userController.removeFavorite(_menu);
+                        //               } else {
+                        //                 _userController.addFavorite(_menu);
+                        //               }
+                        //             },
+                        //             child: ListTile(
+                        //               dense: true,
+                        //               contentPadding: const EdgeInsets.symmetric(
+                        //                   horizontal: 4.0, vertical: 5.0),
+                        //               visualDensity: const VisualDensity(
+                        //                   horizontal: 0, vertical: -4),
+                        //               leading: Icon(_menu.icon,
+                        //                   color: _colorTheme),
+                        //               title: Row(
+                        //                 mainAxisAlignment:
+                        //                     MainAxisAlignment.spaceBetween,
+                        //                 children: [
+                        //                   Text(_menu.title,
+                        //                       style: Theme.of(context)
+                        //                           .textTheme
+                        //                           .subtitle2),
+                        //                   Obx(() => _menu.fav ? const Icon(Icons.favorite, size: 14, color: Colors.red)
+                        //                       : const SizedBox()),
+                        //                 ],
+                        //               ),
+                        //               onTap: () {
+                        //                 print("clicked");
+                        //               },
+                        //               trailing: Obx(
+                        //                 () => Icon(
+                        //                   _userController.lunchTab.value
+                        //                       ? Icons.keyboard_arrow_down
+                        //                       : Icons.arrow_forward_ios,
+                        //                   size: 18,
+                        //                   color: Theme.of(context)
+                        //                       .primaryColor
+                        //                       .withOpacity(0.7),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           );
+                        //         }),
+                        //       ),
+                        //
+                        //       // GestureDetector(
+                        //       //   onLongPress: () {
+                        //       //     _userController.addedFav.value =
+                        //       //         !_userController.addedFav.value;
+                        //       //     print("Long clicked");
+                        //       //     if (_userController.addedFav.value) {
+                        //       //       _userController.addNewFavorite(
+                        //       //         Icons.request_page_outlined,
+                        //       //         'Lunch Request',
+                        //       //       );
+                        //       //     } else {
+                        //       //       _userController.removeNewFavorite(
+                        //       //         Icons.request_page_outlined,
+                        //       //         'Lunch Request',
+                        //       //       );
+                        //       //     }
+                        //       //   },
+                        //       //   child: ListTile(
+                        //       //     dense: true,
+                        //       //     contentPadding: const EdgeInsets.symmetric(
+                        //       //         horizontal: 12.0, vertical: 5.0),
+                        //       //     visualDensity: const VisualDensity(
+                        //       //         horizontal: 0, vertical: -4),
+                        //       //     leading: Icon(Icons.request_page_outlined,
+                        //       //         color: _colorTheme),
+                        //       //     title: Row(
+                        //       //       mainAxisAlignment:
+                        //       //           MainAxisAlignment.spaceBetween,
+                        //       //       children: [
+                        //       //         Text('Lunch Request',
+                        //       //             style: Theme.of(context)
+                        //       //                 .textTheme
+                        //       //                 .subtitle2),
+                        //       //         Obx(() => _userController.addedFav.value
+                        //       //             ? Icon(Icons.favorite,
+                        //       //                 size: 14, color: Colors.red)
+                        //       //             : const SizedBox()),
+                        //       //       ],
+                        //       //     ),
+                        //       //     onTap: () {
+                        //       //       print("clicked");
+                        //       //     },
+                        //       //     trailing: Obx(
+                        //       //       () => Icon(
+                        //       //         _userController.lunchTab.value
+                        //       //             ? Icons.keyboard_arrow_down
+                        //       //             : Icons.arrow_forward_ios,
+                        //       //         size: 18,
+                        //       //         color: Theme.of(context)
+                        //       //             .primaryColor
+                        //       //             .withOpacity(0.7),
+                        //       //       ),
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       // Obx(()=> _userController.lunchTab.value ?
+                        //       //     TweenAnimationBuilder(
+                        //       //       tween: _scaleTween,
+                        //       //       duration: const Duration(seconds: 1),
+                        //       //       builder: (context, scale, child) {
+                        //       //         return Transform.scale(scale: 1, child: child);
+                        //       //       },
+                        //       //       child: SingleChildScrollView(
+                        //       //         padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                        //       //         child: Column(
+                        //       //           children: [
+                        //       //             ListTile(
+                        //       //               dense: true,
+                        //       //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                        //       //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                        //       //               leading: Icon(Icons.score,color: _colorTheme),
+                        //       //               title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                        //       //               onTap: (){
+                        //       //                 // Navigator.of(context).pushNamed("/home");
+                        //       //               },
+                        //       //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //             ),
+                        //       //             ListTile(
+                        //       //               dense: true,
+                        //       //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                        //       //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                        //       //               leading: Icon(Icons.group_off,color: _colorTheme),
+                        //       //               title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                        //       //               onTap: (){
+                        //       //                 // Navigator.of(context).pushNamed("/home");
+                        //       //               },
+                        //       //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //             ),
+                        //       //             ListTile(
+                        //       //               dense: true,
+                        //       //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                        //       //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                        //       //               leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                        //       //               title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                        //       //               onTap: (){
+                        //       //                 // Navigator.of(context).pushNamed("/home");
+                        //       //               },
+                        //       //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                        //       //             ),
+                        //       //           ],
+                        //       //         ),
+                        //       //       ),
+                        //       //     ):
+                        //       //     const SizedBox()),
+                        //       // GestureDetector(
+                        //       //   onLongPress: () {
+                        //       //     _userController.addedFav.value =
+                        //       //         !_userController.addedFav.value;
+                        //       //     print("Long clicked");
+                        //       //     if (_userController.addedFav.value) {
+                        //       //       _userController.addNewFavorite(
+                        //       //         Icons.request_page_outlined,
+                        //       //         'Lunch Request',
+                        //       //       );
+                        //       //     } else {
+                        //       //       _userController.removeNewFavorite(
+                        //       //         Icons.request_page_outlined,
+                        //       //         'Lunch Request',
+                        //       //       );
+                        //       //     }
+                        //       //   },
+                        //       //   child: ListTile(
+                        //       //     dense: true,
+                        //       //     contentPadding: const EdgeInsets.symmetric(
+                        //       //         horizontal: 12.0, vertical: 5.0),
+                        //       //     visualDensity: const VisualDensity(
+                        //       //         horizontal: 0, vertical: -4),
+                        //       //     leading: Icon(Icons.menu_book_sharp,
+                        //       //         color: _colorTheme),
+                        //       //     title: Text('Mess Menu',
+                        //       //         style: Theme.of(context).textTheme.subtitle2),
+                        //       //     onTap: () {
+                        //       //       // Navigator.of(context).pushNamed("/home");
+                        //       //     },
+                        //       //     trailing: Icon(
+                        //       //       Icons.arrow_forward_ios,
+                        //       //       size: 18,
+                        //       //       color: Theme.of(context)
+                        //       //           .primaryColor
+                        //       //           .withOpacity(0.7),
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       // GestureDetector(
+                        //       //   child: ListTile(
+                        //       //     dense: true,
+                        //       //     contentPadding: const EdgeInsets.symmetric(
+                        //       //         horizontal: 12.0, vertical: 5.0),
+                        //       //     visualDensity: const VisualDensity(
+                        //       //         horizontal: 0, vertical: -4),
+                        //       //     leading:
+                        //       //         Icon(Icons.book_online, color: _colorTheme),
+                        //       //     title: Text('Online Mess Subscription form',
+                        //       //         style: Theme.of(context).textTheme.subtitle2),
+                        //       //     onTap: () {
+                        //       //       // Navigator.of(context).pushNamed("/home");
+                        //       //     },
+                        //       //     trailing: Icon(
+                        //       //       Icons.arrow_forward_ios,
+                        //       //       size: 18,
+                        //       //       color: Theme.of(context)
+                        //       //           .primaryColor
+                        //       //           .withOpacity(0.7),
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //     ],
+                        //   ),
+                        // ),
                         // DefaultTabController(
                         //   length: 3,
                         //   child: Padding(
@@ -621,49 +1031,127 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                         //     ),
                         //   ),
                         // ),
-                        DefaultTabController(
-                          length: 3,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                  width: size.width,
-                                  // height: 30,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
-                                    border: Border.all(color: Colors.transparent),
-                                    // borderRadius: BorderRadius.circular(25.0)
-                                  ),
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: Theme.of(context).primaryColor,
-                                    labelColor: Theme.of(context).primaryColor,
-                                    labelStyle: const TextStyle(fontSize: 12.0),
-                                    unselectedLabelColor: Colors.grey,
-                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
-                                    tabs: const  [
-                                      Tab(text: 'My Objectives',),
-                                      Tab(text: 'My Appraisal',),
-                                      Tab(text: 'Team Objectives',),
-                                    ],
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.auto_awesome_motion_outlined,
+                                    color: _colorTheme),
+                                title: Text('My Objectives',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // _userController.updateValue();
+                                },
+                                trailing: Obx(
+                                  () => Icon(
+                                    _userController.lunchTab.value
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.arrow_forward_ios,
+                                    size: 18,
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
                                   ),
                                 ),
-                                const SizedBox(height: 5.0,),
-                                const Expanded(
-                                  child: TabBarView(
+                              ),
 
-                                    children: [
-                                      Center(child: Text('1',)),
-                                      Center(child: Text('2')),
-                                      Center(child: Text('3')),
-                                    ],
-                                  ),
+                              // Obx(()=> _userController.lunchTab.value ?
+                              //     TweenAnimationBuilder(
+                              //       tween: _scaleTween,
+                              //       duration: const Duration(seconds: 1),
+                              //       builder: (context, scale, child) {
+                              //         return Transform.scale(scale: 1, child: child);
+                              //       },
+                              //       child: SingleChildScrollView(
+                              //         padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                              //         child: Column(
+                              //           children: [
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.score,color: _colorTheme),
+                              //               title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.group_off,color: _colorTheme),
+                              //               title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                              //               title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ):
+                              //     const SizedBox()),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.menu_book_sharp, color: _colorTheme),
+                                title: Text('My Appraisals',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
                                 ),
-                              ],
-                            ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.group, color: _colorTheme),
+                                title: Text('Team Objectives',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         SingleChildScrollView(
@@ -672,60 +1160,234 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                             children: [
                               ListTile(
                                 dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.contactless_rounded,color: _colorTheme),
-                                title: Text('Attendance Correction',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.contactless_rounded,
+                                    color: _colorTheme),
+                                title: Text('Attendance Correction',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
                                   // Navigator.of(context).pushNamed("/home");
                                 },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
                               ),
                               ListTile(
                                 dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.menu_book_sharp,color: _colorTheme),
-                                title: Text('Department Attendance',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.menu_book_sharp, color: _colorTheme),
+                                title: Text('Department Attendance',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
                                   // Navigator.of(context).pushNamed("/home");
                                 },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
                               ),
                               ListTile(
                                 dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.time_to_leave,color: _colorTheme),
-                                title: Text('Leave Application',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.time_to_leave, color: _colorTheme),
+                                title: Text('Leave Application',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
                                   // Navigator.of(context).pushNamed("/home");
                                 },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
                               ),
                               ListTile(
                                 dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.report_outlined,color: _colorTheme),
-                                title: Text('Absent Report',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.change_circle_outlined,
+                                    color: _colorTheme),
+                                title: Text('Roster Change Request',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
                                   // Navigator.of(context).pushNamed("/home");
                                 },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
                               ),
                               ListTile(
                                 dense: true,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                                visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                                leading: Icon(Icons.details_outlined,color: _colorTheme),
-                                title: Text('Leave Status',style: Theme.of(context).textTheme.subtitle2),
-                                onTap: (){
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.track_changes, color: _colorTheme),
+                                title: Text('Roster Change Request Multiple',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
                                   // Navigator.of(context).pushNamed("/home");
                                 },
-                                trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
                               ),
-
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.pending, color: _colorTheme),
+                                title: Text('Pending Roster Request Report',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.approval_outlined,
+                                    color: _colorTheme),
+                                title: Text('Roster Request Approval for HOD',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.report_outlined, color: _colorTheme),
+                                title: Text('Absent Report',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.report_outlined, color: _colorTheme),
+                                title: Text('Late IN / Early Out Report',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.report_outlined, color: _colorTheme),
+                                title: Text('Early IN / Late Out Report',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.details_outlined,
+                                    color: _colorTheme),
+                                title: Text('Leave Status',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -778,56 +1440,325 @@ class _SecondPageState extends State<SecondPage> with SingleTickerProviderStateM
                         //     ),
                         //   ),
                         // ),
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.dashboard, color: _colorTheme),
+                                title: Text('Dashboard',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // _userController.updateValue();
+                                },
+                                trailing: Obx(
+                                  () => Icon(
+                                    _userController.lunchTab.value
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.arrow_forward_ios,
+                                    size: 18,
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
+                                  ),
+                                ),
+                              ),
+
+                              // Obx(()=> _userController.lunchTab.value ?
+                              //     TweenAnimationBuilder(
+                              //       tween: _scaleTween,
+                              //       duration: const Duration(seconds: 1),
+                              //       builder: (context, scale, child) {
+                              //         return Transform.scale(scale: 1, child: child);
+                              //       },
+                              //       child: SingleChildScrollView(
+                              //         padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                              //         child: Column(
+                              //           children: [
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.score,color: _colorTheme),
+                              //               title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.group_off,color: _colorTheme),
+                              //               title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                              //               title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ):
+                              //     const SizedBox()),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.app_registration_rounded,
+                                    color: _colorTheme),
+                                title: Text('Registration',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.assessment_outlined,
+                                    color: _colorTheme),
+                                title: Text('Zoom Session',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // _userController.updateValue();
+                                },
+                                trailing: Obx(
+                                  () => Icon(
+                                    _userController.lunchTab.value
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.arrow_forward_ios,
+                                    size: 18,
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
+                                  ),
+                                ),
+                              ),
+
+                              // Obx(()=> _userController.lunchTab.value ?
+                              //     TweenAnimationBuilder(
+                              //       tween: _scaleTween,
+                              //       duration: const Duration(seconds: 1),
+                              //       builder: (context, scale, child) {
+                              //         return Transform.scale(scale: 1, child: child);
+                              //       },
+                              //       child: SingleChildScrollView(
+                              //         padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                              //         child: Column(
+                              //           children: [
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.score,color: _colorTheme),
+                              //               title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.group_off,color: _colorTheme),
+                              //               title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                              //               title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ):
+                              //     const SizedBox()),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.album_outlined, color: _colorTheme),
+                                title: Text('Gallery',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Center(
+                          child: Text("One HR Policies"),
+                        ),
                         const Center(
                           child: Text("7"),
                         ),
-                        DefaultTabController(
-                          length: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  // margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                  width: size.width,
-                                  // height: 30,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
-                                    border: Border.all(color: Colors.transparent),
-                                    // borderRadius: BorderRadius.circular(25.0)
-                                  ),
-                                  child: TabBar(
-                                    isScrollable: true,
-                                    indicatorColor: Theme.of(context).primaryColor,
-                                    labelColor: Theme.of(context).primaryColor,
-                                    labelStyle: const TextStyle(fontSize: 12.0),
-                                    unselectedLabelColor: Colors.grey,
-                                    unselectedLabelStyle: const TextStyle(fontSize: 11.0),
-                                    tabs: const  [
-                                      Tab(text: 'Sustainability 2021',),
-                                      Tab(text: 'Sustainability 2020',),
-
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 5.0,),
-                                const Expanded(
-                                  child: TabBarView(
-
-                                    children: [
-                                      Center(child: Text('1',)),
-                                      Center(child: Text('2')),
-
-                                    ],
+                        const Center(
+                          child: Text("Q Connect"),
+                        ),
+                        SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading:
+                                    Icon(Icons.report_rounded, color: _colorTheme),
+                                title: Text('Sustainability 2021',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // _userController.updateValue();
+                                },
+                                trailing: Obx(
+                                  () => Icon(
+                                    _userController.lunchTab.value
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.arrow_forward_ios,
+                                    size: 18,
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+
+                              // Obx(()=> _userController.lunchTab.value ?
+                              //     TweenAnimationBuilder(
+                              //       tween: _scaleTween,
+                              //       duration: const Duration(seconds: 1),
+                              //       builder: (context, scale, child) {
+                              //         return Transform.scale(scale: 1, child: child);
+                              //       },
+                              //       child: SingleChildScrollView(
+                              //         padding: const EdgeInsets.fromLTRB(24, 4, 0, 8),
+                              //         child: Column(
+                              //           children: [
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.score,color: _colorTheme),
+                              //               title: Text('1',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.group_off,color: _colorTheme),
+                              //               title: Text('2',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //             ListTile(
+                              //               dense: true,
+                              //               contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
+                              //               visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                              //               leading: Icon(Icons.policy_outlined,color: _colorTheme),
+                              //               title: Text('3',style: Theme.of(context).textTheme.subtitle2),
+                              //               onTap: (){
+                              //                 // Navigator.of(context).pushNamed("/home");
+                              //               },
+                              //               trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ):
+                              //     const SizedBox()),
+                              ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 5.0),
+                                visualDensity: const VisualDensity(
+                                    horizontal: 0, vertical: -4),
+                                leading: Icon(Icons.report_gmailerrorred_sharp,
+                                    color: _colorTheme),
+                                title: Text('Sustainability 2020',
+                                    style: Theme.of(context).textTheme.subtitle2),
+                                onTap: () {
+                                  // Navigator.of(context).pushNamed("/home");
+                                },
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 18,
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
-                    ))
+                ))
               ],
             ),
           ),
@@ -895,7 +1826,7 @@ class _CustomBalanceCard extends StatelessWidget {
               offset: const Offset(0, 2), // changes position of shadow
             ),
           ]),
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Column(
         children: [
           Row(
