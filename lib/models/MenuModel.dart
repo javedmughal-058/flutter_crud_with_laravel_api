@@ -44,3 +44,10 @@ final dssMenu = [
   MenuModel(count:10,title: 'CTM', icon: Icons.airplanemode_on_outlined, route: '/poc',color: const Color(0xFDA60000), fav: false),
 
 ];
+
+final messMenu = [
+  MenuModel(count:0, title: 'Lunch Request', icon: Icons.request_page_outlined, route: '/appointment_home',color: const Color(0xff7367f0), fav: false),
+  MenuModel(count:1,title: 'Mess Menu', icon: Icons.menu_book_sharp, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false),
+  MenuModel(count:2,title: 'Online Mess Subscription form', icon: Icons.book_online, route: '/ess',color: const Color(0xFDA60000), fav: false),
+
+];
