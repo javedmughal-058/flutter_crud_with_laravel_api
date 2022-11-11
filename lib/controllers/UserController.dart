@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/config/api_services.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_crud_with_laravel_api/views/StartPage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class UserController extends GetxController{
   var currentIndex = 0.obs;
@@ -20,6 +20,11 @@ class UserController extends GetxController{
     const Setting(),
     const Team(),
   ];
+
+  var isUpdate = false.obs;
+  var recordIndex =0.obs;
+  var updateName ="".obs;
+  var updatedEmail ="".obs;
 
   var EssTabIndex = 0.obs;
   var lunchTab = false.obs;
@@ -89,10 +94,10 @@ class UserController extends GetxController{
       print('Added Error: '+error.toString());
     }
   }
-  Future<void> deleteRecord(String name)async{
+  Future<void> deleteRecord(String id)async{
     var url = 'delete_record';
     var body = {
-      "name":name
+      "id":id
     };
     try{
       await apiService.postData(apiUrl: url, body: body).then((response) async {
@@ -104,6 +109,34 @@ class UserController extends GetxController{
       });
     } catch (error){
       print('Deleted Error: '+error.toString());
+    }
+  }
+
+  Future<void> editData(int index) async{
+    name.text = getData[index].stdname.toString();
+    email.text = getData[index].email.toString();
+    // recordIndex.value = index;
+    // updateName.value = name.text;
+    // updatedEmail.value = email.text;
+
+  }
+  Future<void> updateRecord({required String id, required String username,required String email})async{
+    var url = 'update_record';
+    var body = {
+      "id":id,
+      "name": username,
+      "email":email,
+    };
+    try{
+      await apiService.postData(apiUrl: url, body: body).then((response) async {
+        if(response.statusCode == 200){
+          print('updated');
+        }
+
+
+      });
+    } catch (error){
+      print('updation Error: '+error.toString());
     }
   }
 
