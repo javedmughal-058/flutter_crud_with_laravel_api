@@ -23,10 +23,13 @@ class UserController extends GetxController{
 
   var isUpdate = false.obs;
   var recordIndex =0.obs;
+  var isPressed = false.obs;
   var updateName ="".obs;
   var updatedEmail ="".obs;
   var newFavList = [].obs;
   var addedFav = false.obs;
+  var hasSub = 0.obs;
+
   var EssTabIndex = 0.obs;
   var lunchTab = false.obs;
 
