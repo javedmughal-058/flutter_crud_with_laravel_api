@@ -30,8 +30,11 @@ class UserController extends GetxController{
   var addedFav = false.obs;
   var hasSub = 0.obs;
 
+  var showSub = false.obs;
+
   var EssTabIndex = 0.obs;
   var lunchTab = false.obs;
+  var pressedIndex = [].obs;
 
   String apiUrl = 'http://127.0.0.1:8000/api/';
   ApiService apiService =  ApiService();
