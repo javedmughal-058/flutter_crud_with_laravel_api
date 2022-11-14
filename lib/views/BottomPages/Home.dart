@@ -21,6 +21,7 @@ class main_pageState extends State<main_page> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
   final UserController _userController = Get.find();
 
+
   @override
   Widget build(BuildContext context) {
     Color _colorTheme = Theme.of(context).primaryColor;
@@ -198,9 +199,9 @@ class _NotifyIconBadgerTile extends StatelessWidget {
         children: [
           Container(
             //padding: const EdgeInsets.all(10),
-            width: size.width * 0.5,
-            height: 65,
-            //height: 65,
+            // width: size.width * 0.5,
+            // height: 65,
+            height: 70,
 
             //1
             // decoration: BoxDecoration(
@@ -255,13 +256,19 @@ class _NotifyIconBadgerTile extends StatelessWidget {
                       size: 28,
                       color: Colors.white,
                     ),
-                    Text(
-                      notifyName,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          // decoration: TextDecoration.underline,
-                          fontSize: 12.0),
+                    SizedBox(
+                      width: 80,
+                      child: Text(
+                        notifyName,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            // decoration: TextDecoration.underline,
+                            fontSize: 12.0),
+                      ),
                     ),
                   ],
                 ),
@@ -310,7 +317,7 @@ class CustomGridView extends StatelessWidget {
             mainAxisSpacing: 2.0,
             crossAxisSpacing: 8.0,
           ),
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: const EdgeInsets.only(
               left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
