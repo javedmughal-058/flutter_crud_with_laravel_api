@@ -8,6 +8,7 @@ import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AboutUs.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/DecisionSupport.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
+import 'package:flutter_crud_with_laravel_api/views/MenuPages/NextScreen.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/login.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Appointment.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Garments.dart';
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
             name: "/profile_page", page: () => const ProfilePage(), transition: Transition.leftToRight, transitionDuration: const Duration(milliseconds: 600)),
         GetPage(
             name: "/main", page: () => const MyApp(), transition: Transition.rightToLeft, transitionDuration: const Duration(milliseconds: 600)),
+        GetPage(
+            name: "/nextScreen", page: () => const NextScreen(), transition: Transition.rightToLeft,),
       ],
       routes: {
         "/appointment_home" : (context) => const EmployeeSelfService(),
