@@ -1,10 +1,12 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/Widgets/CustomeLoader.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
 import 'package:get/get.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage>{
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
   final UserController _userController = Get.find();
+  final pageController = PageController();
   final loader =CustomLoader();
 
   @override
@@ -38,6 +41,7 @@ class _StartPageState extends State<StartPage>{
   Widget build(BuildContext context) {
     final CarouselController _controller = CarouselController();
     int _carouselIndex = 0;
+    int slideValue = 0;
     final List<String> imgList = [
       'assets/images/slider1.jpg',
       'assets/images/slider2.jpg',
@@ -280,6 +284,7 @@ class _StartPageState extends State<StartPage>{
               const SizedBox(
                 height: 15,
               ),
+
               SizedBox(
                 height: MediaQuery.of(context).size.height * .20,
                 child: ListView.separated(
@@ -298,6 +303,163 @@ class _StartPageState extends State<StartPage>{
                   },
                 ),
               ),
+
+              Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .17,
+                    child: PageView(
+                      controller: pageController,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[0].icon,
+                                      color: menuList[0].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[0].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[1].icon,
+                                      color: menuList[1].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[1].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[2].icon,
+                                      color: menuList[2].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[2].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[3].icon,
+                                      color: menuList[3].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[3].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[4].icon,
+                                      color: menuList[4].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      menuList[4].icon,
+                                      color: menuList[4].color,
+                                      size: 26,
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Center(child: Text('2')),
+                        Center(child: Text('3')),
+                        Center(child: Text('4')),
+
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  SmoothPageIndicator(
+                      controller: pageController, count: 4,
+                      effect: SwapEffect(
+                        activeDotColor:_colorTheme,
+                        dotColor: Colors.grey,
+                        dotHeight: 10,
+                        dotWidth: 10,
+                        spacing: 7,
+                      )
+                  ),
+                ],
+              ),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children:
+              //     List.generate(3, (index)=> Padding(
+              //       padding: const EdgeInsets.symmetric(horizontal: 5),
+              //       child: AnimatedContainer(
+              //           duration: const Duration(milliseconds: 500),
+              //           curve: Curves.easeIn,
+              //         width: index==slideValue ? 24 : 10,
+              //         height: 10,
+              //          decoration: BoxDecoration(
+              //            borderRadius: BorderRadius.circular(20),
+              //            color:_colorTheme
+              //          ),
+              //       ),
+              //     )),
+              //
+              // ),
               // GridView.builder(
               //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               //           crossAxisCount: 4,
