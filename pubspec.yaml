@@ -49,6 +49,10 @@ dependencies:
   lottie: ^1.2.1
   simple_animations: ^4.0.1
   percent_indicator: ^4.2.0
+  fluttertoast: ^8.1.1
+  toast: ^0.3.0
+  smooth_page_indicator: ^1.0.0+2
+
 
 dev_dependencies:
   flutter_test:
