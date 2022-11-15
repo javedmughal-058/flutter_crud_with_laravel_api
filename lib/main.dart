@@ -5,6 +5,7 @@ import 'package:flutter_crud_with_laravel_api/views/DSS/POC.dart';
 import 'package:flutter_crud_with_laravel_api/views/DSS/PR.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Home.dart';
 import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
+import 'package:flutter_crud_with_laravel_api/views/HomPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AboutUs.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/DecisionSupport.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color(0xff24577a),
         ),
       ),
-      home: const main_page(),
+      home: const MainPage(),
       getPages: [
         GetPage(
             name: "/profile_page", page: () => const ProfilePage(), transition: Transition.leftToRight, transitionDuration: const Duration(milliseconds: 600)),
@@ -54,6 +55,8 @@ class MyApp extends StatelessWidget {
             name: "/main", page: () => const MyApp(), transition: Transition.rightToLeft, transitionDuration: const Duration(milliseconds: 600)),
         GetPage(
             name: "/nextScreen", page: () => const NextScreen(), transition: Transition.rightToLeft,),
+        GetPage(
+          name: "/home", page: () => const MainPage(), transition: Transition.rightToLeft, transitionDuration: const Duration(milliseconds: 600)),
       ],
       routes: {
         "/appointment_home" : (context) => const EmployeeSelfService(),
