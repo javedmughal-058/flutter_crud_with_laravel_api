@@ -286,17 +286,19 @@ class _StartPageState extends State<StartPage>{
               ),
 
               SizedBox(
-                height: MediaQuery.of(context).size.height * .20,
+                height: MediaQuery.of(context).size.height * .35,
                 child: ListView.separated(
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   scrollDirection: Axis.horizontal,
                   itemCount: menuList.length ~/ 2,
                   itemBuilder: (context, index) {
+                    print(itemCount);
                     return Column(
                       children: [
                         productItem((itemCount ~/ 2) * 0 + index, context),
                         //const SizedBox(height: 10,),
                         productItem((itemCount ~/ 2) * 1 + index, context),
+                        // productItem((itemCount ~/ 2) + 2 + index, context),
                         //productItem((itemCount ~/ 2) * 2 + index, context),
                       ],
                     );
@@ -304,143 +306,251 @@ class _StartPageState extends State<StartPage>{
                 ),
               ),
 
-              Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * .17,
-                    child: PageView(
-                      controller: pageController,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[0].icon,
-                                      color: menuList[0].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[0].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[1].icon,
-                                      color: menuList[1].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[1].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[2].icon,
-                                      color: menuList[2].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[2].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[3].icon,
-                                      color: menuList[3].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[3].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[4].icon,
-                                      color: menuList[4].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      menuList[4].icon,
-                                      color: menuList[4].color,
-                                      size: 26,
-                                    ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Center(child: Text('2')),
-                        Center(child: Text('3')),
-                        Center(child: Text('4')),
-
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10,),
-                  SmoothPageIndicator(
-                      controller: pageController, count: 4,
-                      effect: SwapEffect(
-                        activeDotColor:_colorTheme,
-                        dotColor: Colors.grey,
-                        dotHeight: 10,
-                        dotWidth: 10,
-                        spacing: 7,
-                      )
-                  ),
-                ],
-              ),
+              // Column(
+              //   children: [
+              //     SizedBox(
+              //       height: MediaQuery.of(context).size.height * .17,
+              //       child: PageView(
+              //         controller: pageController,
+              //         children: [
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[0].icon,
+              //                         color: menuList[0].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[0].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[1].icon,
+              //                         color: menuList[1].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[1].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[2].icon,
+              //                         color: menuList[2].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[2].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[3].icon,
+              //                         color: menuList[3].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[3].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[4].icon,
+              //                         color: menuList[4].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[4].icon,
+              //                         color: menuList[4].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[4].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //             ],
+              //           ),
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[6].icon,
+              //                         color: menuList[6].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[6].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[7].icon,
+              //                         color: menuList[7].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[7].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[8].icon,
+              //                         color: menuList[8].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[8].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[9].icon,
+              //                         color: menuList[9].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[9].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //               Column(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[10].icon,
+              //                         color: menuList[10].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[10].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                   Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     //crossAxisAlignment: CrossAxisAlignment.center,
+              //                     children: [
+              //                       Icon(
+              //                         menuList[11].icon,
+              //                         color: menuList[11].color,
+              //                         size: 26,
+              //                       ),
+              //                       // const SizedBox(
+              //                       //   height: 5,
+              //                       // ),
+              //                       Text(menuList[11].title, style: const TextStyle(fontSize: 14.0)),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               ),
+              //             ],
+              //           ),
+              //
+              //
+              //         ],
+              //       ),
+              //     ),
+              //     const SizedBox(height: 10,),
+              //     SmoothPageIndicator(
+              //         controller: pageController, count: 2,
+              //         effect: SwapEffect(
+              //           activeDotColor:_colorTheme,
+              //           dotColor: Colors.grey,
+              //           dotHeight: 10,
+              //           dotWidth: 10,
+              //           spacing: 7,
+              //         )
+              //     ),
+              //   ],
+              // ),
 
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
