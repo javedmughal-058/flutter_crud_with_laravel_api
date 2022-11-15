@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                   leading: Icon(Icons.home_outlined,color: _colorTheme),
                   title: Text('Home',style: Theme.of(context).textTheme.subtitle2),
                   onTap: (){
-                    Navigator.of(context).pushNamed("/home");
+                    Get.toNamed('/home');
                   },
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                 ),
@@ -90,18 +90,6 @@ class ProfilePage extends StatelessWidget {
                   visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
                   leading: Icon(Icons.approval_outlined,color: _colorTheme),
                   title: Text('Decision Support',style: Theme.of(context).textTheme.subtitle2),
-                  trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
-
-                  onTap: (){
-                    Navigator.of(context).pushNamed("/dss_notifs");
-                  },
-                ),
-                ListTile(
-                  dense: true,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-                  visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                  leading: Icon(Icons.check_circle_outline,color: _colorTheme),
-                  title: Text('Approvals',style: Theme.of(context).textTheme.subtitle2),
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
 
                   onTap: (){
