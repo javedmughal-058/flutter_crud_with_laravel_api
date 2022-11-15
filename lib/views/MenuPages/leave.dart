@@ -696,38 +696,32 @@ class _LeaveApplyState extends State<LeaveApply> {
                             dense: true,
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 12.0, vertical: 5.0),
-                            visualDensity: const VisualDensity(
-                                horizontal: 0, vertical: -4),
-                            leading: Icon(_menu.icon,
-                                color: Theme.of(context).primaryColor),
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(_menu.title,
-                                    style: Theme.of(context).textTheme.subtitle2),
-                                Obx(
-                                      () => _userController.favorites
-                                      .contains(_menu.count)
-                                      ? const Icon(Icons.favorite,
-                                      size: 14, color: Colors.red)
-                                      : const SizedBox(),
+                            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                            leading: Icon(_menu.icon, color: Theme.of(context).primaryColor),
+                            title: Text(_menu.title,
+                                style: Theme.of(context).textTheme.subtitle2),
+                            trailing: _menu.isSub==true?
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(color: Theme.of(context).primaryColor),
+                                color: Theme.of(context).primaryColor,
                                 ),
-                              ],
-                            ),
-                            trailing: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(color: Theme.of(context).primaryColor),
-                              color: Theme.of(context).primaryColor,
+                                child: Icon(
+                                  _menu.isPressed
+                                        ? Icons.keyboard_arrow_down_outlined
+                                        : Icons.arrow_forward_ios,
+                                    size: 16,
+                                    color: Colors.white,
+                                ),
+                              ):
+                              Obx(
+                                    () => _userController.favorites
+                                    .contains(_menu.count)
+                                    ? const Icon(Icons.favorite,
+                                    size: 14, color: Colors.red)
+                                    : const SizedBox(),
                               ),
-                              child: Icon(
-                                _menu.isPressed
-                                      ? Icons.keyboard_arrow_down_outlined
-                                      : Icons.arrow_forward_ios,
-                                  size: 16,
-                                  color: Colors.white,
-                              ),
-                            ),
                           ),
                         ),
                        _menu.isPressed
