@@ -15,18 +15,18 @@ class MenuModel{
 }
 
 final menuList = [
-   MenuModel(title: 'Appointment', icon: Icons.list_alt, route: '/appointment_home',color: const Color(0xff7367f0), fav: false, count: 0, isPressed: false),
+   MenuModel(title: 'ESS', icon: Icons.list_alt, route: '/leave_apply',color: const Color(0xff7367f0), fav: false, count: 0, isPressed: false),
    MenuModel(title: 'DSS', icon: Icons.approval, route: '/dss_notifs',color: const Color(0xff28c76f), fav: false,count: 1, isPressed: false),
-   MenuModel(title: 'ESS', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false,count: 2, isPressed: false),
-   MenuModel(title: 'Leave', icon: Icons.time_to_leave, route: '/leave_apply',color: const Color(0xffFFA556), fav: false,count: 3, isPressed: false),
-   MenuModel(title: 'Garment', icon: Icons.shopping_cart_outlined, route: '/garment_request',color: const Color(0xff00cfe8), fav: false,count: 4, isPressed: false),
-   MenuModel(title: 'Lunch', icon: Icons.lunch_dining, route: '/lunch_request',color: const Color(0xff74A1DF), fav: false,count: 5, isPressed: false),
-   MenuModel(title: 'CTM', icon: Icons.airplanemode_active_outlined, route: '/ctm',color: const Color(0xffF87CAD), fav: false,count: 6, isPressed: false),
-   MenuModel(title: 'Appraisals', icon: Icons.list, route: '/appraisal',color: const Color(0xff86CAEA), fav: false,count: 7, isPressed: false),
-   MenuModel(title: 'Objectives', icon: Icons.description, route: '/objective',color: const Color(0xffC1C2F6), fav: false,count: 8, isPressed: false),
-   MenuModel(title: 'Policies', icon: Icons.policy, route: '/policies',color: const Color(0xff74A1DF), fav: false,count: 9, isPressed: false),
-   MenuModel(title: 'Settings', icon: Icons.settings, route: '/settings',color: const Color(0xff7367f0), fav: false,count: 10, isPressed: false),
-   MenuModel(title: 'About US', icon: Icons.info, route: '/about_us',color: const Color(0xff28c76f), fav: false,count: 11, isPressed: false),
+   MenuModel(title: 'US MD Dashboard', icon: Icons.time_to_leave, route: '/ess',color: const Color(0xFDA60000), fav: false,count: 2, isPressed: false),
+   MenuModel(title: 'Denim MD Dashboard', icon: Icons.time_to_leave, route: '/leave_apply',color: const Color(0xffFFA556), fav: false,count: 3, isPressed: false),
+   MenuModel(title: 'Denim Overview', icon: Icons.shopping_cart_outlined, route: '/garment_request',color: const Color(0xff00cfe8), fav: false,count: 4, isPressed: false),
+   MenuModel(title: 'Admin Portal', icon: Icons.lunch_dining, route: '/lunch_request',color: const Color(0xff74A1DF), fav: false,count: 5, isPressed: false),
+   MenuModel(title: 'Aj Holding', icon: Icons.airplanemode_active_outlined, route: '/ctm',color: const Color(0xffF87CAD), fav: false,count: 6, isPressed: false),
+   MenuModel(title: 'US Apparel', icon: Icons.list, route: '/appraisal',color: const Color(0xff86CAEA), fav: false,count: 7, isPressed: false),
+   MenuModel(title: 'H&M Automation', icon: Icons.description, route: '/objective',color: const Color(0xffC1C2F6), fav: false,count: 8, isPressed: false),
+   MenuModel(title: 'Daily Update', icon: Icons.policy, route: '/policies',color: const Color(0xff74A1DF), fav: false,count: 9, isPressed: false),
+   MenuModel(title: 'Backup Management', icon: Icons.settings, route: '/settings',color: const Color(0xff7367f0), fav: false,count: 10, isPressed: false),
+   MenuModel(title: 'Capex Dashboard', icon: Icons.info, route: '/about_us',color: const Color(0xff28c76f), fav: false,count: 11, isPressed: false),
 ];
 
 final essMenu = [
