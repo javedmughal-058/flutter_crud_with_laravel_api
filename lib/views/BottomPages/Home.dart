@@ -1,23 +1,17 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
-import 'package:flutter_crud_with_laravel_api/views/BottomPages/Currency.dart';
-import 'package:flutter_crud_with_laravel_api/views/BottomPages/Setting.dart';
-import 'package:flutter_crud_with_laravel_api/views/BottomPages/Team.dart';
-import 'package:flutter_crud_with_laravel_api/views/StartPage.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../MenuPages/DecisionSupport.dart';
-
-class main_page extends StatefulWidget {
-  const main_page({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<main_page> createState() => main_pageState();
+  State<MainPage> createState() => MainPageState();
 }
 
-class main_pageState extends State<main_page> {
+class MainPageState extends State<MainPage> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
   final UserController _userController = Get.find();
 
@@ -132,7 +126,7 @@ class main_pageState extends State<main_page> {
             mainButtonPosition: MainButtonPosition.middle,
             decoration: BoxDecoration(
               color: _colorTheme,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             ),
             itemIconColor: Colors.grey.withOpacity(0.5),
             itemTextStyle: TextStyle(
@@ -310,51 +304,87 @@ class CustomGridView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final UserController _userController = Get.find();
     return Obx(
-      () => GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 1.0,
-            mainAxisSpacing: 2.0,
-            crossAxisSpacing: 8.0,
-          ),
-          physics: const AlwaysScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.only(
-              left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
-          itemCount: _userController.favoritesmenu.length,
-          itemBuilder: (context, index) {
-            final _menu = _userController.favoritesmenu[index];
-            return _NotifyIconBadgerTile(
-                size: size,
-                notifyCount: _menu.count.toString(),
-                notifyName: _menu.title,
-                notifyIcon: _menu.icon,
-                //iconColor: _color2,
-                favIcon: Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        if (_userController.favorites.contains(_menu.count)) {
-                          _userController.removeFavorite(_menu);
-                        } else {
-                          _userController.addFavorite(_menu);
-                        }
-                      },
-                      child: Obx(
-                          () => _userController.favorites.contains(_menu.count)
-                              ? const Icon(
-                                  Icons.favorite_outlined,
-                                  color: Colors.white,
-                                  size: 16,
-                                )
-                              : const Icon(
-                                  Icons.favorite_outline,
-                                  color: Colors.grey,
-                                  size: 16,
-                                )),
-                    )),
-                onTap: () {});
-          }),
+      () => _userController.favoritesmenu.isNotEmpty?
+        GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 1.0,
+              mainAxisSpacing: 2.0,
+              crossAxisSpacing: 8.0,
+            ),
+            physics: const AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(
+                left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
+            itemCount: _userController.favoritesmenu.length,
+            itemBuilder: (context, index) {
+              final _menu = _userController.favoritesmenu[index];
+              return _NotifyIconBadgerTile(
+                  size: size,
+                  notifyCount: _menu.count.toString(),
+                  notifyName: _menu.title,
+                  notifyIcon: _menu.icon,
+                  //iconColor: _color2,
+                  favIcon: Align(
+                      alignment: Alignment.center,
+                      child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context, builder: (builder){
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: Text('Alert',style: Theme.of(context).textTheme.subtitle2,),
+                              content: Text('Are you sure? You want to remove!',style: Theme.of(context).textTheme.bodyText1,),
+                              actions: [
+                                TextButton(
+                                    onPressed: (){
+                                      Get.back();
+                                    },
+                                    child: Text('No',style: GoogleFonts.lato(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w500
+                                    ),)
+                                ),
+                                TextButton(
+                                  onPressed: (){
+                                    if (_userController.favorites.contains(_menu.count)) {
+                                      _userController.removeFavorite(_menu);
+                                    } else {
+                                      _userController.addFavorite(_menu);
+                                    }
+                                    Get.back();
+                                  },
+                                  child: Text('Yes',style: GoogleFonts.lato(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w500
+                                  ),),
+                                ),
+
+                              ],
+                            );
+                          });
+
+
+
+                        },
+                        child: Obx(
+                            () => _userController.favorites.contains(_menu.count)
+                                ? const Icon(
+                                    Icons.favorite_outlined,
+                                    color: Colors.white,
+                                    size: 16,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_outline,
+                                    color: Colors.grey,
+                                    size: 16,
+                                  )),
+                      )),
+                  onTap: () {});
+            }):
+      const Center(child: Text('No Favorite items', style: TextStyle(color: Colors.white),))
     );
   }
 }
