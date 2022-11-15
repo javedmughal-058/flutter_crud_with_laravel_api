@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/config/api_services.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
+import 'package:flutter_crud_with_laravel_api/models/currency_model.dart';
 import 'package:flutter_crud_with_laravel_api/models/showRecordModel.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Currency.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Setting.dart';
@@ -16,7 +17,7 @@ class UserController extends GetxController{
   var currentIndex = 0.obs;
   final screens = [
     const StartPage(),
-    const Currency(),
+    CurrencyPage(),
     const Setting(),
     const Team(),
   ];
@@ -45,6 +46,11 @@ class UserController extends GetxController{
   var getData = <Result>[].obs;
 
   var favoritesmenu = <MenuModel>[].obs;
+
+
+  var currencyRate = <String, double>{}.obs;
+  Rxn<DateTime> currencyDate = Rxn<DateTime>();
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -54,7 +60,26 @@ class UserController extends GetxController{
 
   }
 
-
+  Future<void> getCurrencyData()async{
+    try{
+      var url= 'https://api.apilayer.com/exchangerates_data/latest?&base=USD&apikey=pcrbMPkrl92PNURdPMg1YeFXuwPbHEuF';
+      await http.get(Uri.parse(url)).then((response){
+        if(response.statusCode == 200){
+          var data =  currencyModelFromJson(response.body);
+          currencyDate.value = data.date;
+          currencyRate.value = data.rates ?? {};
+          // print(currencyRate.keys);
+          // data.rates!.forEach((k, v) => currencyRecord.add((k)));
+          // data.rates!.forEach((k, v) => currencyValue.add((v.toString())));
+          // print(currencyDate.value);
+          // print(currencyValue);
+        }
+      });
+    }
+    catch(error){
+      print("Currency Rate: "+error.toString());
+    }
+  }
   Future<void> updateValue() async{
     lunchTab.value = !lunchTab.value;
   }
