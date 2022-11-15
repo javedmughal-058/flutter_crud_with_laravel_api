@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                   leading: Icon(Icons.home_outlined,color: _colorTheme),
                   title: Text('Home',style: Theme.of(context).textTheme.subtitle2),
                   onTap: (){
-                    Get.toNamed('/home');
+                    Get.back();
                   },
                   trailing: Icon(Icons.arrow_forward_ios,size:18,color: Theme.of(context).primaryColor.withOpacity(0.7),),
                 ),
