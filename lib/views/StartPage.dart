@@ -49,15 +49,15 @@ class _StartPageState extends State<StartPage>{
       'assets/images/slider4.jpg',
       'assets/images/slider5.jpg'
     ];
-    Color _color = const Color(0xff115e7a);
-    Color _color2 = const Color(0xfff2652f);
-    Color _color3 = const Color(0xff009b9a);
-    Color _color4 = const Color(0xff2b5485);
-    Color _colorwhite = const Color(0xffffffff);
-    Color _colorTheme = Theme.of(context).primaryColor;
+    // Color _color = const Color(0xff115e7a);
+    // Color _color2 = const Color(0xfff2652f);
+    // Color _color3 = const Color(0xff009b9a);
+    // Color _color4 = const Color(0xff2b5485);
+    // Color _colorwhite = const Color(0xffffffff);
+    // Color _colorTheme = Theme.of(context).primaryColor;
     int itemCount = menuList.length;
-    final size = MediaQuery.of(context).size;
-    final UserController _userController = Get.find();
+    // final size = MediaQuery.of(context).size;
+    // final UserController _userController = Get.find();
 
     return SafeArea(
       child: Scaffold(
