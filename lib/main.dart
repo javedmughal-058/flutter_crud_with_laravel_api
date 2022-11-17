@@ -4,13 +4,10 @@ import 'package:flutter_crud_with_laravel_api/views/DSS/PO.dart';
 import 'package:flutter_crud_with_laravel_api/views/DSS/POC.dart';
 import 'package:flutter_crud_with_laravel_api/views/DSS/PR.dart';
 import 'package:flutter_crud_with_laravel_api/views/BottomPages/Home.dart';
-import 'package:flutter_crud_with_laravel_api/views/FirstPage.dart';
-import 'package:flutter_crud_with_laravel_api/views/HomPage.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/AboutUs.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/DecisionSupport.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Ess.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/NextScreen.dart';
-import 'package:flutter_crud_with_laravel_api/views/MenuPages/login.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Appointment.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Garments.dart';
 import 'package:flutter_crud_with_laravel_api/views/MenuPages/Lunch.dart';
@@ -23,7 +20,6 @@ import 'package:flutter_crud_with_laravel_api/views/MenuPages/leave.dart';
 import 'package:flutter_crud_with_laravel_api/views/ProfilePage.dart';
 import 'package:flutter_crud_with_laravel_api/views/USG_BOT/usg_bot.dart';
 import 'package:get/get.dart';
-import 'views/StartPage.dart';
 
 void main() {
   runApp(const MyApp());
