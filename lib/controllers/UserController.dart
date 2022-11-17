@@ -11,7 +11,6 @@ import 'package:flutter_crud_with_laravel_api/views/StartPage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_animations/simple_animations.dart';
 
 class UserController extends GetxController{
   var currentIndex = 0.obs;
@@ -52,12 +51,11 @@ class UserController extends GetxController{
   Rxn<DateTime> currencyDate = Rxn<DateTime>();
 
   @override
-  void onInit() {
-    // TODO: implement onInit
+  void onInit() async{
+
     super.onInit();
     name = TextEditingController();
     email = TextEditingController();
-
   }
 
   Future<void> getCurrencyData()async{
