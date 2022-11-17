@@ -1,9 +1,14 @@
 
+import 'dart:io';
+
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_version/new_version.dart';
+import 'package:upgrader/upgrader.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +21,35 @@ class MainPageState extends State<MainPage> {
   final _bottomBarController = BottomBarWithSheetController(initialIndex: 0);
   final UserController _userController = Get.find();
 
+  @override
+  void initState() {
+    super.initState();
 
+    // Instantiate NewVersion manager object (Using GCP Console app as example)
+    // _checkVersion();
+  }
+
+
+  void _checkVersion() async {
+    final newVersion = NewVersion(
+      // iOSId: 'com.google.Vespa',
+      androidId: 'com.snapchat.android',
+    );
+
+    newVersion.showAlertIfNecessary(context: context);
+    final newStatus = await newVersion.getVersionStatus();
+    newVersion.showUpdateDialog(context: context, versionStatus: newStatus!,
+        allowDismissal: true,
+        dialogText: 'update',
+        dialogTitle: 'Update available',
+        dismissButtonText: 'cancel',
+        updateButtonText: 'update',
+        dismissAction: (){
+          SystemNavigator.pop();
+        }
+    );
+
+  }
   @override
   Widget build(BuildContext context) {
     Color _colorTheme = Theme.of(context).primaryColor;
@@ -119,7 +152,13 @@ class MainPageState extends State<MainPage> {
         // extendBodyBehindAppBar: true,
         // extendBody: true,
         //backgroundColor: Colors.blue,
-        body: _userController.screens[_userController.currentIndex.value],
+        body: UpgradeAlert(
+            upgrader: Upgrader(
+                durationUntilAlertAgain: const Duration(days: 1),
+                shouldPopScope: ()=> true,
+                canDismissDialog: true,
+                dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material),
+            child: _userController.screens[_userController.currentIndex.value]),
         bottomNavigationBar: BottomBarWithSheet(
           controller: _bottomBarController,
           bottomBarTheme: BottomBarTheme(
