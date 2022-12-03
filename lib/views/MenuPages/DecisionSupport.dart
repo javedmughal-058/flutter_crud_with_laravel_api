@@ -1,5 +1,4 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_with_laravel_api/controllers/UserController.dart';
 import 'package:flutter_crud_with_laravel_api/models/MenuModel.dart';
